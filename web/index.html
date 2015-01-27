@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<!--
+  Copyright (c) 2015, <your name>. All rights reserved. Use of this source code
+  is governed by a BSD-style license that can be found in the LICENSE file.
+-->
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="scaffolded-by" content="https://github.com/google/stagehand">
+    <title>x2e15</title>
+
+    <link rel="stylesheet" href="styles/add-ons.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+  <div class="headerbox">
+    <img src="x2e15.png">
+    <div style="top:0;left:40px;height:100%"><h1>Base2e15 Encoder Decoder</h1></div>
+  </div>
+  <div class="bodybox">
+    <div class="inputbox">
+      <div class="title padding"><h2>Plain Text</h2></div>
+      <div class="padding" style="top:35px;">
+        <textarea id="inputtext"></textarea>
+      </div>
+    </div>
+    <div class="inputbox outputbox">
+      <div class="title padding"><h2>Base2e15</h2></div>
+      <div class="padding" style="top:35px;">
+        <textarea id="outputtext"></textarea>
+      </div>
+    </div>
+    <div class="dividerbox">
+      <button class="red encodeArrow" title="Encode">►</button>
+      <button class="decodeArrow" title="Decode">►</button>
+    </div>
+  </div>
+<script data-pub-inline src="typedarray.js"></script>
+<script type="application/dart" src="main.dart"></script>
+<script data-pub-inline src="packages/browser/dart.js"></script>
+</body>
+</html>
