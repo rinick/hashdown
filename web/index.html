@@ -1,20 +1,32 @@
 <!DOCTYPE html>
-
-<!--
-  Copyright (c) 2015, <your name>. All rights reserved. Use of this source code
-  is governed by a BSD-style license that can be found in the LICENSE file.
--->
-
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="scaffolded-by" content="https://github.com/google/stagehand">
-    <title>x2e15</title>
-
-    <link rel="stylesheet" href="styles/add-ons.css">
-    <link rel="stylesheet" href="styles/main.css">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>x2e15</title>
+<link rel="stylesheet" href="styles/add-ons.css">
+<link rel="stylesheet" href="styles/main.css">
+<script type="text/javascript">
+  window.onload = function() {
+    var ua = navigator.userAgent;
+    if (ua.indexOf("MSIE 9.")>0){
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.src = 'typedarray.js'
+      document.body.appendChild(s);
+    } else if (ua.indexOf("MSIE ") > 0) {
+      if (ua.indexOf("MSIE 8.") > 0 || ua.indexOf("MSIE 7.") > 0 || ua.indexOf("MSIE 6.") > 0) {
+        window.location.replace("http://outdatedbrowser.com");
+        return;
+      }
+    }
+     var s = document.createElement('script');
+     s.type = 'text/javascript';
+     s.src = 'packages/browser/dart.js'
+     document.body.appendChild(s);
+   }
+</script>
 </head>
 
 <body>
@@ -24,15 +36,33 @@
   </div>
   <div class="bodybox">
     <div class="inputbox">
-      <div class="title padding"><h2>Plain Text</h2></div>
-      <div class="padding" style="top:35px;">
+      <div class="title padding">
+        <h2>Plain Text</h2>
+        <select class="selectCode">
+         <option value="Base2e15">Base2e15</option>
+         <option value="Base64">Base64</option>
+         <option value="TadpoleCode2">TadpoleCode2</option>
+        </select>
+      </div>
+      <div class="padding" style="top:35px;bottom:60px">
         <textarea id="inputtext"></textarea>
+      </div>
+      <div class="padding" style="height:50px;bottom:5px">
+        <label>Protection: </label>
+        <input type="radio" name="opProtect" id="opRaw"><label for="opRaw">Raw</label>&nbsp;
+        <input type="radio" name="opProtect" id="opSalt" checked><label for="opSalt">Salt</label>&nbsp;
+        <input type="radio" name="opProtect" id="opSSalt"><label for="opSSalt">Strong Salt</label><br>
+        <label for="opPass">Password: </label><input type="password" id="opPass">
+        <div class="filebox"><label for="opFile">Encode File: </label><input type="file" id="opFile"></div>
+
       </div>
     </div>
     <div class="inputbox outputbox">
-      <div class="title padding"><h2>Base2e15</h2></div>
-      <div class="padding" style="top:35px;">
-        <textarea id="outputtext"></textarea>
+      <div class="title padding"><h2>Encoded</h2></div>
+      <div class="padding" style="top:35px;bottom:100px"">
+        <textarea id="outputtext" ></textarea>
+      </div>
+      <div class="padding" style="height:90px;bottom:5px">
       </div>
     </div>
     <div class="dividerbox">
@@ -40,8 +70,6 @@
       <button class="decodeArrow" title="Decode">►</button>
     </div>
   </div>
-<script data-pub-inline src="typedarray.js"></script>
 <script type="application/dart" src="main.dart"></script>
-<script data-pub-inline src="packages/browser/dart.js"></script>
 </body>
 </html>

@@ -215,6 +215,7 @@ input[type="button"].create,
 input[type="button"].red,
 input[type="submit"].create,
 input[type="submit"].red {
+  background: #f00000;
   background: -moz-linear-gradient(top, #ff6464, #f00000);
   background: -ms-linear-gradient(top, #ff6464, #f00000);
   background: -o-linear-gradient(top, #ff6464, #f00000);
@@ -285,6 +286,7 @@ input[type="button"].create:hover,
 input[type="button"].red:hover,
 input[type="submit"].create:hover,
 input[type="submit"].red:hover {
+  background: #ff0000;
   background: -webkit-linear-gradient(top, #ff6464, #ff0000);
   background: -moz-linear-gradient(top, #ff6464, #ff0000);
   background: -ms-linear-gradient(top, #ff6464, #ff0000);

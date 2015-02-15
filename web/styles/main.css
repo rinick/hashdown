@@ -84,12 +84,11 @@ box-shadow:         0px 2px 5px 0px rgba(50, 50, 50, 0.75);
   padding: 0;'
 }
 .encodeArrow {
-  top: 25%; /* old ie */
-  top: calc(50% - 72px);
+  top: 20%; /* old ie */
+  top: calc(50% - 100px);
 }
 .decodeArrow {
-  bottom: 25%; /* old ie */
-  bottom: calc(50% - 72px);
+  bottom: 50%;
   -moz-transform: scale(-1, 1);
   -webkit-transform: scale(-1, 1);
   transform: scale(-1, 1);
@@ -98,8 +97,6 @@ box-shadow:         0px 2px 5px 0px rgba(50, 50, 50, 0.75);
 .padding {
   left:5px;
   right:5px;
-  top:5px;
-  bottom:5px;
 }
 
 .title {
@@ -108,5 +105,19 @@ box-shadow:         0px 2px 5px 0px rgba(50, 50, 50, 0.75);
   line-height: 24px;
   vertical-align: middle;
 }
-
-
+.selectCode {
+   position: absolute;
+   right: 0px;
+}
+input[type="password"] {
+  width: 100px;
+}
+input[type="file"] {
+  border: 1px solid #ddd;
+}
+.filebox {
+  top:0;
+  right:0;
+  padding:2px;
+  display:none;
+}

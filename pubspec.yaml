@@ -9,4 +9,5 @@ environment:
 dependencies:
   browser: any
   base2e15: any
+  crypto: any
   lzma: any

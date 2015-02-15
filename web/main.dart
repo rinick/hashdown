@@ -4,28 +4,54 @@
 import 'dart:html';
 import 'package:base2e15/base2e15.dart';
 import 'dart:convert';
+import '../lib/x2e15.dart';
 
+InputElement opPass;
+SelectElement selectCode;
 void main() {
   querySelector('.encodeArrow').onClick.listen(onEncode);
   querySelector('.decodeArrow').onClick.listen(onDecode);
+  
+  opPass = querySelector('#opPass');
+  opPass.onInput.listen(onPassInput);
+  
+  selectCode = querySelector('.selectCode');
+}
+void onPassInput(Event e) {
+  if (opPass.value == '') {
+    for (InputElement element in document.querySelectorAll('input[name=opProtect]')) {
+      element.disabled = false;
+    }
+  } else {
+    for (InputElement element in document.querySelectorAll('input[name=opProtect]')) {
+      element.disabled = true;
+    }
+  }
 }
 void onEncode(Event e) {
   String txt = (querySelector('#inputtext') as TextAreaElement).value;
   if (txt != '') {
-    (querySelector('#outputtext') as TextAreaElement).value = Base2e15.encode(UTF8.encode(txt));
+    (querySelector('#outputtext') as TextAreaElement).value = X2e15.encodeString(txt,getOption());
   }
 }
 void onDecode(Event e) {
   String txt = (querySelector('#outputtext') as TextAreaElement).value;
   if (txt != '') {
-    var bytes = Base2e15.decode(txt);
-    try {
-      String str = UTF8.decode(bytes);
-      if (str != '') {
-        (querySelector('#inputtext') as TextAreaElement).value = str;
-      }
-    } catch (err) {
-
+    Object obj = X2e15.decode(txt, opPass.value);
+    if (obj is String) {
+      (querySelector('#inputtext') as TextAreaElement).value = obj;
     }
   }
+}
+
+X2e15Options getOption(){
+  X2e15Options opt = new X2e15Options();
+  opt.password = opPass.value;
+  opt.codec = selectCode.value;
+  if (opt.password != '') {
+    opt.protect = 'opPassword';
+  } else {
+    opt.protect = querySelector('input[name="opProtect"]:checked').id;
+  }
+  return opt;
 }
