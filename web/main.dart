@@ -2,20 +2,22 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:html';
-import 'package:base2e15/base2e15.dart';
-import 'dart:convert';
 import '../lib/x2e15.dart';
+import 'language.dart';
 
 InputElement opPass;
 SelectElement selectCode;
 void main() {
+  initLanguage();
+  
   querySelector('.encodeArrow').onClick.listen(onEncode);
   querySelector('.decodeArrow').onClick.listen(onDecode);
   
   opPass = querySelector('#opPass');
   opPass.onInput.listen(onPassInput);
   
-  selectCode = querySelector('.selectCode');
+  selectCode = querySelector('.selectCode>select');
+  
 }
 void onPassInput(Event e) {
   if (opPass.value == '') {
