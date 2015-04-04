@@ -1,38 +1,37 @@
 library language;
+
 import 'dart:html';
 
 Map<String, String> _lan = null;
 
 Map<String, String> _lan_en;
 Map<String, String> _lan_zh = {
-  '2e15 Encoder Decoder': '2e15编解码',
+  '2e15 Encoder': '2e15编码',
   'Plain Text': '文本',
   'Encoded': '编码结果',
   'Codec:': '编码方式:',
-  'Protection: ': '保护: ',
+  'Salt:': '加盐:',
   'Raw': '无',
-  '1 Byte Salt': '1字节加盐',
-  '4 Bytes Salt': '4字节加盐',
-  'Password: ': '密码: ',
+  '1 Byte': '1字节',
+  '4 Bytes': '4字节',
+  'Password:': '密码:',
   'Encode': '编码',
   'Decode': '解码: ',
   'TadpoleCode2': '蝌蚪解码2'
 };
-
 
 Element cnflag;
 Element usflag;
 void initLanguage() {
   cnflag = querySelector('#cnflag');
   usflag = querySelector('#usflag');
-  
+
   if (window.localStorage['lan'] == 'zh') {
     _lan = _lan_zh;
     usflag.classes.remove('currentLan');
     cnflag.classes.add('currentLan');
     _translateAll();
   } else if (window.localStorage['lan'] == 'en') {
-
   } else if (window.navigator.language.startsWith('zh')) {
     _lan = _lan_zh;
     usflag.classes.remove('currentLan');
@@ -64,18 +63,20 @@ void toggleLanguage(MouseEvent e) {
 }
 
 String t(String str) {
-  if (_lan == null) return str;
+  if (_lan == null) return null;
   if (_lan.containsKey(str)) {
     return _lan[str];
   }
-  return str;
+  return null;
 }
 
 void _translateElement(Element e) {
-  e.text = t(e.text);
+  String rslt = t(e.text);
+  if (rslt != null) e.text = rslt;
 }
 void _translateTitle(Element e) {
-  e.title = t(e.title);
+  String rslt = t(e.title);
+  if (rslt != null) e.title = rslt;
 }
 void _translateAll() {
   document.querySelectorAll('h1').forEach(_translateElement);

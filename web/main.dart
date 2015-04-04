@@ -7,6 +7,8 @@ import 'language.dart';
 
 InputElement opPass;
 SelectElement selectCode;
+SelectElement saltSelect;
+Element headerh1;
 void main() {
   initLanguage();
   
@@ -17,17 +19,17 @@ void main() {
   opPass.onInput.listen(onPassInput);
   
   selectCode = querySelector('.selectCode>select');
+  saltSelect = querySelector('#saltSelect');
+  headerh1 = querySelector('h1');
+  window.onResize.listen(checkSize);
+  checkSize(null);
   
 }
 void onPassInput(Event e) {
   if (opPass.value == '') {
-    for (InputElement element in document.querySelectorAll('input[name=opProtect]')) {
-      element.disabled = false;
-    }
+    saltSelect.disabled = false;
   } else {
-    for (InputElement element in document.querySelectorAll('input[name=opProtect]')) {
-      element.disabled = true;
-    }
+    saltSelect.disabled = true;
   }
 }
 void onEncode(Event e) {
@@ -53,7 +55,22 @@ X2e15Options getOption(){
   if (opt.password != '') {
     opt.protect = 'opPassword';
   } else {
-    opt.protect = querySelector('input[name="opProtect"]:checked').id;
+    opt.protect = saltSelect.value;
   }
   return opt;
+}
+
+bool vmode = false;
+void checkSize(Event e) {
+  headerh1.style.display = window.innerWidth < 440 ? 'none':'';
+  if (window.innerWidth < 480 || window.innerWidth < window.innerHeight) {
+    if (!vmode) {
+      
+    }
+  } else {
+    if (vmode) {
+      
+    }
+  }
+  
 }
