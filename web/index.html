@@ -16,6 +16,7 @@
 </head>
 
 <body>
+<div class='sizebox'>
   <div class="headerbox">
     <img src="x2e15.png">
     <h1>2e15 Encoder</h1>
@@ -24,7 +25,7 @@
        <label for="saltSelect">Salt:</label><br/>
        <select id="saltSelect">
         <option value="opRaw">Raw</option>
-        <option value="opSalt">1 Byte</option>
+        <option value="opSalt" selected>1 Byte</option>
         <option value="opSSalt">4 Bytes</option>
        </select>
       </div>
@@ -46,16 +47,15 @@
         <img id="usflag" class="currentLan" src="us.png">
       </div>
       </div>
-
     </div>
   </div>
-  <div class="bodybox hlayout">
+  <div class="bodybox hlayout" style='display:none'>
     <div class="inputbox">
       <div class="title padding">
         <h2>Plain Text</h2>
       </div>
       <div class="padding" style="top:35px;">
-        <textarea id="inputtext"></textarea>
+        <textarea id="inputtext" placeholder="Input text here&#xA;and click the red button to encode it."></textarea>
       </div>
     </div>
     <div class="dividerbox">
@@ -67,9 +67,11 @@
         <h2>Encoded</h2>
       </div>
       <div class="padding" style="top:35px;">
-        <textarea id="outputtext" ></textarea>
+        <textarea id="outputtext" placeholder="If you have encoded text, paste it here&#xA;and click the white button to decode it."></textarea>
       </div>
     </div>
+  </div>
+  <div class='vbodybox' style='display:none'>
   </div>
   <iframe class="outdatedbrowser" id="outdatedbrowser" style="display:none" ></iframe>
   
@@ -78,6 +80,20 @@ by <a href='http://www.goozo.net'>Rick Zhou</a><br/>
 created with<br/>
 <a href='https://www.dartlang.org'><image alt='Dart' src='https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/static/dart-logo.png'></image></a>
 </div>
+
+<div id='adDiv' style='position:absolute;left:5px;right:5px;max-width:728px;height:90px;bottom:0;overflow:hidden'>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- default -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3283235194066083"
+     data-ad-slot="2505547458"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
 
 <script type="text/javascript">
   function init() {
@@ -101,21 +117,25 @@ created with<br/>
      s.src = 'main.dart.js'
      document.body.appendChild(s);
     }
+    
+    if (window.innerWidth <= 480) {
+      var adDiv = document.querySelector('#adDiv');
+      adDiv.style.height = '100px';
+      adDiv.style.left = '0';
+      adDiv.style.right = '0';
+      document.querySelector('.bodybox').style.bottom = '100px';
+      document.querySelector('.vbodybox').style.display = '';
+      document.querySelector('.vbodybox').style.bottom = '100px';
+      var aboutBox = document.querySelector('.aboutDiv');
+      aboutBox.style.bottom = '105px';
+      aboutBox.style.right = '16px';
+    } else {
+      document.querySelector('.bodybox').style.display = '';
+    }
    }
    init();
-</script>
-<div id='adDiv' style='position:absolute;width:100%;height:100px;bottom:0'>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- default -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-3283235194066083"
-     data-ad-slot="2505547458"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
+   
 </script>
 </div>
-
 </body>
 </html>

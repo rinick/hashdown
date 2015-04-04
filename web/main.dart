@@ -63,13 +63,17 @@ X2e15Options getOption(){
 bool vmode = false;
 void checkSize(Event e) {
   headerh1.style.display = window.innerWidth < 440 ? 'none':'';
-  if (window.innerWidth < 480 || window.innerWidth < window.innerHeight) {
+  if (window.innerWidth < 480) {
     if (!vmode) {
-      
+      document.querySelector('.vbodybox').style.display = '';
+      document.querySelector('.bodybox').style.display = 'none';
+      vmode = true;
     }
   } else {
     if (vmode) {
-      
+      document.querySelector('.vbodybox').style.display = 'none';
+      document.querySelector('.bodybox').style.display = '';
+      vmode = false;
     }
   }
   
