@@ -116,9 +116,11 @@ class X2e15 {
     } catch (e) {
       print(e);
       if (params != null && params.protection == X2e15Params.PROTECT_PASSWORD) {
-        return 'Incorrect password';
+        // blank String for password error
+        return '';
       }
-      return 'Decoding failed';
+      // null for decode fail
+      return null;
     }
   }
 }

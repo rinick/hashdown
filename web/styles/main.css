@@ -9,7 +9,7 @@ div.sizebox {
   width: 100%;
   height: 100%;
   min-width: 320px;
-  min-height: 480px;
+  min-height: 400px;
 }
 textarea {
   resize: none;
@@ -35,11 +35,10 @@ div {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f8f8f8));
   background: -webkit-linear-gradient(top,  #ffffff 0%,#f8f8f8 100%);
   background: -ms-linear-gradient(top,  #ffffff 0%,#f8f8f8 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f8f8f8',GradientType=0 );
   
 -webkit-box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.75);
 -moz-box-shadow:    0px 2px 5px 0px rgba(50, 50, 50, 0.75);
-box-shadow:         0px 2px 5px 0px rgba(50, 50, 50, 0.75); 
+box-shadow:         0px 2px 5px 0px rgba(50, 50, 50, 0.75);
 }
 
 div.hlayout{
@@ -79,8 +78,22 @@ div.hlayout > *{
   bottom: 90px;
   left: 2px;
   right: 2px;
-  background: #f0f0f0;
+  background: white;
+
+background: -moz-linear-gradient(-45deg, #f0f0f0 0%, #ffffff 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#f0f0f0), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg, #f0f0f0 0%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+background: -ms-linear-gradient(-45deg, #f0f0f0 0%,#ffffff 100%); /* IE10+ */
+background: linear-gradient(135deg, #f0f0f0 0%,#ffffff 100%); /* W3C */
 }
+.vtoolbar {
+  left:5px;
+  right:5px;
+  bottom:5px;
+  height:55px;
+  position: absolute;
+}
+
 .inputbox {
   width: 50%;
   height: 100%;
@@ -90,12 +103,11 @@ div.hlayout > *{
   
   background: #f0f0f0;
 
-  background: linear-gradient(to bottom,  #f8f8f8 0%,#f0f0f0 100%);
-  background: -moz-linear-gradient(top,  #f8f8f8 0%, #f0f0f0 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#f0f0f0));
-  background: -webkit-linear-gradient(top,  #f8f8f8 0%,#f0f0f0 100%);
-  background: -ms-linear-gradient(top,  #f8f8f8 0%,#f0f0f0 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#f0f0f0',GradientType=0 );
+  background: linear-gradient(to bottom,  #f0f0f0 0%,#f8f8f8 100%);
+  background: -moz-linear-gradient(top,  #f0f0f0 0%, #f8f8f8 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f0f0), color-stop(100%,#f8f8f8));
+  background: -webkit-linear-gradient(top,  #f0f0f0 0%,#f8f8f8 100%);
+  background: -ms-linear-gradient(top,  #f0f0f0 0%,#f8f8f8 100%);
 }
 
 .dividerbox {
@@ -113,17 +125,24 @@ div.hlayout > *{
   padding: 0;'
 }
 .encodeArrow {
-  top: 20%; /* old ie */
-  top: calc(50% - 100px);
+  top: calc(50% - 50px);
 }
 .decodeArrow {
-  bottom: 50%;
+  top: calc(50% + 10px);
   -moz-transform: scale(-1, 1);
   -webkit-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
 
+button.decode{
+  color: #f00000;
+}
+.vtoolbar > button {
+  font-size:13px;
+}
+
 .padding {
+  top:5px;
   left:5px;
   right:5px;
   bottom:5px;
@@ -203,6 +222,18 @@ input[type="password"] {
   bottom:30px;
   text-align: right;
 }
+.downloadDiv {
+  position:absolute;
+  right:10px;
+  bottom:5px;
+  text-align: right;  
+}
 .aboutDiv img {
   height:13px
+}
+.error {
+  width: 132px;
+  position: absolute;
+  text-align: center;
+  top: 20px;
 }

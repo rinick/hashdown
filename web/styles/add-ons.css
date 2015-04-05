@@ -176,7 +176,7 @@ input[type="submit"] {
   height: 29px;
   line-height: 27px;
   margin: 0;
-  min-width: 72px;
+  min-width: 60px;
   outline: 0;
   padding: 0 8px;
   text-align: center;
@@ -224,7 +224,6 @@ input[type="submit"].red {
   border: 1px solid transparent;
   color: #fff;
   text-shadow: 0 1px rgba(0, 0, 0, .1);
-  text-transform: uppercase;
 }
 
 .button.green,
@@ -467,7 +466,7 @@ input[type="submit"].share:disabled {
 .button + .button,
 button + button,
 input + input {
-  margin-left: 12px;
+  margin-left: 4px;
 }
 
 /* CHECKBOXES */

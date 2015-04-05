@@ -16,8 +16,14 @@ Map<String, String> _lan_zh = {
   '4 Bytes': '4字节',
   'Password:': '密码:',
   'Encode': '编码',
-  'Decode': '解码: ',
-  'TadpoleCode2': '蝌蚪解码2'
+  'Decode': '解码',
+  'Undo': '撤销',
+  'TadpoleCode2': '蝌蚪解码2',
+  'Decoding failed':'解码失败',
+  'Wrong password':'密码错误',
+  'Download Offline Version':'下载离线版',
+  'Input text here and click the encode button':'在这里输入文字后点击编码按钮',
+  'To decode text, paste it here and click the decode button':'需要解码时把文本粘贴到这里，然后点击解码按钮'
 };
 
 Element cnflag;
@@ -69,7 +75,13 @@ String t(String str) {
   }
   return null;
 }
-
+String t2(String str) {
+  if (_lan == null) return str;
+  if (_lan.containsKey(str)) {
+    return _lan[str];
+  }
+  return str;
+}
 void _translateElement(Element e) {
   String rslt = t(e.text);
   if (rslt != null) e.text = rslt;
@@ -78,6 +90,11 @@ void _translateTitle(Element e) {
   String rslt = t(e.title);
   if (rslt != null) e.title = rslt;
 }
+void _translatePlaceHolder(TextAreaElement e) {
+  String rslt = t(e.placeholder);
+  if (rslt != null) e.placeholder = rslt;
+}
+
 void _translateAll() {
   document.querySelectorAll('h1').forEach(_translateElement);
   document.querySelectorAll('h2').forEach(_translateElement);
@@ -85,4 +102,5 @@ void _translateAll() {
   document.querySelectorAll('button').forEach(_translateElement);
   document.querySelectorAll('option').forEach(_translateElement);
   document.querySelectorAll('[title]').forEach(_translateTitle);
+  document.querySelectorAll('textarea').forEach(_translatePlaceHolder);
 }

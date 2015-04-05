@@ -35,7 +35,7 @@
       </div>
       <div class="selectCode">
        <label>Codec:</label><br/>
-       <select>
+       <select style='width:90px'>
         <option value="Base2e15">Base2e15</option>
         <option value="Base64">Base64</option>
         <option value="TadpoleCode2">TadpoleCode2</option>
@@ -55,26 +55,38 @@
         <h2>Plain Text</h2>
       </div>
       <div class="padding" style="top:35px;">
-        <textarea id="inputtext" placeholder="Input text here&#xA;and click the red button to encode it."></textarea>
+        <textarea id="inputtext" placeholder="Input text here and click the encode button"></textarea>
       </div>
     </div>
     <div class="dividerbox">
       <button class="red encodeArrow" title="Encode">►</button>
-      <button class="decodeArrow" title="Decode">►</button>
+      <button class="decode decodeArrow" title="Decode">►</button>
     </div>
     <div class="inputbox">
       <div class="title padding">
         <h2>Encoded</h2>
       </div>
       <div class="padding" style="top:35px;">
-        <textarea id="outputtext" placeholder="If you have encoded text, paste it here&#xA;and click the white button to decode it."></textarea>
+        <textarea id="outputtext" placeholder="To decode text, paste it here and click the decode button"></textarea>
       </div>
     </div>
   </div>
   <div class='vbodybox' style='display:none'>
+    <div class="padding" style="bottom:65px;top:5px">
+        <textarea id="vinputtext"></textarea>
+     </div>
+    <div class="vtoolbar">
+      <button class='red encodeV'>Encode</button>
+      <button class='decodeV decode'>Decode</button>&nbsp;&nbsp;
+      <button class='undoV' disabled>Undo</button> <br/>
+      <h2 class='error'></h2>
+    </div>
+     
   </div>
   <iframe class="outdatedbrowser" id="outdatedbrowser" style="display:none" ></iframe>
-  
+<div class='downloadDiv'>
+  <a href='2e15_offline.zip'><label>Download Offline Version</label></a>
+</div>
 <div class='aboutDiv'>
 by <a href='http://www.goozo.net'>Rick Zhou</a><br/>
 created with<br/>
@@ -116,21 +128,6 @@ created with<br/>
      s.type = 'text/javascript';
      s.src = 'main.dart.js'
      document.body.appendChild(s);
-    }
-    
-    if (window.innerWidth <= 480) {
-      var adDiv = document.querySelector('#adDiv');
-      adDiv.style.height = '100px';
-      adDiv.style.left = '0';
-      adDiv.style.right = '0';
-      document.querySelector('.bodybox').style.bottom = '100px';
-      document.querySelector('.vbodybox').style.display = '';
-      document.querySelector('.vbodybox').style.bottom = '100px';
-      var aboutBox = document.querySelector('.aboutDiv');
-      aboutBox.style.bottom = '105px';
-      aboutBox.style.right = '16px';
-    } else {
-      document.querySelector('.bodybox').style.display = '';
     }
    }
    init();
