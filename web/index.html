@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>HashDown</title>
+<meta charset="utf-8">
+<meta name="hashdownad" content="enabled">
+<meta name="description" content="HashDown Viewer">
+<meta name="keywords" content="HashDown,Encode,Decode,Base2e15,Base64,tadpole code,编码,解码,蝌蚪解码,蝌蚪码,加密,安全">
+<meta name="author" content="Rick Zhou">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="styles/add-ons.css">
+<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/markdown.css">
+</head>
+ 
+  <body class='viewerbody'>
+  <div><a href='http://www.hashdown.net/edit.html' style='margin-left:20px'><img src="hashdown.png" class='viewerIcon'></a>HashDown Viewer</div>
+<div style='position:absolute;top:0;right:0'>powered by
+ <a href='https://www.dartlang.org'><img class='dart' alt='Dart' src='https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/static/dart-logo.png'></a>&nbsp;
+ <div class="languageDiv" style='display:none'><img id="cnflag" src="cn.png"><img id="usflag" class="currentLan" src="us.png"></div>
+</div>
+    <div class='viewerbox'>
+      <div class='markdown viewer'>
+        <div class='viewerpassbox' style='display:none'>
+          <label class='error'>Password required</label><br>
+          <label>Password:</label> <input type="password" id="opPass"><br>
+          <button class='decode'>Decode</button>
+        </div>
+      </div>
+       <div style='margin: 2px 0 80px 0'><a id='editLink' class='lan'>edit this HashDown</a>
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <a class='lan' href='edit.html#url'>create a new HashDown</a></div>
+    </div>
+   
+  <iframe class="outdatedbrowser" id="outdatedbrowser" style="display:none" ></iframe>
+<script type="text/javascript">
+  function init() {
+    if (window.location.hash == ''){
+      window.location.replace('http://www.hashdown.net/edit.html');
+      return;
+    }
+    var ua = navigator.userAgent;
+    if (ua.indexOf("MSIE ") > 0) {
+      if (ua.indexOf("MSIE 9.") > 0 || ua.indexOf("MSIE 8.") > 0 || ua.indexOf("MSIE 7.") > 0 || ua.indexOf("MSIE 6.") > 0) {
+        document.getElementById('outdatedbrowser').style.display = "";
+        document.getElementById('outdatedbrowser').src="outdatedbrowser.html";
+        return;
+      }
+    }
+    if (navigator.userAgent.indexOf('(Dart)') !== -1) {
+     var s = document.createElement('script');
+     s.type = 'application/dart';
+     s.src = 'index.dart'
+     document.body.appendChild(s);
+    }
+   }
+   init();
+   
+</script>
+<script src="markd_min.js"></script>
+<script src="index.dart.js"></script>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-library x2e15.tadpolecode;
+library hashdown.tadpolecode;
 import 'dart:typed_data';
 
 class TadpoleCode {

@@ -1,4 +1,4 @@
-part of base2e15.x;
+part of hashdown;
 
 class UTF16 {
   static Uint8List encode(String str) {

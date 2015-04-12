@@ -6,26 +6,31 @@ Map<String, String> _lan = null;
 
 Map<String, String> _lan_en;
 Map<String, String> _lan_zh = {
-  '2e15 Encoder': '2e15编码',
   'Plain Text': '纯文本',
   'Encoded': '编码结果',
-  '<Markdown>': '<标记语言>',
-  'Codec:': '编码方式:',
+  'Markdown': '标记语言',
+  'markdown.md': 'markdown.zh.md',
+  'Encode Mode:': '编码模式:',
   'Salt:': '加盐:',
   'Raw': '无',
   '1 Byte': '1字节',
   '4 Bytes': '4字节',
   'Password:': '密码:',
+  'Link': '链接',
   'Encode': '编码',
   'Decode': '解码',
   'Encode Markdown': '编码标记语言',
   'Undo': '撤销',
-  'TadpoleCode2': '蝌蚪解码2',
+  'TadpoleCode': '蝌蚪码',
+  'Help': '帮助',
+  'edit this HashDown': '编辑这个HashDown',
+  'create a new HashDown': '创建新的HashDown',
   'Decoding failed':'解码失败',
   'Wrong password':'密码错误',
-  'Download Offline Version':'下载离线版',
   'Input text here and click the encode button':'在这里输入文字，然后点击编码按钮',
-  'To decode text, paste it here and click the decode button':'需要解码时把文本粘贴到这里，然后点击解码按钮'
+  'To decode text, paste it here and click the decode button':'需要解码时把文本粘贴到这里，然后点击解码按钮',
+  'Hosted on GitHub':'下载离线版',
+  'https://github.com/rinick/hashdown':'https://github.com/rinick/hashdown/archive/gh-pages.zip',
 };
 
 Element cnflag;
@@ -46,7 +51,9 @@ void initLanguage() {
     cnflag.classes.add('currentLan');
     _translateAll();
   }
-  querySelector(".languageDiv").onClick.listen(toggleLanguage);
+  Element lanDiv = querySelector(".languageDiv");
+  if (lanDiv != null)
+    lanDiv.onClick.listen(toggleLanguage);
 }
 
 void toggleLanguage(MouseEvent e) {
@@ -88,6 +95,10 @@ void _translateElement(Element e) {
   String rslt = t(e.text);
   if (rslt != null) e.text = rslt;
 }
+void _translateAnchor(AnchorElement e) {
+  String rslt = t(e.href);
+  if (rslt != null) e.href = rslt;
+}
 void _translateTitle(Element e) {
   String rslt = t(e.title);
   if (rslt != null) e.title = rslt;
@@ -99,6 +110,7 @@ void _translatePlaceHolder(TextAreaElement e) {
 
 void _translateAll() {
   document.querySelectorAll('.lan').forEach(_translateElement);
+  document.querySelectorAll('a.a_lan').forEach(_translateAnchor);
   document.querySelectorAll('label').forEach(_translateElement);
   document.querySelectorAll('button').forEach(_translateElement);
   document.querySelectorAll('option').forEach(_translateElement);

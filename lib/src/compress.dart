@@ -1,8 +1,8 @@
-part of base2e15.x;
+part of hashdown;
 
-class X2e15Compress {
+class HashdownCompress {
 
-  static List<int> compressString(String str, X2e15Params params) {
+  static List<int> compressString(String str, HashdownParams params) {
     List<int> rslt;
     List<int> utf8 = UTF8.encode(str);
     List<int> utf8c = compress(utf8);
@@ -10,7 +10,7 @@ class X2e15Compress {
     List<int> uft16c = compress(uft16);
       rslt = utf8;
       int min = utf8.length;
-      params.mode = X2e15Params.MODE_UTF8;
+      params.mode = HashdownParams.MODE_UTF8;
       params.compressed = 0;
     if (min > utf8c.length) {
       rslt = utf8c;
@@ -20,24 +20,24 @@ class X2e15Compress {
     if (min > uft16c.length) {
       rslt = uft16c;
       min = uft16c.length;
-      params.mode = X2e15Params.MODE_UTF16;
+      params.mode = HashdownParams.MODE_UTF16;
       params.compressed = 1;
     }
     if (min > uft16.length) {
-      if (params.protection == X2e15Params.PROTECT_PASSWORD){
+      if (params.protection == HashdownParams.PROTECT_PASSWORD){
         // add extra 0 to validate utf16
         rslt = []..addAll(uft16)..add(0);
       } else {
         rslt = uft16;
       }
-      params.mode = X2e15Params.MODE_UTF16;
+      params.mode = HashdownParams.MODE_UTF16;
       params.compressed = 0;
     }
     return rslt;
   }
-  static List<int> compressFile(X2e15File file, X2e15Params params) {
+  static List<int> compressFile(HashdownFile file, HashdownParams params) {
     List<int> data = file.encode();
-    params.mode = X2e15Params.MODE_FILE;
+    params.mode = HashdownParams.MODE_FILE;
     if (params.compressed == 1){
       List<int> compressed = compress(data);
       if (compressed.length < data.length) {
@@ -47,18 +47,18 @@ class X2e15Compress {
     params.compressed = 0;
     return data;
   }
-  static Object decompressAuto(List<int> data, X2e15Params params) {
+  static Object decompressAuto(List<int> data, HashdownParams params) {
     if (params.compressed == 1) {
       data = decompress(data);
     }
-    if (params.mode == X2e15Params.MODE_UTF8){
+    if (params.mode == HashdownParams.MODE_UTF8){
       return UTF8.decode(data);
     }
-    if (params.mode == X2e15Params.MODE_UTF16 ) {
+    if (params.mode == HashdownParams.MODE_UTF16 ) {
       return UTF16.decode(data);
     }
-    if (params.mode == X2e15Params.MODE_FILE ) {
-      new X2e15File.decode(data);
+    if (params.mode == HashdownParams.MODE_FILE ) {
+      new HashdownFile.decode(data);
     }
     return data;
   }

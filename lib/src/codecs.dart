@@ -1,11 +1,14 @@
-part of base2e15.x;
+part of hashdown;
 
 abstract class XCodec {
   static XCodec getCodec(String name) {
-    if (name.toLowerCase().startsWith('base64')) {
+    if (name.startsWith('link')) {
+      return new Base64UrlCodec();
+    }
+    if (name.startsWith('base64')) {
       return new Base64Codec();
     }
-    if (name.toLowerCase().startsWith('tadpole')) {
+    if (name.startsWith('tadpole')) {
       return new TadpoleCodec();
     }
     return new Base2e15Codec();
@@ -15,7 +18,6 @@ abstract class XCodec {
 }
 
 class Base2e15Codec implements XCodec {
-
   List<int> decode(String str) {
     return Base2e15.decode(str);
   }
@@ -26,7 +28,6 @@ class Base2e15Codec implements XCodec {
 }
 
 class Base64Codec implements XCodec {
-
   List<int> decode(String str) {
     return CryptoUtils.base64StringToBytes(str);
   }
@@ -36,13 +37,45 @@ class Base64Codec implements XCodec {
   }
 }
 
-class TadpoleCodec implements XCodec {
+class Base64UrlCodec implements XCodec {
+  static String url = '';
 
   List<int> decode(String str) {
-    return Tadoole2.decode(str);
+    int pos = str.indexOf('#');
+    if (pos > -1) {
+      str = str.substring(pos + 1);
+    }
+    // append =
+    int len = str.length;
+    switch (len % 4) {
+      case 3:
+        str = str + '=';
+        break;
+      case 2:
+        str = str + '==';
+        break;
+      case 1: // impossible
+        str = str + '===';
+        break;
+    }
+    return CryptoUtils.base64StringToBytes(str);
   }
 
   String encode(List<int> bytes) {
-    return Tadoole2.encode(bytes);
+    String base64 = CryptoUtils.bytesToBase64(bytes, urlSafe: true);
+    if (base64.endsWith('==')) base64 = base64.substring(0, base64.length - 2);
+    else if (base64.endsWith('=')) base64 =
+        base64.substring(0, base64.length - 1);
+    return '$url$base64';
+  }
+}
+
+class TadpoleCodec implements XCodec {
+  List<int> decode(String str) {
+    return TadpoleCode.decode(str);
+  }
+
+  String encode(List<int> bytes) {
+    return TadpoleCode.encode(bytes);
   }
 }

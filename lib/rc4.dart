@@ -1,7 +1,7 @@
 // Copyright (c) 2015, Rick Zhou. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-library x2e15.rc4;
+library hashdown.rc4;
 
 /// a simple class that can be used for encryption, descyption and prng
 class RC4 {
