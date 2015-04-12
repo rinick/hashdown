@@ -4,6 +4,7 @@
 import 'dart:html';
 import '../lib/x2e15.dart';
 import 'language.dart';
+import 'dart:async';
 
 InputElement opPass;
 SelectElement selectCode;
@@ -25,9 +26,13 @@ void main() {
   selectCode = querySelector('.selectCode>select');
   saltSelect = querySelector('#saltSelect');
   headerh1 = querySelector('h1');
-  window.onResize.listen(checkSize);
-  checkSize(null);
   
+  if (window.location.hash.indexOf('#tadpole') == 0) {
+    (document.querySelector('option[value="TadpoleCode2"') as OptionElement).selected = true;
+  }
+  checkSize(null);
+  window.onResize.listen(checkSize);
+  new Timer(new Duration(milliseconds:500), initAd);
 }
 void onPassInput(Event e) {
   if (opPass.value == '') {
@@ -126,24 +131,60 @@ void checkSize(Event e) {
       vmode = false;
     }
   }
-  
-  if (!inited) {
-    if (window.innerWidth < 480) {
-      var adDiv = document.querySelector('#adDiv');
-      adDiv.style.height = '100px';
-      adDiv.style.left = '0';
-      adDiv.style.right = '0';
-      document.querySelector('.bodybox').style.bottom = '100px';
-      document.querySelector('.vbodybox').style.bottom = '100px';
-      var aboutBox = document.querySelector('.aboutDiv');
-      aboutBox.style.bottom = '105px';
-      aboutBox.style.right = '16px';
-      document.querySelector('.downloadDiv').style.display = 'none'; 
-    }
-    if (window.location.hash.indexOf('#tadpole') == 0) {
-      (document.querySelector('option[value="TadpoleCode2"') as OptionElement).selected = true;
-    }
-  }
+}
+
+void initAd(){
   inited = true;
+  checkSize(null);
+  String host = window.location.host;
+  if (host.indexOf('2e15.com') < 0) {
+    return;
+  }
+  var aboutBox = document.querySelector('.aboutDiv');
+  DivElement adDiv = document.createElement('div');
+  adDiv.id = 'adDiv';
   
+  NodeValidator validator = new NodeValidatorBuilder()
+   ..allowHtml5()
+   ..allowInlineStyles()
+   ..allowElement('script', attributes: ['src','async'])
+   ..allowElement('ins', attributes: ['data-ad-slot','data-ad-client']);
+      
+  if (window.innerWidth < 728) {
+    adDiv.style.height = '100px';
+    adDiv.style.left = '0';
+    adDiv.style.right = '0';
+    document.querySelector('.bodybox').style.bottom = '100px';
+    document.querySelector('.vbodybox').style.bottom = '100px';
+   
+    aboutBox.style.bottom = '105px';
+    aboutBox.style.right = '16px';
+    adDiv.setInnerHtml(r'''
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2e15_mobile -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:320px;height:100px"
+     data-ad-client="ca-pub-3283235194066083"
+     data-ad-slot="6644918654"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>''', validator:validator);
+  } else {
+    document.querySelector('.bodybox').style.bottom = '90px';
+    document.querySelector('.vbodybox').style.bottom = '90px';
+    document.querySelector('.downloadDiv').style.display = ''; 
+    aboutBox.style.bottom = '30px';
+    aboutBox.style.right = '10px';
+    adDiv.setInnerHtml(r'''
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 2e15_desktop -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3283235194066083"
+     data-ad-slot="5168185454"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>''', validator:validator);
+  }
+  document.body.append(adDiv);
 }

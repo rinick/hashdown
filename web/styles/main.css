@@ -68,14 +68,14 @@ div.hlayout > *{
 .bodybox {
   position: absolute;
   top: 46px;
-  bottom: 90px;
+  bottom: 5px;
   left: 5px;
   right: 5px;
 }
 .vbodybox {
   position: absolute;
   top: 43px;
-  bottom: 90px;
+  bottom: 5px;
   left: 2px;
   right: 2px;
   background: white;
@@ -218,8 +218,8 @@ input[type="password"] {
 
 .aboutDiv {
   position:absolute;
-  right:10px;
-  bottom:30px;
+  right:16px;
+  bottom:10px;
   text-align: right;
 }
 .downloadDiv {
@@ -236,4 +236,12 @@ input[type="password"] {
   position: absolute;
   text-align: center;
   top: 20px;
+}
+#adDiv {
+  position:absolute;
+  left:5px;
+  right:5px;
+  max-width:728px;
+  bottom:0;
+  overflow:hidden;
 }
