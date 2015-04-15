@@ -7,8 +7,9 @@ Map<String, String> _lan = null;
 Map<String, String> _lan_en;
 Map<String, String> _lan_zh = {
   '2e15 Encoder': '2e15编码',
-  'Plain Text': '文本',
+  'Plain Text': '纯文本',
   'Encoded': '编码结果',
+  '<Markdown>': '<标记语言>',
   'Codec:': '编码方式:',
   'Salt:': '加盐:',
   'Raw': '无',
@@ -17,12 +18,13 @@ Map<String, String> _lan_zh = {
   'Password:': '密码:',
   'Encode': '编码',
   'Decode': '解码',
+  'Encode Markdown': '编码标记语言',
   'Undo': '撤销',
   'TadpoleCode2': '蝌蚪解码2',
   'Decoding failed':'解码失败',
   'Wrong password':'密码错误',
   'Download Offline Version':'下载离线版',
-  'Input text here and click the encode button':'在这里输入文字后点击编码按钮',
+  'Input text here and click the encode button':'在这里输入文字，然后点击编码按钮',
   'To decode text, paste it here and click the decode button':'需要解码时把文本粘贴到这里，然后点击解码按钮'
 };
 
@@ -96,8 +98,7 @@ void _translatePlaceHolder(TextAreaElement e) {
 }
 
 void _translateAll() {
-  document.querySelectorAll('h1').forEach(_translateElement);
-  document.querySelectorAll('h2').forEach(_translateElement);
+  document.querySelectorAll('.lan').forEach(_translateElement);
   document.querySelectorAll('label').forEach(_translateElement);
   document.querySelectorAll('button').forEach(_translateElement);
   document.querySelectorAll('option').forEach(_translateElement);

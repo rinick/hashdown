@@ -5,20 +5,30 @@ import 'dart:html';
 import '../lib/x2e15.dart';
 import 'language.dart';
 import 'dart:async';
+import 'package:markdown/markdown.dart' as Markdown;
 
 InputElement opPass;
 SelectElement selectCode;
 SelectElement saltSelect;
 Element headerh1;
 void main() {
+  String url = window.location.toString();
+  Base64UrlCodec.url = url.replaceFirst('/edit.html', '/#');
+
   initLanguage();
+  
+  
+  querySelector('#inputnavTab').onClick.listen(onInputTab);
+  querySelector('#markdownnavTab').onClick.listen(onMarkdownTab);
   
   querySelector('.encodeArrow').onClick.listen(onEncode);
   querySelector('.decodeArrow').onClick.listen(onDecode);
   
   querySelector('.encodeV').onClick.listen(onEncodeV);
   querySelector('.decodeV').onClick.listen(onDecodeV);
+  querySelector('.markdownV').onClick.listen(onMarkdownV);
   querySelector('.undoV').onClick.listen(onUndoV);
+  
   
   opPass = querySelector('#opPass');
   opPass.onInput.listen(onPassInput);
@@ -41,9 +51,36 @@ void onPassInput(Event e) {
     saltSelect.disabled = true;
   }
 }
+
+bool markdown = false;
+void onInputTab(Event e) {
+  if (!markdown) return;
+  markdown = false;
+  querySelector('#inputnavTab').classes.add('selectedTab');
+  querySelector('#markdownnavTab').classes.remove('selectedTab');
+  querySelector('.encodeMarkdown').style.display = 'none';
+  querySelector('#markdown')
+      ..style.display = 'none'
+      ..innerHtml = '';
+}
+void onMarkdownTab(Event e) {
+  if (markdown) return;
+  markdown = true;
+  querySelector('#inputnavTab').classes.remove('selectedTab');
+  querySelector('#markdownnavTab').classes.add('selectedTab');
+  querySelector('.encodeMarkdown').style.display = '';
+  querySelector('#markdown')
+      ..style.display = '' 
+      ..innerHtml = Markdown.markdownToHtml((querySelector('#inputtext') as TextAreaElement).value);
+  
+}
+
 void onEncode(Event e) {
   String txt = (querySelector('#inputtext') as TextAreaElement).value;
   if (txt != '') {
+    if (markdown) {
+      txt = '$txt\u001b';
+    }
     (querySelector('#outputtext') as TextAreaElement).value = X2e15.encodeString(txt,getOption());
   }
 }
@@ -53,10 +90,21 @@ void onDecode(Event e) {
     Object obj = X2e15.decode(txt, opPass.value);
     if (obj == null) {
       (querySelector('#inputtext') as TextAreaElement).value = t2('Decoding failed');
+      onInputTab(null);
     } else if (obj == '') {
       (querySelector('#inputtext') as TextAreaElement).value = t2('Wrong password');
+      onInputTab(null);
     } else if (obj is String) {
-      (querySelector('#inputtext') as TextAreaElement).value = obj;
+      if (obj.endsWith('\u001b')){
+        //markdown
+        (querySelector('#inputtext') as TextAreaElement).value = obj.substring(0, obj.length - 1);
+        markdown = false; // force a conversion
+        onMarkdownTab(null);
+      } else {
+        (querySelector('#inputtext') as TextAreaElement).value = obj;
+        onInputTab(null);
+      }
+      
     }
   }
 }
@@ -65,6 +113,10 @@ void onEncodeV(Event e) {
   String txt = (querySelector('#vinputtext') as TextAreaElement).value;
   if (txt != '') {
     logHis(txt);
+    if (markdownV) {
+      txt = '$txt\u001b';
+      onMarkdownV(null);
+    }
     (querySelector('#vinputtext') as TextAreaElement).value = X2e15.encodeString(txt,getOption());
     querySelector('.error').text = '';
   }
@@ -78,9 +130,18 @@ void onDecodeV(Event e) {
     } else if (obj == '') {
       querySelector('.error').text = t2('Wrong password');
     } else if (obj is String) {
+      String rslt = obj;
       logHis(txt);
-      (querySelector('#vinputtext') as TextAreaElement).value = obj;
-      querySelector('.error').text = '';
+      if (rslt.endsWith('\u001b')){
+         //markdown
+        rslt = rslt.substring(0, rslt.length - 1);
+         (querySelector('#vinputtext') as TextAreaElement).value = rslt;
+         markdownV = false; // force a conversion
+         onMarkdownV(null);
+       } else {
+         (querySelector('#vinputtext') as TextAreaElement).value = rslt;
+       }
+       querySelector('.error').text = '';
     }
   }
 }
@@ -93,11 +154,35 @@ void logHis(String str) {
     }
   }
 }
+
+bool markdownV = false;
+void onMarkdownV(Event e) {
+  if (markdownV) {
+    markdownV = false;
+    querySelector('#vmarkdown')
+            ..style.display = 'none' 
+            ..innerHtml = '';
+    querySelector('.markdownV').classes.remove('blue');
+    querySelector('.encodeV').text = t2('Encode');
+    querySelector('.decodeV').style.display = '';
+  } else {
+    markdownV = true;
+    querySelector('#vmarkdown')
+        ..style.display = '' 
+        ..innerHtml = Markdown.markdownToHtml((querySelector('#vinputtext') as TextAreaElement).value);
+    querySelector('.markdownV').classes.add('blue');
+    querySelector('.encodeV').text = t2('Encode Markdown');
+    querySelector('.decodeV').style.display = 'none';
+  }
+}
 void onUndoV(Event e) {
   if (history.length > 0) {
     (querySelector('#vinputtext') as TextAreaElement).value = history.removeLast();
     if (history.length == 0) {
       (querySelector('.undoV') as ButtonElement).disabled = true;
+    }
+    if (markdownV ) {
+       onMarkdownV(null);
     }
   }
 }
@@ -137,9 +222,9 @@ void initAd(){
   inited = true;
   checkSize(null);
   String host = window.location.host;
-  if (host.indexOf('2e15.com') < 0) {
-    return;
-  }
+//  if (host.indexOf('2e15.com') < 0 || host.indexOf('rinick') < 0) {
+//    return;
+//  }
   var aboutBox = document.querySelector('.aboutDiv');
   DivElement adDiv = document.createElement('div');
   adDiv.id = 'adDiv';
@@ -186,5 +271,5 @@ void initAd(){
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>''', validator:validator);
   }
-  document.body.append(adDiv);
+  document.querySelector('.sizebox').append(adDiv);
 }

@@ -19,7 +19,7 @@
 <div class='sizebox'>
   <div class="headerbox">
     <img src="x2e15.png">
-    <h1>2e15 Encoder</h1>
+    <h1 class='lan'>2e15 Encoder</h1>
     <div class="headeroptions hlayout">
       <div class="selectProtect">
        <label for="saltSelect">Salt:</label><br/>
@@ -39,6 +39,7 @@
         <option value="Base2e15">Base2e15</option>
         <option value="Base64">Base64</option>
         <option value="TadpoleCode2">TadpoleCode2</option>
+        <option value="Url">Url</option>
        </select>
       </div>
       <div class="selectLanguage">
@@ -52,19 +53,25 @@
   <div class="bodybox hlayout" style='display:none'>
     <div class="inputbox">
       <div class="title padding">
-        <h2>Plain Text</h2>
+        <h2 id='inputnavTab' class='lan tabbtn selectedTab'>Plain Text</h2>
+        <h2 id='markdownnavTab' class='lan tabbtn'>&lt;Markdown&gt;</h2>
       </div>
-      <div class="padding" style="top:35px;">
+      <div id="inputnav" class="padding" style="top:35px;">
         <textarea id="inputtext" placeholder="Input text here and click the encode button"></textarea>
+      </div>
+      <div id="markdown" class="padding markdown" style="top:35px;display:none">
+        
       </div>
     </div>
     <div class="dividerbox">
-      <button class="red encodeArrow" title="Encode">►</button>
+      <button class="red encodeArrow" title="Encode">►
+        <div class='encodeMarkdown' style='display:none'>&lt; &gt;</div>
+      </button>
       <button class="decode decodeArrow" title="Decode">►</button>
     </div>
     <div class="inputbox">
       <div class="title padding">
-        <h2>Encoded</h2>
+        <h2 class='lan tabbtn selectedTab'>Encoded</h2>
       </div>
       <div class="padding" style="top:35px;">
         <textarea id="outputtext" placeholder="To decode text, paste it here and click the decode button"></textarea>
@@ -75,17 +82,21 @@
     <div class="padding" style="bottom:65px;top:5px">
         <textarea id="vinputtext"></textarea>
      </div>
+     <div id='vmarkdown' class="padding markdown" style="bottom:65px;top:5px;display:none">
+       
+     </div>
     <div class="vtoolbar">
       <button class='red encodeV'>Encode</button>
       <button class='decodeV decode'>Decode</button>&nbsp;&nbsp;
-      <button class='undoV' disabled>Undo</button> <br/>
+      <button class='markdownV' title='Markdown' >&lt;&gt;</button>
+      <button class='undoV' title='Undo' disabled>↶</button> <br/>
       <h2 class='error'></h2>
     </div>
      
   </div>
   <iframe class="outdatedbrowser" id="outdatedbrowser" style="display:none" ></iframe>
 <div class='downloadDiv' style='display:none'>
-  <a href='2e15_offline.zip'><label>Download Offline Version</label></a>
+  <a href='https://github.com/rinick/2e15/archive/gh-pages.zip' download='2e15.zip'><label>Download Offline Version</label></a>
 </div>
 <div class='aboutDiv'>
 by <a href='http://www.goozo.net'>Rick Zhou</a><br/>

@@ -1,8 +1,9 @@
 // Copyright (c) 2015, Rick Zhou. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-part of base2e15.x;
+library x2e15.rc4;
 
+/// a simple class that can be used for encryption, descyption and prng
 class RC4 {
   int i = 0,
       j = 0;
@@ -63,5 +64,26 @@ class RC4 {
       bytes[x] ^= S[(S[i] + S[j]) & 0xFF];
       j = (j + byte) & 0xFF;
     }
+  }
+  /// prng
+  int nextByte() {
+    i = (i + 1) & 0xFF;
+    j = (j + S[i]) & 0xFF;
+    int t = S[i];
+    S[i] = S[j];
+    S[j] = t;
+    return S[(S[i] + S[j]) & 0xFF];
+  }
+  int nextInt(int max) {
+    int round = max ;
+    int v = nextByte();
+    do {
+      v = v <<8 | nextByte();
+      if (v >= max) {
+        v %= max;
+      }
+      round >>= 6;
+    } while(round != 0);
+    return v;
   }
 }

@@ -1,6 +1,7 @@
-part of base2e15.x;
+library x2e15.tadpolecode;
+import 'dart:typed_data';
 
-class Tadoole2 {
+class TadpoleCode {
 
   static const List<int> _encodeTable = const [ //
     0x0315, 0x031B, 0x0321, 0x0322, //
