@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_blank">
+<title>2e15</title>
+<meta charset="utf-8">
+<meta name="description" content="2e15 Encoder">
+<meta name="keywords" content="2e15,Encode,Decode,Base2e15,Base64,tadpole code,编码,解码,蝌蚪解码,蝌蚪码,加密,安全">
+<meta name="author" content="Rick Zhou">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="styles/add-ons.css">
+<link rel="stylesheet" href="styles/main.css">
+
+</head>
+
+<body>
+<div class='sizebox'>
+  <div class="headerbox">
+    <img src="x2e15.png">
+    <h1 class='lan'>2e15 Encoder</h1>
+    <div class="headeroptions hlayout">
+      <div class="selectProtect">
+       <label for="saltSelect">Salt:</label><br/>
+       <select id="saltSelect">
+        <option value="opRaw">Raw</option>
+        <option value="opSalt" selected>1 Byte</option>
+        <option value="opSSalt">4 Bytes</option>
+       </select>
+      </div>
+      <div class="inputPassword">
+       <label>Password:</label><br/>
+       <input type="password" id="opPass">
+      </div>
+      <div class="selectCode">
+       <label>Codec:</label><br/>
+       <select style='width:90px'>
+        <option value="base2e15">Base2e15</option>
+        <option value="base64">Base64</option>
+        <option value="tadpole">TadpoleCode2</option>
+        <option value="url">Url</option>
+       </select>
+      </div>
+      <div class="selectLanguage">
+        <div class="languageDiv">
+        <img id="cnflag" src="cn.png"> <br/>
+        <img id="usflag" class="currentLan" src="us.png">
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="bodybox hlayout" style='display:none'>
+    <div class="inputbox">
+      <div class="title padding">
+        <h2 id='inputnavTab' class='lan tabbtn selectedTab'>Plain Text</h2>
+        <h2 id='markdownnavTab' class='lan tabbtn'>&lt;Markdown&gt;</h2>
+      </div>
+      <div id="inputnav" class="padding" style="top:35px;">
+        <textarea id="inputtext" placeholder="Input text here and click the encode button"></textarea>
+      </div>
+      <div id="markdown" class="padding markdown" style="top:35px;display:none">
+        
+      </div>
+    </div>
+    <div class="dividerbox">
+      <button class="red encodeArrow" title="Encode">►
+        <div class='encodeMarkdown' style='display:none'>&lt; &gt;</div>
+      </button>
+      <button class="decode decodeArrow" title="Decode">►</button>
+    </div>
+    <div class="inputbox">
+      <div class="title padding">
+        <h2 class='lan tabbtn selectedTab'>Encoded</h2>
+      </div>
+      <div class="padding" style="top:35px;">
+        <textarea id="outputtext" placeholder="To decode text, paste it here and click the decode button"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class='vbodybox' style='display:none'>
+    <div class="padding" style="bottom:65px;top:5px">
+        <textarea id="vinputtext"></textarea>
+     </div>
+     <div id='vmarkdown' class="padding markdown" style="bottom:65px;top:5px;display:none">
+       
+     </div>
+    <div class="vtoolbar">
+      <button class='red encodeV'>Encode</button>
+      <button class='decodeV decode'>Decode</button>&nbsp;&nbsp;
+      <button class='markdownV' title='Markdown' >&lt;&gt;</button>
+      <button class='undoV' title='Undo' disabled>↶</button> <br/>
+      <h2 class='error errorpos'></h2>
+    </div>
+     
+  </div>
+  <iframe class="outdatedbrowser" id="outdatedbrowser" style="display:none" ></iframe>
+<div class='downloadDiv' style='display:none'>
+  <a href='https://github.com/rinick/2e15/archive/gh-pages.zip' download='2e15.zip'><label>Download Offline Version</label></a>
+</div>
+<div class='aboutDiv'>
+by <a href='http://www.goozo.net'>Rinick</a><br/>
+powered by<br/>
+<a href='https://www.dartlang.org'><img class='dart' alt='Dart' src='https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/static/dart-logo.png'></a>
+</div>
+
+<script type="text/javascript">
+  function init() {
+    var ua = navigator.userAgent;
+    if (ua.indexOf("MSIE ") > 0) {
+      if (ua.indexOf("MSIE 9.") > 0 || ua.indexOf("MSIE 8.") > 0 || ua.indexOf("MSIE 7.") > 0 || ua.indexOf("MSIE 6.") > 0) {
+        document.getElementById('outdatedbrowser').style.display = "";
+        document.getElementById('outdatedbrowser').src="outdatedbrowser.html";
+        document.querySelector('div.headeroptions').style.display = "none";
+        return;
+      }
+    }
+    if (navigator.userAgent.indexOf('(Dart)') !== -1) {
+     var s = document.createElement('script');
+     s.type = 'application/dart';
+     s.src = 'edit.dart'
+     document.body.appendChild(s);
+    } else {
+     var s = document.createElement('script');
+     s.type = 'text/javascript';
+     s.src = 'edit.dart.js'
+     document.body.appendChild(s);
+    }
+   }
+   init();
+   
+</script>
+</div>
+</body>
+</html>
