@@ -22,7 +22,7 @@
     <h1 class='lan'>2e15 Encoder</h1>
     <div class="headeroptions hlayout">
       <div class="selectProtect">
-       <label for="saltSelect">Salt:</label><br/>
+       <label id="saltSelectLabel" for="saltSelect">Salt:</label><br/>
        <select id="saltSelect">
         <option value="opRaw">Raw</option>
         <option value="opSalt" selected>1 Byte</option>
@@ -37,16 +37,16 @@
        <label>Codec:</label><br/>
        <select style='width:90px'>
         <option value="base2e15">Base2e15</option>
-        <option value="base64">Base64</option>
-        <option value="tadpole">TadpoleCode2</option>
+        <!--option value="base64">Base64</option-->
+        <option value="tadpole">TadpoleCode</option>
         <option value="url">Url</option>
        </select>
       </div>
       <div class="selectLanguage">
         <div class="languageDiv">
-        <img id="cnflag" src="cn.png"> <br/>
-        <img id="usflag" class="currentLan" src="us.png">
-      </div>
+          <img id="cnflag" src="cn.png">
+          <img id="usflag" class="currentLan" src="us.png">
+        </div>
       </div>
     </div>
   </div>

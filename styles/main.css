@@ -292,6 +292,9 @@ div.headeroptions > div {
   padding: 0 3px;
   border-left:1px solid #DDD;
 }
+label.disabled {
+  color: #afafaf;
+}
 
 .selectCode {
 }

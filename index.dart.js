@@ -5173,7 +5173,7 @@ $.S=z
 x=G.X(z,"")
 if(typeof x==="string")if(x===""){J.Hj(document.querySelector(".viewerpassbox").style,"")
 z=J.V(document.querySelector(".decode"))
-H.J(new W.xC(0,z.Q,z.a,W.Q(E.JS()),z.b),[H.Y(z,0)]).Y()}else if(C.xB.Tc(x,"\u001b"))J.Qy(document.querySelector(".markdown"),B.pS(C.xB.Nj(x,0,$.S.length-1),null,!1,null,null))
+H.J(new W.xC(0,z.Q,z.a,W.Q(E.JS()),z.b),[H.Y(z,0)]).Y()}else if(C.xB.Tc(x,"\u001b"))J.Qy(document.querySelector(".markdown"),B.pS(C.xB.Nj(x,0,x.length-1),null,!1,null,null))
 else{z=document.querySelector(".markdown")
 J.EU(z.style,"pre-wrap")
 J.it(z.style,"break-word")
@@ -5187,22 +5187,23 @@ else{y=document.querySelector(".markdown")
 J.EU(y.style,"pre-wrap")
 J.it(y.style,"break-word")
 y.textContent=z}},"$1","JS",2,0,30],
-TO:[function(){var z,y,x,w
-window.location.host
+TO:[function(){var z,y,x,w,v
+z=window.location.host
+if(J.U6(z).OY(z,"2e15.com")<0||C.xB.OY(z,"github.")<0)return
 document.querySelector(".aboutDiv")
-z=document.createElement("div",null)
-y=H.J([],[W.kF])
-x=new W.vD(y)
-y.push(W.Tw(null))
-y.push(W.GA(null,["*::style"],null,null))
-x.V6("script",["src","async"],null,null)
-x.V6("ins",["data-ad-slot","data-ad-client"],null,null)
-y=window.innerWidth
-if(typeof y!=="number")return y.w()
-w=J.R(z)
-if(y<728){J.OE(z.style,"100px")
-w.pk(z,"<script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>\r\n<!-- 2e15_mobile -->\r\n<ins class=\"adsbygoogle\"\r\n     style=\"display:inline-block;width:320px;height:100px\"\r\n     data-ad-client=\"ca-pub-3283235194066083\"\r\n     data-ad-slot=\"6644918654\"></ins>\r\n<script>\r\n(adsbygoogle = window.adsbygoogle || []).push({});\r\n</script>",x)}else w.pk(z,"<script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>\r\n<!-- 2e15_desktop -->\r\n<ins class=\"adsbygoogle\"\r\n     style=\"display:inline-block;width:728px;height:90px\"\r\n     data-ad-client=\"ca-pub-3283235194066083\"\r\n     data-ad-slot=\"5168185454\"></ins>\r\n<script>\r\n(adsbygoogle = window.adsbygoogle || []).push({});\r\n</script>",x)
-document.querySelector(".viewerbox").appendChild(z)},"$0","P",0,0,1]},1],["","",,Y,{
+y=document.createElement("div",null)
+x=H.J([],[W.kF])
+w=new W.vD(x)
+x.push(W.Tw(null))
+x.push(W.GA(null,["*::style"],null,null))
+w.V6("script",["src","async"],null,null)
+w.V6("ins",["data-ad-slot","data-ad-client"],null,null)
+x=window.innerWidth
+if(typeof x!=="number")return x.w()
+v=J.R(y)
+if(x<728){J.OE(y.style,"100px")
+v.pk(y,"<script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>\r\n<!-- 2e15_viewer -->\r\n<ins class=\"adsbygoogle\"\r\n     style=\"display:inline-block;width:300px;height:250px\"\r\n     data-ad-client=\"ca-pub-3283235194066083\"\r\n     data-ad-slot=\"9703973057\"></ins>\r\n<script>\r\n(adsbygoogle = window.adsbygoogle || []).push({});\r\n</script>",w)}else v.pk(y,"<script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>\r\n<!-- 2e15_desktop -->\r\n<ins class=\"adsbygoogle\"\r\n     style=\"display:inline-block;width:728px;height:90px\"\r\n     data-ad-client=\"ca-pub-3283235194066083\"\r\n     data-ad-slot=\"5168185454\"></ins>\r\n<script>\r\n(adsbygoogle = window.adsbygoogle || []).push({});\r\n</script>",w)
+document.querySelector(".viewerbox").appendChild(y)},"$0","P",0,0,1]},1],["","",,Y,{
 "^":"",
 Z:[function(a){var z,y
 z=$.T
@@ -6635,7 +6636,7 @@ I.$lazy($,"scheduleImmediateClosure","lI","ej",function(){return P.xg()})
 I.$lazy($,"_toStringVisiting","nM","Ex",function(){return[]})
 I.$lazy($,"_allowedElements","zX","Fv",function(){return P.tM(["A","ABBR","ACRONYM","ADDRESS","AREA","ARTICLE","ASIDE","AUDIO","B","BDI","BDO","BIG","BLOCKQUOTE","BR","BUTTON","CANVAS","CAPTION","CENTER","CITE","CODE","COL","COLGROUP","COMMAND","DATA","DATALIST","DD","DEL","DETAILS","DFN","DIR","DIV","DL","DT","EM","FIELDSET","FIGCAPTION","FIGURE","FONT","FOOTER","FORM","H1","H2","H3","H4","H5","H6","HEADER","HGROUP","HR","I","IFRAME","IMG","INPUT","INS","KBD","LABEL","LEGEND","LI","MAP","MARK","MENU","METER","NAV","NOBR","OL","OPTGROUP","OPTION","OUTPUT","P","PRE","PROGRESS","Q","S","SAMP","SECTION","SELECT","SMALL","SOURCE","SPAN","STRIKE","STRONG","SUB","SUMMARY","SUP","TABLE","TBODY","TD","TEXTAREA","TFOOT","TH","THEAD","TIME","TR","TRACK","TT","U","UL","VAR","VIDEO","WBR"],null)})
 I.$lazy($,"_attributeValidators","or","NJ",function(){return P.A(null,null)})
-I.$lazy($,"_lan_zh","L","N",function(){return P.B(["2e15 Encoder","2e15\u7f16\u7801","Plain Text","\u7eaf\u6587\u672c","Encoded","\u7f16\u7801\u7ed3\u679c","<Markdown>","<\u6807\u8bb0\u8bed\u8a00>","Codec:","\u7f16\u7801\u65b9\u5f0f:","Salt:","\u52a0\u76d0:","Raw","\u65e0","1 Byte","1\u5b57\u8282","4 Bytes","4\u5b57\u8282","Password:","\u5bc6\u7801:","Encode","\u7f16\u7801","Decode","\u89e3\u7801","Encode Markdown","\u7f16\u7801\u6807\u8bb0\u8bed\u8a00","Undo","\u64a4\u9500","TadpoleCode2","\u874c\u86aa\u89e3\u78012","Decoding failed","\u89e3\u7801\u5931\u8d25","Wrong password","\u5bc6\u7801\u9519\u8bef","Download Offline Version","\u4e0b\u8f7d\u79bb\u7ebf\u7248","Input text here and click the encode button","\u5728\u8fd9\u91cc\u8f93\u5165\u6587\u5b57\uff0c\u7136\u540e\u70b9\u51fb\u7f16\u7801\u6309\u94ae","To decode text, paste it here and click the decode button","\u9700\u8981\u89e3\u7801\u65f6\u628a\u6587\u672c\u7c98\u8d34\u5230\u8fd9\u91cc\uff0c\u7136\u540e\u70b9\u51fb\u89e3\u7801\u6309\u94ae"],null,null)})
+I.$lazy($,"_lan_zh","L","N",function(){return P.B(["2e15 Encoder","2e15\u7f16\u7801","Plain Text","\u7eaf\u6587\u672c","Encoded","\u7f16\u7801\u7ed3\u679c","<Markdown>","<\u6807\u8bb0\u8bed\u8a00>","Codec:","\u7f16\u7801\u65b9\u5f0f:","Salt:","\u52a0\u76d0:","Raw","\u65e0","1 Byte","1\u5b57\u8282","4 Bytes","4\u5b57\u8282","Password:","\u5bc6\u7801:","Encode","\u7f16\u7801","Decode","\u89e3\u7801","Encode Markdown","\u7f16\u7801\u6807\u8bb0\u8bed\u8a00","Undo","\u64a4\u9500","TadpoleCode","\u874c\u86aa\u7801","Decoding failed","\u89e3\u7801\u5931\u8d25","Wrong password","\u5bc6\u7801\u9519\u8bef","Download Offline Version","\u4e0b\u8f7d\u79bb\u7ebf\u7248","Input text here and click the encode button","\u5728\u8fd9\u91cc\u8f93\u5165\u6587\u5b57\uff0c\u7136\u540e\u70b9\u51fb\u7f16\u7801\u6309\u94ae","To decode text, paste it here and click the decode button","\u9700\u8981\u89e3\u7801\u65f6\u628a\u6587\u672c\u7c98\u8d34\u5230\u8fd9\u91cc\uff0c\u7136\u540e\u70b9\u51fb\u89e3\u7801\u6309\u94ae"],null,null)})
 I.$lazy($,"_RE_EMPTY","JY","l0",function(){return P.nu("^([ \\t]*)$",!0,!1)})
 I.$lazy($,"_RE_SETEXT","d4","TU",function(){return P.nu("^((=+)|(-+))$",!0,!1)})
 I.$lazy($,"_RE_HEADER","tT","li",function(){return P.nu("^(#{1,6})(.*?)#*$",!0,!1)})
