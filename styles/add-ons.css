@@ -84,9 +84,6 @@ h5,
 h6 {
   color: #000;
   font: 16px/24px arial, sans-serif normal;
-  display: inline;
-  padding-left: 8px;
-  padding-right: 8px;
   font-weight: bold;
 }
 
