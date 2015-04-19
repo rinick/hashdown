@@ -35,7 +35,7 @@
        <input type="password" id="opPass">
       </div>
       <div class="selectCode">
-       <label>Output Type:</label><br/>
+       <label>Encode Mode:</label><br/>
        <select style='width:90px'>
         <option value="link">Link</option>
         <option value="base2e15">Base2e15</option>
@@ -54,14 +54,19 @@
   <div class="bodybox hlayout" style='display:none'>
     <div class="inputbox">
       <div class="title padding">
-        <h2 id='inputnavTab' class='lan tabbtn selectedTab'>Plain Text</h2>
-        <h2 id='markdownnavTab' class='lan tabbtn'>&lt;Markdown&gt;</h2>
-        <a class='a_lan helpicon' title='Help' href='https://github.com/rinick/2e15/blob/master/README.md#markdown'></a>
+        <h2 id='inputnavTab' class='lan tabbtn'>Plain Text</h2>
+        <button class='markdownBtn' title='Markdown' >&lt;&gt;</button>
       </div>
       <div id="inputnav" class="padding" style="top:35px;">
         <textarea id="inputtext" placeholder="Input text here and click the encode button"></textarea>
       </div>
-      <div id="markdown" class="padding markdown" style="top:35px;display:none">
+    </div>
+    <div class="inputbox markdownbox" style='min-width:320px;display:none'>
+      <div class="title padding">
+        <h2 class='lan tabbtn'>Markdown</h2>
+        <a class='a_lan helpicon' title='Help' href='https://github.com/rinick/2e15/blob/master/README.md#markdown'></a>
+      </div>
+      <div id="markdown" class="padding markdown" style="top:35px">
         
       </div>
     </div>
@@ -73,7 +78,7 @@
     </div>
     <div class="inputbox">
       <div class="title padding">
-        <h2 class='lan tabbtn selectedTab'>Encoded</h2>
+        <h2 id='encodedTab' class='lan tabbtn'>Encoded</h2>
       </div>
       <div class="padding" style="top:35px;">
         <textarea id="outputtext" placeholder="To decode text, paste it here and click the decode button"></textarea>
@@ -90,7 +95,7 @@
     <div class="vtoolbar">
       <button class='red encodeV'>Encode</button>
       <button class='decodeV decode'>Decode</button>&nbsp;&nbsp;
-      <button class='markdownV' title='Markdown' >&lt;&gt;</button>
+      <button class='markdownVBtn' title='Markdown' >&lt;&gt;</button>
       <button class='undoV' title='Undo' disabled>↶</button> <br/>
       <h2 class='error errorpos'></h2>
     </div>
@@ -116,6 +121,12 @@ powered by<br/>
         document.querySelector('div.headeroptions').style.display = "none";
         return;
       }
+    }
+    if (navigator.userAgent.indexOf('(Dart)') !== -1) {
+     var s = document.createElement('script');
+     s.type = 'application/dart';
+     s.src = 'edit.dart'
+     document.body.appendChild(s);
     }
    }
    init();

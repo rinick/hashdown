@@ -23,7 +23,7 @@
  <div class="languageDiv" style='display:none'><img id="cnflag" src="cn.png"><img id="usflag" class="currentLan" src="us.png"></div>
 </div>
     <div class='viewerbox'>
-      <div class='markdown' style='max-width:700px;min-height:300px;min-width:320px'>
+      <div class='markdown' style='max-width:700px;min-height:250px;min-width:320px'>
         <div class='viewerpassbox' style='display:none'>
           <label class='error'>Password required</label><br>
           <label>Password:</label> <input type="password" id="opPass"><br>
@@ -50,11 +50,16 @@
         return;
       }
     }
+    if (navigator.userAgent.indexOf('(Dart)') !== -1) {
+     var s = document.createElement('script');
+     s.type = 'application/dart';
+     s.src = 'index.dart'
+     document.body.appendChild(s);
+    }
    }
    init();
    
 </script>
-
 <script src="markd_min.js"></script>
 <script src="index.dart.js"></script>
   </body>

@@ -159,14 +159,20 @@ background: linear-gradient(135deg, #f0f0f0 0%,#ffffff 100%); /* W3C */
   margin:  0 8px;
   cursor: default;
   display: inline;
-}
-.tabbtn:hover {
-  border-bottom: solid 1.5px #333;
-}
-.selectedTab {
-  border-bottom: solid 1.5px #333;
+  
 }
 
+.linkbtn {
+  color: #15c;
+  cursor: pointer;
+}
+.linkbtn::after {
+  padding: 2px;
+    content: url(chain.png);
+}
+.linkbtn:hover {
+  border-bottom: solid 1.5px #15c;
+}
 .dividerbox {
   min-width: 48px;
   height: 100%;
@@ -197,10 +203,21 @@ background: linear-gradient(135deg, #f0f0f0 0%,#ffffff 100%); /* W3C */
   bottom: 3px;
   line-height: 12px;
 }
+.markdownBtn {
+  position: absolute;
+  right: 0;
+  top: 2px;
+  font-size: 12px;
+  min-width: 0;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  line-height: 0;
+}
 button.decode{
   color: #f00000;
 }
-.vtoolbar > button {
+.vtoolbar > button{
   font-size:13px;
   min-width: 0;
 }
