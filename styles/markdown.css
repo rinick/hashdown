@@ -1,17 +1,10 @@
 
-.markdown body {
+.markdown {
   font-family: Helvetica, arial, sans-serif;
   font-size: 14px;
-  line-height: 1.6;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  line-height: 1.5;
   background-color: white;
-  padding: 30px; }
- 
-.markdown body > *:first-child {
-  margin-top: 0 !important; }
-.markdown body > *:last-child {
-  margin-bottom: 0 !important; }
+}
  
 .markdown a {
   color: #4183C4; }
@@ -27,34 +20,36 @@
   left: 0;
   bottom: 0; }
  
-.markdown h1, .markdown 2, .markdown 3, .markdown 4, .markdown 5, .markdown 6 {
+.markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
   margin: 20px 0 10px;
   padding: 0;
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
+  -webkit-margin-before: 20px;
+  -webkit-margin-after: 20px;
   cursor: text;
   position: relative; }
  
-.markdown h1:hover a.anchor, .markdown 2:hover a.anchor, .markdown 3:hover a.anchor, .markdown 4:hover a.anchor, .markdown 5:hover a.anchor, .markdown 6:hover a.anchor {
+.markdown h1:hover a.anchor, .markdown h2:hover a.anchor, .markdown h3:hover a.anchor, .markdown h4:hover a.anchor, .markdown h5:hover a.anchor, .markdown h6:hover a.anchor {
   background: url("../../images/modules/styleguide/para.png") no-repeat 10px center;
   text-decoration: none; }
  
-.markdown h1 tt, .markdown 1 code {
+.markdown h1 tt, .markdown h1 code {
   font-size: inherit; }
  
-.markdown h2 tt, .markdown 2 code {
+.markdown h2 tt, .markdown h2 code {
   font-size: inherit; }
  
-.markdown h3 tt, .markdown 3 code {
+.markdown h3 tt, .markdown h3 code {
   font-size: inherit; }
  
-.markdown h4 tt, .markdown 4 code {
+.markdown h4 tt, .markdown h4 code {
   font-size: inherit; }
  
-.markdown h5 tt, .markdown 5 code {
+.markdown h5 tt, .markdown h5 code {
   font-size: inherit; }
  
-.markdown h6 tt, .markdown 6 code {
+.markdown h6 tt, .markdown h6 code {
   font-size: inherit; }
  
 .markdown h1 {
@@ -79,37 +74,37 @@
   color: #777777;
   font-size: 14px; }
  
-.markdown p, .markdown lockquote, .markdown l, .markdown l, .markdown l, .markdown i, .markdown able, .markdown re {
+.markdown p, .markdown lockquote, .markdown ul, .markdown ol, .markdown dl, .markdown table, .markdown pre {
   margin: 4px 0 10px 0; }
- 
+  
 .markdown hr {
-  background: transparent url("../../images/modules/pulls/dirty-shade.png") repeat-x 0 0;
   border: 0 none;
   color: #cccccc;
-  height: 4px;
-  padding: 0; }
+  height: 2px;
+  background: #cccccc;}
  
-.markdown body > h2:first-child {
+.markdown > h2:first-child {
   margin-top: 0;
   padding-top: 0; }
-.markdown body > h1:first-child {
+.markdown > h1:first-child {
   margin-top: 0;
   padding-top: 0; }
   body > h1:first-child + h2 {
     margin-top: 0;
     padding-top: 0; }
-.markdown body > h3:first-child, .markdown ody > h4:first-child, .markdown ody > h5:first-child, .markdown ody > h6:first-child {
+.markdown > h3:first-child, .markdown > h4:first-child, .markdown > h5:first-child, .markdown > h6:first-child {
   margin-top: 0;
   padding-top: 0; }
  
-.markdown a:first-child h1, .markdown :first-child h2, .markdown :first-child h3, .markdown :first-child h4, .markdown :first-child h5, .markdown :first-child h6 {
+.markdown a:first-child h1, .markdown a:first-child h2, .markdown a:first-child h3, .markdown a:first-child h4, .markdown a:first-child h5, .markdown a:first-child h6 {
   margin-top: 0;
   padding-top: 0; }
  
-.markdown h1 p, .markdown 2 p, .markdown 3 p, .markdown 4 p, .markdown 5 p, .markdown 6 p {
+.markdown h1 p, .markdown h2 p, .markdown h3 p, .markdown h4 p, .markdown h5 p, .markdown h6 p {
   margin-top: 0; }
  
 .markdown li p.first {
+  margin: 0;
   display: inline-block; }
  
 .markdown ul, .markdown ol {
@@ -146,6 +141,8 @@
 .markdown blockquote {
   border-left: 4px solid #dddddd;
   padding: 0 15px;
+  -webkit-margin-start: 1em;
+  -webkit-margin-end: 1em;
   color: #777777; }
   blockquote > :first-child {
     margin-top: 0; }
@@ -174,9 +171,9 @@
       text-align: left;
       margin: 0;
       padding: 6px 13px; }
-    table tr th :first-child, .markdown able tr td :first-child {
+    table tr th :first-child, .markdown table tr td :first-child {
       margin-top: 0; }
-    table tr th :last-child, .markdown able tr td :last-child {
+    table tr th :last-child, .markdown table tr td :last-child {
       margin-bottom: 0; }
  
 .markdown img {
@@ -275,6 +272,6 @@
   overflow: auto;
   padding: 6px 10px;
   border-radius: 3px; }
-  pre code, .markdown re tt {
+  pre code, .markdown pre tt {
     background-color: transparent;
     border: none; }

@@ -29,6 +29,7 @@ div.sizebox {
   min-height: 360px;
 }
 .padding > textarea {
+  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
   resize: none;
   position: absolute;
   width: 100%;
@@ -198,10 +199,10 @@ background: linear-gradient(135deg, #f0f0f0 0%,#ffffff 100%); /* W3C */
 }
 .encodeMarkdown{
   position: absolute;
-  font-size: 12px;
-  right: 0;
-  bottom: 3px;
-  line-height: 12px;
+  font-size: 10px;
+  right: 4px;
+  bottom: 4px;
+  line-height: 12px
 }
 .markdownBtn {
   position: absolute;
