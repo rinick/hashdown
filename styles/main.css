@@ -20,7 +20,17 @@ background: linear-gradient(135deg, #ffffff 0%,#f0f0f0 100%); /* W3C */
 -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
-
+.viewer {
+  max-width:700px;
+  min-width:320px;
+  min-height:250px;
+}
+.viewerIcon {
+  position:absolute;
+  height:20px; 
+  top:-2px;
+  left:-2px;
+}
 div.sizebox {
   position: absolute;
   width: 100%;

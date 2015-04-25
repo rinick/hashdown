@@ -74,9 +74,11 @@
   color: #777777;
   font-size: 14px; }
  
-.markdown p, .markdown lockquote, .markdown ul, .markdown ol, .markdown dl, .markdown table, .markdown pre {
+.markdown p, .markdown blockquote, .markdown ul, .markdown ol, .markdown dl, .markdown table, .markdown pre {
   margin: 4px 0 10px 0; }
-  
+.markdown > p, .markdown > blockquote > p {
+  white-space: pre-line;
+}
 .markdown hr {
   border: 0 none;
   color: #cccccc;
@@ -89,7 +91,7 @@
 .markdown > h1:first-child {
   margin-top: 0;
   padding-top: 0; }
-  body > h1:first-child + h2 {
+  .markdown > h1:first-child + h2 {
     margin-top: 0;
     padding-top: 0; }
 .markdown > h3:first-child, .markdown > h4:first-child, .markdown > h5:first-child, .markdown > h6:first-child {
@@ -118,24 +120,24 @@
  
 .markdown dl {
   padding: 0; }
-  dl dt {
+  .markdown dl dt {
     font-size: 14px;
     font-weight: bold;
     font-style: italic;
     padding: 0;
     margin: 15px 0 5px; }
-    dl dt:first-child {
+    .markdown dl dt:first-child {
       padding: 0; }
-    dl dt > :first-child {
+    .markdown dl dt > :first-child {
       margin-top: 0; }
-    dl dt > :last-child {
+    .markdown dl dt > :last-child {
       margin-bottom: 0; }
-  dl dd {
+  .markdown dl dd {
     margin: 0 0 15px;
     padding: 0 15px; }
-    dl dd > :first-child {
+    .markdown dl dd > :first-child {
       margin-top: 0; }
-    dl dd > :last-child {
+    .markdown dl dd > :last-child {
       margin-bottom: 0; }
  
 .markdown blockquote {
@@ -144,36 +146,36 @@
   -webkit-margin-start: 1em;
   -webkit-margin-end: 1em;
   color: #777777; }
-  blockquote > :first-child {
+  .markdown blockquote > :first-child {
     margin-top: 0; }
-  blockquote > :last-child {
+  .markdown blockquote > :last-child {
     margin-bottom: 0; }
  
 .markdown table {
   padding: 0; 
   border-spacing: 0;}
-  table tr {
+  .markdown table tr {
     border-top: 1px solid #cccccc;
     background-color: white;
     margin: 0;
     padding: 0; }
-    table tr:nth-child(2n) {
+    .markdown table tr:nth-child(2n) {
       background-color: #f8f8f8; }
-    table tr th {
+    .markdown table tr th {
       font-weight: bold;
       border: 1px solid #cccccc;
       text-align: left;
       margin: 0;
       padding: 6px 13px; 
       background-color: #fcfcfc; }
-    table tr td {
+    .markdown table tr td {
       border: 1px solid #cccccc;
       text-align: left;
       margin: 0;
       padding: 6px 13px; }
-    table tr th :first-child, .markdown table tr td :first-child {
+    .markdown table tr th :first-child, .markdown table tr td :first-child {
       margin-top: 0; }
-    table tr th :last-child, .markdown table tr td :last-child {
+    .markdown table tr th :last-child, .markdown table tr td :last-child {
       margin-bottom: 0; }
  
 .markdown img {
@@ -182,7 +184,7 @@
 .markdown span.frame {
   display: block;
   overflow: hidden; }
-  span.frame > span {
+  .markdown span.frame > span {
     border: 1px solid #dddddd;
     display: block;
     float: left;
@@ -190,10 +192,10 @@
     margin: 13px 0 0;
     padding: 7px;
     width: auto; }
-  span.frame span img {
+  .markdown span.frame span img {
     display: block;
     float: left; }
-  span.frame span span {
+  .markdown span.frame span span {
     clear: both;
     color: #333333;
     display: block;
@@ -202,24 +204,24 @@
   display: block;
   overflow: hidden;
   clear: both; }
-  span.align-center > span {
+  .markdown span.align-center > span {
     display: block;
     overflow: hidden;
     margin: 13px auto 0;
     text-align: center; }
-  span.align-center span img {
+  .markdown span.align-center span img {
     margin: 0 auto;
     text-align: center; }
 .markdown span.align-right {
   display: block;
   overflow: hidden;
   clear: both; }
-  span.align-right > span {
+  .markdown span.align-right > span {
     display: block;
     overflow: hidden;
     margin: 13px 0 0;
     text-align: right; }
-  span.align-right span img {
+  .markdown span.align-right span img {
     margin: 0;
     text-align: right; }
 .markdown span.float-left {
@@ -227,14 +229,14 @@
   margin-right: 13px;
   overflow: hidden;
   float: left; }
-  span.float-left span {
+  .markdown span.float-left span {
     margin: 13px 0 0; }
 .markdown span.float-right {
   display: block;
   margin-left: 13px;
   overflow: hidden;
   float: right; }
-  span.float-right > span {
+  .markdown span.float-right > span {
     display: block;
     overflow: hidden;
     margin: 13px auto 0;
@@ -272,6 +274,6 @@
   overflow: auto;
   padding: 6px 10px;
   border-radius: 3px; }
-  pre code, .markdown pre tt {
+  .markdown pre code, .markdown pre tt {
     background-color: transparent;
     border: none; }

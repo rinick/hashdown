@@ -11,17 +11,6 @@ phasis, aka italics, with *asterisks* or _underscores_.
 Strong emphasis, aka bold, with **asterisks** or __underscores__.
 
 
-# Paragraph
-
-paragraph 1
-
-use 2 new line before paragraph 2,
-one new line won't work
-
-but you can add 2 spaces in the end of line, like this:  
-so a line break will be inserted before the next line
-
-
 # List
 
 * Unordered list 
