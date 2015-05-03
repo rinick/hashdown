@@ -14,6 +14,7 @@ class UTF16 {
 
   static String decode(List<int> bytes) {
     if (bytes.length % 2 == 1 && bytes.last != 0) {
+      // if there is an extra byte, it must be 0
       throw 'invalid utf16';
     }
     int len = bytes.length >> 1;

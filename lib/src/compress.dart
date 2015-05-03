@@ -1,44 +1,48 @@
 part of hashdown;
 
 class HashdownCompress {
-
-  static List<int> compressString(String str, HashdownParams params) {
-    List<int> rslt;
+  static List<int> compressString(
+      String str, HashdownParams params, bool tryCompression) {
     List<int> utf8 = UTF8.encode(str);
-    List<int> utf8c = compress(utf8);
-    List<int> uft16 = UTF16.encode(str);
-    List<int> uft16c = compress(uft16);
-      rslt = utf8;
-      int min = utf8.length;
-      params.mode = HashdownParams.MODE_UTF8;
-      params.compressed = 0;
-    if (min > utf8c.length) {
-      rslt = utf8c;
-      min = utf8c.length;
-      params.compressed = 1;
-    }
-    if (min > uft16c.length) {
-      rslt = uft16c;
-      min = uft16c.length;
-      params.mode = HashdownParams.MODE_UTF16;
-      params.compressed = 1;
-    }
-    if (min > uft16.length) {
-      if (params.protection == HashdownParams.PROTECT_PASSWORD){
-        // add extra 0 to validate utf16
-        rslt = []..addAll(uft16)..add(0);
-      } else {
-        rslt = uft16;
+    List<int> rslt = utf8;
+    int min = utf8.length;
+    params.mode = HashdownParams.MODE_UTF8;
+    params.compressed = 0;
+
+    if (tryCompression) {
+      List<int> uft16 = UTF16.encode(str);
+      List<int> utf8c = compress(utf8);
+      List<int> uft16c = compress(uft16);
+      if (min > utf8c.length) {
+        rslt = utf8c;
+        min = utf8c.length;
+        params.compressed = 1;
       }
-      params.mode = HashdownParams.MODE_UTF16;
-      params.compressed = 0;
+      if (min > uft16c.length) {
+        rslt = uft16c;
+        min = uft16c.length;
+        params.mode = HashdownParams.MODE_UTF16;
+        params.compressed = 1;
+      }
+      if (min > uft16.length) {
+        if (params.protection == HashdownParams.PROTECT_PASSWORD) {
+          // add extra 0 to validate utf16
+          rslt = []
+            ..addAll(uft16)
+            ..add(0);
+        } else {
+          rslt = uft16;
+        }
+        params.mode = HashdownParams.MODE_UTF16;
+        params.compressed = 0;
+      }
     }
     return rslt;
   }
   static List<int> compressFile(HashdownFile file, HashdownParams params) {
     List<int> data = file.encode();
     params.mode = HashdownParams.MODE_FILE;
-    if (params.compressed == 1){
+    if (params.compressed == 1) {
       List<int> compressed = compress(data);
       if (compressed.length < data.length) {
         return compressed;
@@ -51,20 +55,20 @@ class HashdownCompress {
     if (params.compressed == 1) {
       data = decompress(data);
     }
-    if (params.mode == HashdownParams.MODE_UTF8){
+    if (params.mode == HashdownParams.MODE_UTF8) {
       return UTF8.decode(data);
     }
-    if (params.mode == HashdownParams.MODE_UTF16 ) {
+    if (params.mode == HashdownParams.MODE_UTF16) {
       return UTF16.decode(data);
     }
-    if (params.mode == HashdownParams.MODE_FILE ) {
+    if (params.mode == HashdownParams.MODE_FILE) {
       new HashdownFile.decode(data);
     }
     return data;
   }
 
   static LZMA.Params _params = new LZMA.Params();
-  
+
   static List<int> compress(List<int> data) {
     var inStream = new LZMA.InStream(data);
     var outStream = new LZMA.OutStream();
@@ -77,17 +81,17 @@ class HashdownCompress {
 
     var sizes = encodeLength(data.length);
     outStream.writeBlock(sizes, 0, sizes.length);
-    
+
     encoder.code(inStream, outStream, -1, -1);
     return outStream.data;
   }
-  
+
   static List<int> decompress(List<int> data) {
     var inStream = new LZMA.InStream(data);
     var outStream = new LZMA.OutStream();
     var decoder = new LZMA.Decoder();
     decoder.setDecoderProperties([93, 0, 0, 128, 0]);
-    
+
     int size = decodeLength(inStream);
 
     if (!decoder.decode(inStream, outStream, size)) {
@@ -110,7 +114,7 @@ class HashdownCompress {
     int byte;
     do {
       byte = stream.read();
-      n |= (byte&127) << shift;
+      n |= (byte & 127) << shift;
       shift += 7;
     } while (byte > 127);
     return n;

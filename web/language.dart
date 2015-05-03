@@ -10,6 +10,7 @@ Map<String, String> _lan_zh = {
   'Encoded': '编码结果',
   'Markdown': '标记语言',
   'markdown.md': 'markdown.zh.md',
+  'README.md': 'README.zh.md',
   'Encode Mode:': '编码模式:',
   'Salt:': '加盐:',
   'Raw': '无',
@@ -76,7 +77,7 @@ void toggleLanguage(MouseEvent e) {
   }
   _translateAll();
 }
-
+/// translte the string or return null
 String t(String str) {
   if (_lan == null) return null;
   if (_lan.containsKey(str)) {
@@ -84,12 +85,20 @@ String t(String str) {
   }
   return null;
 }
-String t2(String str) {
+/// translte the string or return original text
+String t_(String str) {
   if (_lan == null) return str;
   if (_lan.containsKey(str)) {
     return _lan[str];
   }
   return str;
+}
+String getLocaleFilename(String name, String ext) {
+  if (_lan == _lan_zh) {
+    return '$name.zh$ext';
+  } else {
+    return '$name$ext';
+  }
 }
 void _translateElement(Element e) {
   String rslt = t(e.text);

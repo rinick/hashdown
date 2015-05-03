@@ -19,7 +19,7 @@ class HashdownCrypt {
       RC4 rc4 = new RC4(pass, 5);
       rc4.encryptBytes(rslt);
       rslt[rslt.length - 2] = salt;
-    } else if (params.protection == HashdownParams.PROTECT_S_SALT) {
+    } else if (params.protection == HashdownParams.PROTECT_SALT4) {
       List<int> salts = [rng.nextInt(256), rng.nextInt(256), rng.nextInt(256), rng.nextInt(256)];
       RC4 rc4 = new RC4(salts, 5);
       rc4.encryptBytes(rslt);
@@ -41,7 +41,7 @@ class HashdownCrypt {
       pass = [salt, 20, 200];
       RC4 rc4 = new RC4(pass, 5);
       rc4.decryptBytes(rslt);
-    } else if (params.protection == HashdownParams.PROTECT_S_SALT) {
+    } else if (params.protection == HashdownParams.PROTECT_SALT4) {
       List<int> salts = bytes.sublist(bytes.length - 5, bytes.length - 1);
       RC4 rc4 = new RC4(salts, 5);
       rc4.decryptBytes(rslt);

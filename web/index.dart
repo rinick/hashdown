@@ -9,24 +9,24 @@ void main() {
   initLanguage();
 
   hash = window.location.hash;
-  Object decoded = Hashdown.decode(hash, '');
-  if (decoded is String) {
-    if (decoded == '') {
-      // password error
-      querySelector('.viewerpassbox').style.display = '';
-      querySelector('.decode').onClick.listen(onDecode);
-    } else if (decoded.endsWith('\u001b')) {
+  HashdownResult result = Hashdown.decode(hash, '');
+  if (result.usePassword) {
+    // need password
+    querySelector('.viewerpassbox').style.display = '';
+    querySelector('.decode').onClick.listen(onDecode);
+  }else if (result.text != null) {
+    if (result.useMarkdown) {
       querySelector('.markdown').setInnerHtml(
-          markdownToHtml(decoded.substring(0, decoded.length - 1)),
+          markdownToHtml(result.text),
           validator: markdownValidator);
     } else {
       querySelector('.markdown')
         ..style.whiteSpace = 'pre-wrap'
         ..style.wordWrap = 'break-word'
-        ..text = decoded;
+        ..text = result.text;
     }
   } else {
-    querySelector('.markdown').text = t2('Decoding failed');
+    querySelector('.markdown').text = t_('Decoding failed');
   }
   // init edit link href
   (querySelector('#editLink') as AnchorElement).href = 'edit.html$hash';
@@ -35,20 +35,22 @@ void main() {
 }
 
 void onDecode(Event e) {
-  Object decoded =
+  HashdownResult result = 
       Hashdown.decode(hash, (querySelector('input') as InputElement).value);
-  if (decoded == '') {
-    querySelector('.error').text = t2('Wrong password');
-  } else if (decoded is String) {
-    if (decoded.endsWith('\u001b')) {
+  if (result.text == null) {
+    if (result.usePassword) {
+      querySelector('.error').text = t_('Wrong password');
+    }
+  } else {
+    if (result.useMarkdown) {
       querySelector('.markdown').setInnerHtml(
-          markdownToHtml(decoded.substring(0, decoded.length - 1)),
+          markdownToHtml(result.text),
           validator: markdownValidator);
     } else {
       querySelector('.markdown')
         ..style.whiteSpace = 'pre-wrap'
         ..style.wordWrap = 'break-word'
-        ..text = decoded;
+        ..text = result.text;
     }
   }
 }

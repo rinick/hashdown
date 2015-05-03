@@ -7,6 +7,7 @@ import 'language.dart';
 import 'util.dart';
 import 'dart:async';
 import 'dart:math';
+import '../lib/tadpole.dart';
 
 InputElement opPass;
 
@@ -41,7 +42,7 @@ void main() {
   inputtext = querySelector('#inputtext');
   outputtext = querySelector('#outputtext');
   vinputtext = querySelector('#vinputtext');
-
+  
   encodedTab = querySelector('#encodedTab');
 
   opPass = querySelector('#opPass');
@@ -54,20 +55,25 @@ void main() {
 
   encodedTab.onClick.listen(onClickLink);
 
+  document.querySelectorAll('.menu > div > label').onClick.listen((MouseEvent e) async{
+    String filename = (e.target as LabelElement).text;
+    document.querySelectorAll('.menu > div').style..display = 'none';
+    try {
+      String str = await HttpRequest.getString(getLocaleFilename(filename,'.md'));
+      inputtext.value = str;
+      markdown = false;
+      onMarkdown(null);
+    } catch(err) {}finally {
+      document.querySelectorAll('.menu > div').style..display = '';
+    }
+  });
   checkSize(null);
   window.onResize.listen(checkSize);
   new Timer(new Duration(milliseconds: 500), initAd);
 
   String hash = window.location.hash;
   if (hash.length > 1) {
-    if (hash == '#help') {
-      HttpRequest.getString(t2('markdown.md')).then((String str) {
-        inputtext.value = str;
-        if (!markdown) {
-          onMarkdown(null);
-        }
-      });
-    } else if (hash.length < 10) {
+    if (hash.length < 10) {
       Element opt =
           document.querySelector('option[value="${hash.substring(1)}"');
       if (opt is OptionElement) {
@@ -76,8 +82,10 @@ void main() {
     } else {
       pendingInitData = Base64UrlCodec.url + hash.substring(1);
     }
-  } else if (Base64UrlCodec.url.indexOf('2e15.com') > 0) {
-    (document.querySelector('option[value="base2e15"') as OptionElement).selected = true;
+  } else {
+    if (Base64UrlCodec.url.indexOf('2e15.com') > 0) {
+      (document.querySelector('option[value="base2e15"') as OptionElement).selected = true;
+    }
   }
   selectCode.onChange.listen((e) {
     window.location.hash = '#${selectCode.value}';
@@ -137,10 +145,7 @@ void doMarkdownUpdate() {
 void onEncode(Event e) {
   String txt = inputtext.value;
   if (txt != '') {
-    if (markdown) {
-      txt = '$txt\u001b';
-    }
-    HashdownOptions option = getOption();
+    HashdownOptions option = getOption(markdown);
     outputtext.value = Hashdown.encodeString(txt, option);
     if (option.codec == 'link') {
       setLink(outputtext.value);
@@ -152,19 +157,18 @@ void onEncode(Event e) {
 void onDecode(Event e) {
   String txt = outputtext.value;
   if (txt != '') {
-    Object obj = Hashdown.decode(txt, opPass.value);
-    if (obj == null) {
-      inputtext.value = t2('Decoding failed');
-    } else if (obj == '') {
-      inputtext.value = t2('Wrong password');
-    } else if (obj is String) {
-      if (obj.endsWith('\u001b')) {
-        //markdown
-        inputtext.value = obj.substring(0, obj.length - 1);
+    HashdownResult result = Hashdown.decode(txt, opPass.value);
+    if (result.text == null) {
+      if (result.usePassword){
+        inputtext.value = t_('Wrong password');
+      } else {
+        inputtext.value = t_('Decoding failed');
+      }
+    } else {
+      inputtext.value = result.text;
+      if (result.useMarkdown) {
         markdown = false; // force a conversion
         onMarkdown(null);
-      } else {
-        inputtext.value = obj;
       }
     }
   }
@@ -191,32 +195,28 @@ void onEncodeV(Event e) {
   if (txt != '') {
     logHis(txt);
     if (markdownV) {
-      txt = '$txt\u001b';
       onMarkdownV(null);
     }
-    vinputtext.value = Hashdown.encodeString(txt, getOption());
+    vinputtext.value = Hashdown.encodeString(txt, getOption(markdownV));
     querySelector('.error').text = '';
   }
 }
 void onDecodeV(Event e) {
   String txt = vinputtext.value;
   if (txt != '') {
-    Object obj = Hashdown.decode(txt, opPass.value);
-    if (obj == null) {
-      querySelector('.error').text = t2('Decoding failed');
-    } else if (obj == '') {
-      querySelector('.error').text = t2('Wrong password');
-    } else if (obj is String) {
-      String rslt = obj;
+    HashdownResult result = Hashdown.decode(txt, opPass.value);
+    if (result.text == null) {
+      if (result.usePassword) {
+        querySelector('.error').text = t_('Wrong password');
+      } else {
+        querySelector('.error').text = t_('Decoding failed');
+      }
+    } else {
       logHis(txt);
-      if (rslt.endsWith('\u001b')) {
-        //markdown
-        rslt = rslt.substring(0, rslt.length - 1);
-        vinputtext.value = rslt;
+      vinputtext.value = result.text;
+      if (result.useMarkdown) {
         markdownV = false; // force a conversion
         onMarkdownV(null);
-      } else {
-        vinputtext.value = rslt;
       }
       querySelector('.error').text = '';
     }
@@ -242,7 +242,7 @@ void onMarkdownV(Event e) {
       ..style.display = 'none'
       ..innerHtml = '';
     querySelector('.markdownVBtn').classes.remove('blue');
-    querySelector('.encodeV').text = t2('Encode');
+    querySelector('.encodeV').text = t_('Encode');
     querySelector('.decodeV').style.display = '';
   } else {
     markdownV = true;
@@ -251,7 +251,7 @@ void onMarkdownV(Event e) {
       ..setInnerHtml(markdownToHtml(vinputtext.value),
           validator: markdownValidator);
     querySelector('.markdownVBtn').classes.add('blue');
-    querySelector('.encodeV').text = t2('Encode Markdown');
+    querySelector('.encodeV').text = t_('Encode Markdown');
     querySelector('.decodeV').style.display = 'none';
   }
 }
@@ -267,15 +267,17 @@ void onUndoV(Event e) {
   }
 }
 
-HashdownOptions getOption() {
+HashdownOptions getOption(bool markdown) {
   HashdownOptions opt = new HashdownOptions();
+  opt.markdown = markdown;
   opt.password = opPass.value;
   opt.codec = selectCode.value;
   if (opt.password != '') {
-    opt.protect = 'opPassword';
+    opt.protect = HashdownOptions.PROTECT_PASSWORD;
   } else {
     opt.protect = saltSelect.value;
   }
+  opt.compress = (opt.protect != HashdownOptions.PROTECT_RAW);
   return opt;
 }
 bool inited = false;
