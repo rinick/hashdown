@@ -18,13 +18,13 @@ http://www.hashdown.net/#SGFzaERvd24gTGluayBpcyBBd2Vzb21l
 Of course, you can write things on blog and share the link. But HashDown link does it in a very different way
 
 * The encoding and decoding are 100% done in client side javascript, our server never know your text. the url hash (what's after #) is never sent to the network.
-* When the server is down, you can still decode the content from the url if you find any  HashDown mirror site or an offline version of HashDown tool. 
+* When the server is down, you can still decode the content from the url if you can find any HashDown mirror site or an offline version of HashDown tool. 
 * You can use a password to protect your content.
 
-#### Shortener
+#### Url Shortener
 Url shortener works great with HashDown link, like this: http://goo.gl/Oz9MJu
 
-But if the url shortener service is shutdown or blocked by govermenent or ISP, people will no longer be able to access it.
+But if the url shortener service is shutdown or blocked by firewall, people will no longer be able to access it.
 
 ## HashDown Base2e15
 
@@ -48,5 +48,6 @@ Sample Plain Text
 ```
 In URIs a hashmark # introduces the optional fragment near the end of the URL. The generic RFC 3986 syntax for URIs also allows an optional query part introduced by a question mark ?. In URIs with a query and a fragment, the fragment follows the query. Query parts depend on the URI scheme and are evaluated by the server.
 ```
-Convert to Tadpole Code: 
-`/̷̴̷̴̶̴̶̷̴̷̸̶̸̸̶̶̷̷̴̶̶̴̸̷̵̶̶̵̶̶̷̷̵̶̸̵̵̶̴̶̷̸̷̴̵̵̷̸̴̶̴̶̷̶̸̴̴̴̶̵̵̶̴̴̴̸̷̶̵̷̷̸̶̷̷̸̵̶̸̷̵̴̶̵̵̶̶̴̸̷̴̶̵̵̶̴̶̵̵̴̶̷̷̷̸̸̴̸̷̶̴̷̸̶̶̷̶̷̷̵̸̸̵̵̴̷̶̷̶̶̷̶̶̴̵̵̵̵̴̶̵̵̷̴̷̴̷̶̵̶̵̶̧̢̨̧̧̧̧̧̢̡̨̡̨̡̢̡̨̨̨̡̨̨̧̡̢̧̢̢̡̡̢̡̢̧̡̢̡̧̢̡̡̧̡̨̨̢̧̨̡̡̨̧̨̡̧̨̨̡̢̡̨̧̨̧̨̨̢̧̨̢̨̧̧̨̡̡̨̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛̛︢︡︡︣︡︡︡︡︡︡︢︠︢︠︡︠︢︠︢︠︣︢︢︠︡︡︣︢︢︡︡︢︢︣︡︡︢︠︠︠︠︢︠︢︣︠︣︣︢︠︣︠︢︡︣︢︠︠︠︡︠︠︠︠︢︣︢︠︣︡︠︣︡︢︡︠︡︡︣︣︣︡︡︢︡︢︢︣︣︢︠︠︢︠︢︣︢︣︢︡︢︡︠︠︣︢̕͘̕͘͘̕̕̕͘̕͘͘̕̕̕̕͘͘͘͘͘̕̕̕̕͘͘̕͘̕͘͘͘̕͘͘̕͘͘͘͘̕͘͘͘̕͘͘̕͘͘͘͘̕̕̕̕̕ `  ( It's actually **426** characters!! )
+Convert to Tadpole Code:
+
+&nbsp /̶̶̴̴̸̵⃚̸⃚̷⃚⃙̵̷̴⃘̵̵⃚̷̷̷̸̸̵̶⃘̷̴⃚̴⃘̴̴⃚̸⃚⃘̴⃘̴̸̴⃘̸̴̸⃚̵̶̸⃙̵̶̵⃙̵̴̸⃙̴̸̸⃚⃘̵̶̵̷̶⃙⃙⃙̶̸̵̴̶⃘̶̶̴̸̵̶⃙̷̴̷⃚̷⃘⃙̴⃚⃙⃙̴̴⃘⃘̸⃘⃙̸̶̶⃚̶⃘̵⃙̷̷⃙⃙̶̶⃘̷̸⃚⃘̴⃚⃘⃚̵̶̴⃙⃘̵̴⃚̶̴⃘̸̶̵̴̶̵⃚⃙⃘⃚̴̵̷⃚̷⃚̴⃘⃘⃙̵̴⃙⃙̸̶̴̸̴⃘̴̵̷⃘⃚⃚̶⃘̸̸⃚̸̴̵̷⃙̶̴⃚⃚̵⃙⃘⃙ًًًًًًًًًًًًًًًًًًًًًًًًًًًًًًًًًٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍََََََََََََََََََََََََََََََُُُُُُُُُُُُُُُُُُُٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤ͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘‎,  &nbsp &nbsp ( It's actually **427** characters!! )

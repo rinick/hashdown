@@ -20,14 +20,14 @@
 <div class='sizebox'>
   <div class="headerbox">
     <a href='https://github.com/rinick/hashdown'><img src="hashdown.png">
-    <h1 class='lan'>HashDown<span style='font-size:10px'> 1.0</span></h1></a>
+    <h1 class='lan'>HashDown<span style='font-size:10px'> 1.0.1</span></h1></a>
     <div class="headeroptions hlayout">
       <div class="selectProtect">
        <label id="saltSelectLabel" for="saltSelect">Salt:</label><br/>
        <select id="saltSelect">
-        <option value="opRaw">Raw</option>
-        <option value="opSalt" selected>1 Byte</option>
-        <option value="opSSalt">4 Bytes</option>
+        <option value="raw">Raw</option>
+        <option value="salt" selected>1 Byte</option>
+        <option value="salt4">4 Bytes</option>
        </select>
       </div>
       <div class="inputPassword">
@@ -64,7 +64,17 @@
     <div class="inputbox markdownbox" style='min-width:320px;display:none'>
       <div class="title padding">
         <h2 class='lan tabbtn'>Markdown</h2>
-        <a href='edit.html#help'><button class='helpicon' title='Help'>?</button></a>
+<div class="menu">
+<label>Samples</label>
+<div>
+  <div class='lan'>Open sample will overwrite current text</div>
+  <label>README</label>
+  <label>markdown_basis</label>
+  <!--label>markdown_links</label>
+  <label>markdown_style</label>
+  <label>hashdown_api</label-->
+</div>
+</div>
       </div>
       <div id="markdown" class="padding markdown" style="top:35px">
         

@@ -341,11 +341,63 @@ img.dart {
   overflow:hidden;
 }
 
-button.helpicon{
-  width: 18px;
-  height: 18px;
-  min-width: 0;
-  line-height: 0;
-  border-radius: 50%;
+.menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: right;
+  z-index: 10;
+}
+.menu > div {
+  text-align: center;
+  display: none;
+  width: 140px;
+  background: white;
+  border: 1px solid #DDD;
   padding: 0;
+  margin-top:2px;
+}
+.menu:hover > div {
+  display: block;
+}
+.menu > div > label {
+  display: block;
+}
+.menu > div >label:hover {
+  background: #4d90fe;
+  color: white;
+}
+/* message box */
+.menu >div > div {
+  line-height: 14px;
+  text-align: center;
+  color: white;
+  background: #AAAAAA;
+  padding: 6px;
+}
+.menu > label {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: url(grey-disclosure-arrow-up-down.png), -moz-linear-gradient(top, #f5f5f5, #f1f1f1);
+  background: url(grey-disclosure-arrow-up-down.png), -ms-linear-gradient(top, #f5f5f5, #f1f1f1);
+  background: url(grey-disclosure-arrow-up-down.png), -webkit-linear-gradient(top, #f5f5f5, #f1f1f1);
+  background: url(grey-disclosure-arrow-up-down.png), linear-gradient(top, #f5f5f5, #f1f1f1);
+  background-position: 95% 50%;
+  background-repeat: no-repeat;
+  border: 1px solid #dcdcdc;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  color: #333;
+  cursor: default;
+  font-family: arial, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  height: 29px;
+  margin: 0;
+  min-width: 72px;
+  outline: 0;
+  padding: 7px 19px 7px 4px;
+  text-align: center;
+  white-space: nowrap;
 }
