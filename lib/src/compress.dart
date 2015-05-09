@@ -2,14 +2,15 @@ part of hashdown;
 
 class HashdownCompress {
   static List<int> compressString(
-      String str, HashdownParams params, bool tryCompression) {
+      String str, HashdownParams params) {
     List<int> utf8 = UTF8.encode(str);
     List<int> rslt = utf8;
     int min = utf8.length;
     params.mode = HashdownParams.MODE_UTF8;
-    params.compressed = 0;
 
-    if (tryCompression) {
+    if (params.compressed == 1) {
+      // assume compression is not needed
+      params.compressed = 0;
       List<int> uft16 = UTF16.encode(str);
       List<int> utf8c = compress(utf8);
       List<int> uft16c = compress(uft16);

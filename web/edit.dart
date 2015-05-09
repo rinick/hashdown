@@ -6,8 +6,7 @@ import '../lib/hashdown.dart';
 import 'language.dart';
 import 'util.dart';
 import 'dart:async';
-import 'dart:math';
-import '../lib/tadpole.dart';
+
 
 InputElement opPass;
 
@@ -273,11 +272,11 @@ HashdownOptions getOption(bool markdown) {
   opt.password = opPass.value;
   opt.codec = selectCode.value;
   if (opt.password != '') {
-    opt.protect = HashdownOptions.PROTECT_PASSWORD;
+    opt.protect = Hashdown.PROTECT_PASSWORD;
   } else {
     opt.protect = saltSelect.value;
   }
-  opt.compress = (opt.protect != HashdownOptions.PROTECT_RAW);
+  opt.compress = (opt.protect != Hashdown.PROTECT_RAW);
   return opt;
 }
 bool inited = false;

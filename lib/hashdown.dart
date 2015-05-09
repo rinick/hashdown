@@ -42,17 +42,20 @@ class HashdownParams {
   
   HashdownParams();
   HashdownParams.fromOption(HashdownOptions opt) {
-    if ((opt.password != '' && opt.password != null) || opt.protect == HashdownOptions.PROTECT_PASSWORD) {
+    if ((opt.password != '' && opt.password != null) || opt.protect == Hashdown.PROTECT_PASSWORD) {
       protection = PROTECT_PASSWORD;
-    } else if (opt.protect == HashdownOptions.PROTECT_RAW) {
+    } else if (opt.protect == Hashdown.PROTECT_RAW) {
       protection = PROTECT_RAW;
-    } else if (opt.protect == HashdownOptions.PROTECT_SALT) {
+    } else if (opt.protect == Hashdown.PROTECT_SALT) {
       protection = PROTECT_SALT;
-    } else if (opt.protect == HashdownOptions.PROTECT_SALT4) {
+    } else if (opt.protect == Hashdown.PROTECT_SALT4) {
       protection = PROTECT_SALT4;
     }
     if (opt.markdown) {
       markdown = 1;
+    }
+    if (opt.compress) {
+      compressed = 1;
     }
   }
   HashdownParams.fromByte(int b) {
@@ -67,15 +70,15 @@ class HashdownParams {
 }
 
 class HashdownOptions {
-  static const String PROTECT_RAW = 'raw';
-  static const String PROTECT_SALT = 'salt';
-  static const String PROTECT_SALT4 = 'salt4';
-  static const String PROTECT_PASSWORD = 'password';
   String password = '';
-  String protect = PROTECT_SALT;
-  String codec = 'link';
+  /// protect mode 
+  String protect = Hashdown.PROTECT_SALT;
+  /// encode mode
+  String codec = Hashdown.LINK;
+  /// encode/decode as markdown
   bool markdown = false;
-  bool compress = false;
+  /// use compression
+  bool compress = true;
 }
 
 class HashdownResult {
@@ -90,22 +93,33 @@ class HashdownResult {
   bool get usePassword => params.protection == HashdownParams.PROTECT_PASSWORD;
 }
 
-/// Hashdown provide some convenient api to directly encode string or file into base2e15 format
-/// support encryption and compression
+/// Hashdown provide some convenient api to directly encode string or file into base2e15/tadpoleCode/link format
+/// It also supports encryption and compression
 class Hashdown {
-
+  static const String LINK = 'link';
+  static const String TADPOLE = 'tadpole';
+  static const String BASE2E15 = 'base2e15';
+  
+  static const String PROTECT_RAW = 'raw';
+  static const String PROTECT_SALT = 'salt';
+  static const String PROTECT_SALT4 = 'salt4';
+  static const String PROTECT_PASSWORD = 'password';
+  
   static String encodeString(String str, HashdownOptions opt) {
     HashdownParams params = new HashdownParams.fromOption(opt);
-    List<int> data = HashdownCompress.compressString(str, params, opt.compress);
+    List<int> data = HashdownCompress.compressString(str, params);
     data = HashdownCrypt.encrypt(data, params, opt.password);
     return XCodec.getCodec(opt.codec).encode(data);
   }
   static String encodeFile(HashdownFile file, HashdownOptions opt) {
-
+    HashdownParams params = new HashdownParams.fromOption(opt);
+    List<int> data = HashdownCompress.compressFile(file, params);
+    data = HashdownCrypt.encrypt(data, params, opt.password);
+    return XCodec.getCodec(opt.codec).encode(data);
   }
 
   /// return String, Uint8List, or HashdownFile
-  static HashdownResult decode(String str, String password) {
+  static HashdownResult decode(String str, [String password = '']) {
     str = str.trim();
     List<int> bytes;
     HashdownResult result = new HashdownResult();
@@ -113,11 +127,11 @@ class Hashdown {
     try {
       int char0 = str.codeUnitAt(0);
       if (char0 == 0x2F) {
-        bytes = XCodec.getCodec('tadpole').decode(str);
+        bytes = XCodec.getCodec(TADPOLE).decode(str);
       } else if (char0 >= 0x3400 && char0 <= 0xD7A3) {
-        bytes = XCodec.getCodec('base2e15').decode(str);
+        bytes = XCodec.getCodec(BASE2E15).decode(str);
       } else {
-        bytes = XCodec.getCodec('link').decode(str);
+        bytes = XCodec.getCodec(LINK).decode(str);
       }
 
       if (bytes == null || bytes.length == 0) {
@@ -142,7 +156,7 @@ class Hashdown {
         result.file = data;
       }
     } catch (e) {
-      print(e);
+      //print(e);
     }
     return result;
   }
@@ -151,7 +165,11 @@ class Hashdown {
 class HashdownFile {
   String name;
   List<int> data;
-  HashdownFile(this.name, this.data);
+  HashdownFile(this.name, this.data) {
+    if (name.length>256) {
+      name = name.substring(0, 256);
+    }
+  }
   HashdownFile.decode(List<int> bytes) {
     int namelen = bytes[0];
     name = UTF8.decode(bytes.sublist(1, namelen + 1));
@@ -165,5 +183,4 @@ class HashdownFile {
     list.setRange(namebytes.length + 1, list.length, data);
     return list;
   }
-
 }

@@ -8,7 +8,8 @@ class HashdownCrypt {
     rslt.setRange(0, bytes.length, bytes);
     List<int> pass;
     if (params.protection == HashdownParams.PROTECT_PASSWORD) {
-      int salt = rng.nextInt(256);
+      // only 7 bits salt, reserve 1 bits for other purpose (like pk encryption)
+      int salt = rng.nextInt(64);
       pass = [salt]..addAll(UTF8.encode(password));
       RC4 rc4 = new RC4(pass, 5);
       rc4.encryptBytes(rslt);

@@ -28,7 +28,7 @@ class TadpoleCode {
     0x064B, 0x064C, 0x064D, 0x064E, 0x064F, 0x0670, 0x06e4,
     /*0x20D2, 0x20d3,*/ 0x20d8, 0x20d9, 0x20da, //
     
-    0x200E // index 16, L-to-R
+    //0x200E // index 16, L-to-R
   ];
   static final List<int> _decodeTable = (() {
     List<int> table = new List<int>(decodeTableSize);
@@ -41,14 +41,14 @@ class TadpoleCode {
   })();
 
   static String encode(List<int> bytes) {
-    List<int> out = new List<int> (bytes.length*2+3);
+    List<int> out = new List<int> (bytes.length*2+2);
     out[0] = 47;
     int i = 0;
     for (int byte in bytes){
       out[++i] = _encodeTable[byte>>4];
       out[++i] = _encodeTable[byte&15];
     }
-    out[++i] = 0x200E;
+    //out[++i] = 0x200E;
     out[++i] = 0x2C;
     return new String.fromCharCodes(out);
   }

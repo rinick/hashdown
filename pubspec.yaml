@@ -1,7 +1,7 @@
 name: 'hashdown'
-version: 1.0.1
+version: 1.0.2
 description: >
-  An absolute bare-bones web app.
+  Hashdown is an  file/text-to-text encoding scheme designed for safe and compact data sharing
 homepage: http://www.hashdown.net
 environment:
   sdk: '>=1.0.0 <2.0.0'
@@ -9,3 +9,5 @@ dependencies:
   base2e15: any
   crypto: any
   lzma: any
+dev_dependencies:
+  test: any
