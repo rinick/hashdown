@@ -1,10 +1,10 @@
 # Custom CSS
 
-Inline css is also allowed in markdown, you can use almost any css style that works  in a html page.
+Hashdown允许任何自定义的css
 
-## Background
+## 背景
 
-black background and white text
+黑色背景和白色文字
 
 <style>
 body{
@@ -22,13 +22,13 @@ color:white;
 }
 </style>
 
-## Web Font
+## 网页字体
 
 <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 
 <span style="font-family:'Indie Flower',cursive;font-size:20px">Indie Flower font</span>
 
-## Animation
+## 动画
 
 <style>
 #animated
@@ -60,7 +60,7 @@ border-radius:5px;
 
 <img src="hashdown.png" id="animated">
 
-## Text Shadow
+## 文字阴影
 
 <style>
 #texteffect { 
@@ -71,6 +71,6 @@ text-shadow: 3px 3px 3px #F33;
 }
 </style>
 
-<span id="texteffect">text with shadow</span>
+<span id="texteffect">文字阴影</span>
 
 

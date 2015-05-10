@@ -50,4 +50,44 @@ In URIs a hashmark # introduces the optional fragment near the end of the URL. T
 ```
 Convert to Tadpole Code:
 
-&nbsp /̶̶̴̴̸̵⃚̸⃚̷⃚⃙̵̷̴⃘̵̵⃚̷̷̷̸̸̵̶⃘̷̴⃚̴⃘̴̴⃚̸⃚⃘̴⃘̴̸̴⃘̸̴̸⃚̵̶̸⃙̵̶̵⃙̵̴̸⃙̴̸̸⃚⃘̵̶̵̷̶⃙⃙⃙̶̸̵̴̶⃘̶̶̴̸̵̶⃙̷̴̷⃚̷⃘⃙̴⃚⃙⃙̴̴⃘⃘̸⃘⃙̸̶̶⃚̶⃘̵⃙̷̷⃙⃙̶̶⃘̷̸⃚⃘̴⃚⃘⃚̵̶̴⃙⃘̵̴⃚̶̴⃘̸̶̵̴̶̵⃚⃙⃘⃚̴̵̷⃚̷⃚̴⃘⃘⃙̵̴⃙⃙̸̶̴̸̴⃘̴̵̷⃘⃚⃚̶⃘̸̸⃚̸̴̵̷⃙̶̴⃚⃚̵⃙⃘⃙ًًًًًًًًًًًًًًًًًًًًًًًًًًًًًًًًًٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍََََََََََََََََََََََََََََََُُُُُُُُُُُُُُُُُُُٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤ͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘‎,  &nbsp &nbsp ( It's actually **427** characters!! )
+&nbsp; /̶⃙̸̴⃘̸⃙̷̶⃘̵⃙̵̷̷⃙⃚⃘̶⃙̷̴̷⃙⃘⃚̴̷⃘⃚⃚⃘̸⃘⃘̵̷̵⃚⃘⃙̵⃚⃙̵⃙⃚̵⃚̸⃙⃘̴⃘̴̶̴̷⃙̴⃘̵̷̸⃚̶̴̴̴̴̸̵̵̷⃙⃘̶̸̵̶⃙̶⃙⃙̶̷̴̵⃘̷̴̸̷̴̸̷̸̴̵⃙̵̵̶⃚̶⃙⃚⃚̶⃚⃙̸̷̶̵̵̸̵̶̷⃚̶̷⃚⃚⃘̵̶⃚̸⃙̶̴̴̵⃘̷⃘̶̷⃙̶̵⃘̷̶⃙⃙̸̷⃙⃚̸̵̶̵̴̶̸⃘⃚̴̶̵̴̸̷⃚̸⃘⃚̴̴̴⃘̷̴̷⃚̵⃘̴⃘̴⃘̶̴̷̸⃙⃙̴⃙⃚⃙⃚̵̷̶̷̵̴̸⃙ًًًًًًًًًًًًًًًًًًًًٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍَََََََََََََََََََََََََََََََََُُُُُُُُُُُُُُُُُُُُُُٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤۤ͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘͘,  &nbsp; &nbsp; ( It's actually **426** characters!! )
+
+# API
+
+API to encode and decode hashdown in javascript and dart code
+
+## javascript
+
+```html
+    <script src="http://www.hashdown.net/api.js"></script>
+    <script>
+      // simple encoding/decoding
+      var encoded1 = $hashdown.encode('Hashdown is awesome');
+      var decoded1 = $hashdown.decode(encoded1);
+
+      // encoding with options
+      var encoded2 = $hashdown.encode('Hashdown is awesome',{
+      	"codec" : $hashdown.BASE2E15,
+      	"markdown" : true,
+      	"protect" :  $hashdown.PROTECT_PASSWORD,
+      	"password" : "mypassword"
+      });
+      var decoded2 = $hashdown.decode(encoded2, 'mypassword').text;
+    </script>
+```
+
+## dart
+
+```dart
+	import 'package:hashdown/hashdown.dart';
+
+	void main() {
+	  // encode string to hashdown link
+	  String hashdownLink =
+	      Hashdown.encodeString('Hashdown is awesome', new HashdownOptions());
+	  
+	  // encode string to base2e15
+	  String base2e15 = Hashdown.encodeString(
+	      'Hashdown is awesome', new HashdownOptions()..codec = Hashdown.BASE2E15);
+	}
+```
