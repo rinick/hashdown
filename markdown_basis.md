@@ -64,16 +64,8 @@ alert(s);
 
 # Horizontal Rule
 
-Three or more...
-
----
-Hyphens
-
-***
-Asterisks
-
+Three or more underscores
 ___
-Underscores
 
 
 # Html

@@ -3625,7 +3625,7 @@ $isqE:1,
 $iscv:1,
 $isKV:1,
 $isa:1,
-"%":"HTMLAppletElement|HTMLBRElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDialogElement|HTMLDirectoryElement|HTMLDivElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLImageElement|HTMLLIElement|HTMLLabelElement|HTMLLegendElement|HTMLMarqueeElement|HTMLMenuElement|HTMLMenuItemElement|HTMLMeterElement|HTMLModElement|HTMLOListElement|HTMLOptGroupElement|HTMLOptionElement|HTMLParagraphElement|HTMLPictureElement|HTMLPreElement|HTMLProgressElement|HTMLQuoteElement|HTMLShadowElement|HTMLSourceElement|HTMLSpanElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableDataCellElement|HTMLTableHeaderCellElement|HTMLTitleElement|HTMLTrackElement|HTMLUListElement|HTMLUnknownElement|PluginPlaceholderElement;HTMLElement"},
+"%":"HTMLAppletElement|HTMLBRElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDialogElement|HTMLDirectoryElement|HTMLDivElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLImageElement|HTMLLIElement|HTMLLabelElement|HTMLLegendElement|HTMLMarqueeElement|HTMLMenuElement|HTMLMenuItemElement|HTMLMeterElement|HTMLModElement|HTMLOListElement|HTMLOptGroupElement|HTMLOptionElement|HTMLParagraphElement|HTMLPictureElement|HTMLPreElement|HTMLProgressElement|HTMLQuoteElement|HTMLScriptElement|HTMLShadowElement|HTMLSourceElement|HTMLSpanElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableDataCellElement|HTMLTableHeaderCellElement|HTMLTitleElement|HTMLTrackElement|HTMLUListElement|HTMLUnknownElement|PluginPlaceholderElement;HTMLElement"},
 Gh:{
 "^":"qE;y0:hostname=,LU:href%,tp:port=,A8:protocol=",
 X:function(a){return String(a)},
@@ -3782,7 +3782,6 @@ Cv:{
 $1:function(a){return!!J.t(a).$iscv}},
 Fs:{
 "^":"qE;oc:name=",
-$isFs:1,
 "%":"HTMLEmbedElement"},
 hY:{
 "^":"ea;kc:error=",
@@ -3812,7 +3811,6 @@ smk:function(a,b){a.title=b},
 "%":"HTMLDocument"},
 tb:{
 "^":"qE;oc:name=",
-$istb:1,
 "%":"HTMLIFrameElement"},
 Sg:{
 "^":"Gv;",
@@ -3843,7 +3841,6 @@ eL:{
 "%":"HTMLAudioElement|HTMLMediaElement|HTMLVideoElement"},
 Ee:{
 "^":"qE;oc:name=",
-$isEe:1,
 "%":"HTMLMetaElement"},
 bn:{
 "^":"Im;",
@@ -3930,7 +3927,6 @@ $aszM:function(){return[W.KV]},
 $isqC:1},
 G7:{
 "^":"qE;oc:name=",
-$isG7:1,
 "%":"HTMLObjectElement"},
 wL:{
 "^":"qE;oc:name=",
@@ -3938,10 +3934,6 @@ wL:{
 HD:{
 "^":"qE;oc:name=",
 "%":"HTMLParamElement"},
-qI:{
-"^":"qE;",
-$isqI:1,
-"%":"HTMLScriptElement"},
 lp:{
 "^":"qE;v:length=,oc:name=",
 "%":"HTMLSelectElement"},
@@ -4961,7 +4953,7 @@ if(a>=0)return C.jn.l(a,b)
 else{z=C.jn.l(a,b)
 return z>=2147483648?z-4294967296:z}}}}}],["","",,O,{
 "^":"",
-OB:function(a,b){var z,y,x,w,v,u,t,s,r,q,p,o,n,m,l
+OB:function(a,b){var z,y,x,w,v,u,t,s,r,q,p,o,n,m
 a=J.rr(a)
 z=null
 y=new O.Cb($.yO(),null,null)
@@ -4971,37 +4963,35 @@ if(J.mG(w,47))z=O.hK("tadpole").kV(a)
 else if(J.u6(w,13312)&&J.Df(w,55203))z=O.hK("base2e15").kV(a)
 else z=O.hK("link").kV(a)
 if(z==null||J.wS(z)===0)return y
-t=J.MQ(z)
-s=new O.KD(0,0,1,0)
-r=J.Wx(t)
-s.Q=r.i(t,3)
-s.a=J.mQ(r.l(t,2),1)
-s.b=J.mQ(r.l(t,3),3)
-s.c=J.mQ(r.l(t,5),1)
-x=s
+u=J.MQ(z)
+t=new O.KD(0,0,1,0)
+s=J.Wx(u)
+t.Q=s.i(u,3)
+t.a=J.mQ(s.l(u,2),1)
+t.b=J.mQ(s.l(u,3),3)
+t.c=J.mQ(s.l(u,5),1)
+x=t
 y.sO3(x)
-if(J.mG(y.gO3().b,3))t=J.mG(b,"")||b==null
-else t=!1
-if(t)return y
+if(J.mG(y.gO3().b,3))u=J.mG(b,"")||b==null
+else u=!1
+if(u)return y
 if(!J.mG(J.mQ(J.MQ(z),192),192)){J.t3(y,C.dy.kV(z))
-return y}t=z
-r=x
-q=J.U6(t)
-p=q.gv(t)
-o=r.gLq()
-if(o>>>0!==o||o>=4)return H.e(C.m3,o)
-n=q.aM(t,0,p-C.m3[o])
-if(J.mG(r.gLq(),3)){m=[q.p(t,q.gv(t)-2)]
-C.Nm.FV(m,C.dy.gZE().WJ(b))
-Y.jo(m,5).U7(n)}else if(J.mG(r.gLq(),1))Y.jo([q.p(t,q.gv(t)-2),20,200],5).U7(n)
-else if(J.mG(r.gLq(),2))Y.jo(q.aM(t,q.gv(t)-5,q.gv(t)-1),5).U7(n)
-z=n
+return y}u=z
+s=x
+r=J.U6(u)
+q=r.gv(u)
+p=s.gLq()
+if(p>>>0!==p||p>=4)return H.e(C.m3,p)
+o=r.aM(u,0,q-C.m3[p])
+if(J.mG(s.gLq(),3)){n=[r.p(u,r.gv(u)-2)]
+C.Nm.FV(n,C.dy.gZE().WJ(b))
+Y.jo(n,5).U7(o)}else if(J.mG(s.gLq(),1))Y.jo([r.p(u,r.gv(u)-2),20,200],5).U7(o)
+else if(J.mG(s.gLq(),2))Y.jo(r.aM(u,r.gv(u)-5,r.gv(u)-1),5).U7(o)
+z=o
 v=O.hG(z,x)
-t=v
-if(typeof t==="string")J.t3(y,v)
-else if(v instanceof O.DK)y.sMZ(v)}catch(l){t=H.Ru(l)
-u=t
-P.mp(u)}return y},
+u=v
+if(typeof u==="string")J.t3(y,v)
+else if(v instanceof O.DK)y.sMZ(v)}catch(m){H.Ru(m)}return y},
 hK:function(a){if(C.xB.nC(a,"link"))return new O.jL()
 if(C.xB.nC(a,"base64"))return new O.CV()
 if(C.xB.nC(a,"tadpole"))return new O.R6()
@@ -5134,7 +5124,7 @@ z=Array(256)
 z.fixed$length=Array
 y=H.J(z,[P.KN])
 C.Nm.du(y,0,256,17)
-for(x=0;x<17;++x)y[C.jn.V(C.dD[x],256)]=x
+for(x=0;x<16;++x)y[C.jn.V(C.mS[x],256)]=x
 return y}}}],["","",,P,{
 "^":"",
 dg:function(){var z=$.L4
@@ -5232,7 +5222,7 @@ document.querySelector(".aboutDiv")
 z=document.createElement("div",null)
 y=z.style
 y.height="100px"
-J.DZ(z,"<script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>\r\n<!-- 2e15_mobile -->\r\n<ins class=\"adsbygoogle\"\r\n     style=\"display:inline-block;width:320px;height:100px\"\r\n     data-ad-client=\"ca-pub-3283235194066083\"\r\n     data-ad-slot=\"6644918654\"></ins>\r\n<script>\r\n(adsbygoogle = window.adsbygoogle || []).push({});\r\n</script>",$.UZ())
+J.DZ(z,"<script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>\r\n<!-- 2e15_mobile -->\r\n<ins class=\"adsbygoogle\"\r\n     style=\"display:inline-block;width:320px;height:100px\"\r\n     data-ad-client=\"ca-pub-3283235194066083\"\r\n     data-ad-slot=\"6644918654\"></ins>\r\n<script>\r\n(adsbygoogle = window.adsbygoogle || []).push({});\r\n</script>",$.Vc())
 document.querySelector(".viewerbox").appendChild(z)},"$0","hT",0,0,1]},1],["","",,Y,{
 "^":"",
 Z:[function(a){var z,y
@@ -5622,12 +5612,7 @@ y5:{
 mv:{
 "^":"a;",
 Eb:function(a,b,c){return!0},
-i0:function(a){return!0}},
-i8:{
-"^":"a;",
-Eb:function(a,b,c){return!C.xB.nC(b,"on")},
-i0:function(a){var z=J.t(a)
-return!z.$isqI&&!z.$istb&&!z.$isEe&&!z.$isG7&&!z.$isFs}}}],]
+i0:function(a){return!0}}}],]
 setupProgram(dart)
 J.Qc=function(a){if(typeof a=="number")return J.F.prototype
 if(typeof a=="string")return J.E.prototype
@@ -5876,7 +5861,7 @@ C.Vu=function(_, letter) { return letter.toUpperCase(); }
 C.Gb=H.J(I.uL([127,2047,65535,1114111]),[P.KN])
 C.zm=H.J(I.uL(["*::class","*::dir","*::draggable","*::hidden","*::id","*::inert","*::itemprop","*::itemref","*::itemscope","*::lang","*::spellcheck","*::title","*::translate","A::accesskey","A::coords","A::hreflang","A::name","A::shape","A::tabindex","A::target","A::type","AREA::accesskey","AREA::alt","AREA::coords","AREA::nohref","AREA::shape","AREA::tabindex","AREA::target","AUDIO::controls","AUDIO::loop","AUDIO::mediagroup","AUDIO::muted","AUDIO::preload","BDO::dir","BODY::alink","BODY::bgcolor","BODY::link","BODY::text","BODY::vlink","BR::clear","BUTTON::accesskey","BUTTON::disabled","BUTTON::name","BUTTON::tabindex","BUTTON::type","BUTTON::value","CANVAS::height","CANVAS::width","CAPTION::align","COL::align","COL::char","COL::charoff","COL::span","COL::valign","COL::width","COLGROUP::align","COLGROUP::char","COLGROUP::charoff","COLGROUP::span","COLGROUP::valign","COLGROUP::width","COMMAND::checked","COMMAND::command","COMMAND::disabled","COMMAND::label","COMMAND::radiogroup","COMMAND::type","DATA::value","DEL::datetime","DETAILS::open","DIR::compact","DIV::align","DL::compact","FIELDSET::disabled","FONT::color","FONT::face","FONT::size","FORM::accept","FORM::autocomplete","FORM::enctype","FORM::method","FORM::name","FORM::novalidate","FORM::target","FRAME::name","H1::align","H2::align","H3::align","H4::align","H5::align","H6::align","HR::align","HR::noshade","HR::size","HR::width","HTML::version","IFRAME::align","IFRAME::frameborder","IFRAME::height","IFRAME::marginheight","IFRAME::marginwidth","IFRAME::width","IMG::align","IMG::alt","IMG::border","IMG::height","IMG::hspace","IMG::ismap","IMG::name","IMG::usemap","IMG::vspace","IMG::width","INPUT::accept","INPUT::accesskey","INPUT::align","INPUT::alt","INPUT::autocomplete","INPUT::checked","INPUT::disabled","INPUT::inputmode","INPUT::ismap","INPUT::list","INPUT::max","INPUT::maxlength","INPUT::min","INPUT::multiple","INPUT::name","INPUT::placeholder","INPUT::readonly","INPUT::required","INPUT::size","INPUT::step","INPUT::tabindex","INPUT::type","INPUT::usemap","INPUT::value","INS::datetime","KEYGEN::disabled","KEYGEN::keytype","KEYGEN::name","LABEL::accesskey","LABEL::for","LEGEND::accesskey","LEGEND::align","LI::type","LI::value","LINK::sizes","MAP::name","MENU::compact","MENU::label","MENU::type","METER::high","METER::low","METER::max","METER::min","METER::value","OBJECT::typemustmatch","OL::compact","OL::reversed","OL::start","OL::type","OPTGROUP::disabled","OPTGROUP::label","OPTION::disabled","OPTION::label","OPTION::selected","OPTION::value","OUTPUT::for","OUTPUT::name","P::align","PRE::width","PROGRESS::max","PROGRESS::min","PROGRESS::value","SELECT::autocomplete","SELECT::disabled","SELECT::multiple","SELECT::name","SELECT::required","SELECT::size","SELECT::tabindex","SOURCE::type","TABLE::align","TABLE::bgcolor","TABLE::border","TABLE::cellpadding","TABLE::cellspacing","TABLE::frame","TABLE::rules","TABLE::summary","TABLE::width","TBODY::align","TBODY::char","TBODY::charoff","TBODY::valign","TD::abbr","TD::align","TD::axis","TD::bgcolor","TD::char","TD::charoff","TD::colspan","TD::headers","TD::height","TD::nowrap","TD::rowspan","TD::scope","TD::valign","TD::width","TEXTAREA::accesskey","TEXTAREA::autocomplete","TEXTAREA::cols","TEXTAREA::disabled","TEXTAREA::inputmode","TEXTAREA::name","TEXTAREA::placeholder","TEXTAREA::readonly","TEXTAREA::required","TEXTAREA::rows","TEXTAREA::tabindex","TEXTAREA::wrap","TFOOT::align","TFOOT::char","TFOOT::charoff","TFOOT::valign","TH::abbr","TH::align","TH::axis","TH::bgcolor","TH::char","TH::charoff","TH::colspan","TH::headers","TH::height","TH::nowrap","TH::rowspan","TH::scope","TH::valign","TH::width","THEAD::align","THEAD::char","THEAD::charoff","THEAD::valign","TR::align","TR::bgcolor","TR::char","TR::charoff","TR::valign","TRACK::default","TRACK::kind","TRACK::label","TRACK::srclang","UL::compact","UL::type","VIDEO::controls","VIDEO::height","VIDEO::loop","VIDEO::mediagroup","VIDEO::muted","VIDEO::preload","VIDEO::width"]),[P.I])
 C.m3=I.uL([1,2,5,2])
-C.dD=I.uL([820,821,822,823,824,856,1611,1612,1613,1614,1615,1648,1764,8408,8409,8410,8206])
+C.mS=I.uL([820,821,822,823,824,856,1611,1612,1613,1614,1615,1648,1764,8408,8409,8410])
 C.m9=H.J(I.uL([0,0,1048576,531441,1048576,390625,279936,823543,262144,531441,1e6,161051,248832,371293,537824,759375,1048576,83521,104976,130321,16e4,194481,234256,279841,331776,390625,456976,531441,614656,707281,81e4,923521,1048576,35937,39304,42875,46656]),[P.KN])
 C.xD=I.uL([])
 C.pa=I.uL([-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-1,-2,-2,-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,62,-2,62,-2,63,52,53,54,55,56,57,58,59,60,61,-2,-2,-2,0,-2,-2,-2,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,-2,-2,-2,-2,63,-2,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2])
@@ -5916,7 +5901,7 @@ $.BO=null
 $.lt=null
 $.EU=null
 $.fc=null
-$.wn=""
+$.wn="http://www.hashdown.net/#"
 $.L4=null
 $.EM=null
 $.w5=null
@@ -5933,7 +5918,7 @@ var w=a[y+1]
 var v=a[y+2]
 I.$lazy(x,w,v)}})(["Kb","Rs",function(){return H.Td()},"rS","p6",function(){return new P.kM(null)},"lm","WD",function(){return H.LX(H.S7({toString:function(){return"$receiver$"}}))},"k1","OI",function(){return H.LX(H.S7({$method$:null,toString:function(){return"$receiver$"}}))},"Re","PH",function(){return H.LX(H.S7(null))},"fN","D1",function(){return H.LX(function(){var $argumentsExpr$='$arguments$'
 try{null.$method$($argumentsExpr$)}catch(z){return z.message}}())},"qi","rx",function(){return H.LX(H.S7(void 0))},"rZ","Y9",function(){return H.LX(function(){var $argumentsExpr$='$arguments$'
-try{(void 0).$method$($argumentsExpr$)}catch(z){return z.message}}())},"BX","zO",function(){return H.LX(H.Mj(null))},"tt","Bi",function(){return H.LX(function(){try{null.$method$}catch(z){return z.message}}())},"dt","eA",function(){return H.LX(H.Mj(void 0))},"A7","ko",function(){return H.LX(function(){try{(void 0).$method$}catch(z){return z.message}}())},"lI","ej",function(){return P.xg()},"nM","Ex",function(){return[]},"fd","pJ",function(){return{}},"zX","Fv",function(){return P.tM(["A","ABBR","ACRONYM","ADDRESS","AREA","ARTICLE","ASIDE","AUDIO","B","BDI","BDO","BIG","BLOCKQUOTE","BR","BUTTON","CANVAS","CAPTION","CENTER","CITE","CODE","COL","COLGROUP","COMMAND","DATA","DATALIST","DD","DEL","DETAILS","DFN","DIR","DIV","DL","DT","EM","FIELDSET","FIGCAPTION","FIGURE","FONT","FOOTER","FORM","H1","H2","H3","H4","H5","H6","HEADER","HGROUP","HR","I","IFRAME","IMG","INPUT","INS","KBD","LABEL","LEGEND","LI","MAP","MARK","MENU","METER","NAV","NOBR","OL","OPTGROUP","OPTION","OUTPUT","P","PRE","PROGRESS","Q","S","SAMP","SECTION","SELECT","SMALL","SOURCE","SPAN","STRIKE","STRONG","SUB","SUMMARY","SUP","TABLE","TBODY","TD","TEXTAREA","TFOOT","TH","THEAD","TIME","TR","TRACK","TT","U","UL","VAR","VIDEO","WBR"],null)},"or","NJ",function(){return P.A(null,null)},"eo","cM",function(){return P.ND(self)},"kt","Iq",function(){return H.Yg("_$dart_dartObject")},"Ri","Dp",function(){return H.Yg("_$dart_dartClosure")},"Je","hs",function(){return function DartObject(a){this.o=a}},"ry","yO",function(){return new O.KD(0,0,1,0)},"Cu","fY",function(){return new G.wJ().$0()},"GA","pq",function(){return P.nu("^\\S+$",!0,!1)},"L","N",function(){return P.B(["Plain Text","\u7eaf\u6587\u672c","Encoded","\u7f16\u7801\u7ed3\u679c","Markdown","\u6807\u8bb0\u8bed\u8a00","markdown.md","markdown.zh.md","README.md","README.zh.md","Encode Mode:","\u7f16\u7801\u6a21\u5f0f:","Salt:","\u52a0\u76d0:","Raw","\u65e0","1 Byte","1\u5b57\u8282","4 Bytes","4\u5b57\u8282","Password:","\u5bc6\u7801:","Link","\u94fe\u63a5","Encode","\u7f16\u7801","Decode","\u89e3\u7801","Encode Markdown","\u7f16\u7801\u6807\u8bb0\u8bed\u8a00","Undo","\u64a4\u9500","TadpoleCode","\u874c\u86aa\u7801","Help","\u5e2e\u52a9","edit this HashDown","\u7f16\u8f91\u8fd9\u4e2aHashDown","create a new HashDown","\u521b\u5efa\u65b0\u7684HashDown","Decoding failed","\u89e3\u7801\u5931\u8d25","Wrong password","\u5bc6\u7801\u9519\u8bef","Input text here and click the encode button","\u5728\u8fd9\u91cc\u8f93\u5165\u6587\u5b57\uff0c\u7136\u540e\u70b9\u51fb\u7f16\u7801\u6309\u94ae","To decode text, paste it here and click the decode button","\u9700\u8981\u89e3\u7801\u65f6\u628a\u6587\u672c\u7c98\u8d34\u5230\u8fd9\u91cc\uff0c\u7136\u540e\u70b9\u51fb\u89e3\u7801\u6309\u94ae","Hosted on GitHub","\u4e0b\u8f7d\u79bb\u7ebf\u7248","https://github.com/rinick/hashdown","https://github.com/rinick/hashdown/archive/gh-pages.zip"],null,null)},"Iz","UZ",function(){return new M.mv()},"P","Vc",function(){return new M.i8()}])
+try{(void 0).$method$($argumentsExpr$)}catch(z){return z.message}}())},"BX","zO",function(){return H.LX(H.Mj(null))},"tt","Bi",function(){return H.LX(function(){try{null.$method$}catch(z){return z.message}}())},"dt","eA",function(){return H.LX(H.Mj(void 0))},"A7","ko",function(){return H.LX(function(){try{(void 0).$method$}catch(z){return z.message}}())},"lI","ej",function(){return P.xg()},"nM","Ex",function(){return[]},"fd","pJ",function(){return{}},"zX","Fv",function(){return P.tM(["A","ABBR","ACRONYM","ADDRESS","AREA","ARTICLE","ASIDE","AUDIO","B","BDI","BDO","BIG","BLOCKQUOTE","BR","BUTTON","CANVAS","CAPTION","CENTER","CITE","CODE","COL","COLGROUP","COMMAND","DATA","DATALIST","DD","DEL","DETAILS","DFN","DIR","DIV","DL","DT","EM","FIELDSET","FIGCAPTION","FIGURE","FONT","FOOTER","FORM","H1","H2","H3","H4","H5","H6","HEADER","HGROUP","HR","I","IFRAME","IMG","INPUT","INS","KBD","LABEL","LEGEND","LI","MAP","MARK","MENU","METER","NAV","NOBR","OL","OPTGROUP","OPTION","OUTPUT","P","PRE","PROGRESS","Q","S","SAMP","SECTION","SELECT","SMALL","SOURCE","SPAN","STRIKE","STRONG","SUB","SUMMARY","SUP","TABLE","TBODY","TD","TEXTAREA","TFOOT","TH","THEAD","TIME","TR","TRACK","TT","U","UL","VAR","VIDEO","WBR"],null)},"or","NJ",function(){return P.A(null,null)},"eo","cM",function(){return P.ND(self)},"kt","Iq",function(){return H.Yg("_$dart_dartObject")},"Ri","Dp",function(){return H.Yg("_$dart_dartClosure")},"Je","hs",function(){return function DartObject(a){this.o=a}},"ry","yO",function(){return new O.KD(0,0,1,0)},"Cu","fY",function(){return new G.wJ().$0()},"GA","pq",function(){return P.nu("^\\S+$",!0,!1)},"L","N",function(){return P.B(["Plain Text","\u7eaf\u6587\u672c","Encoded","\u7f16\u7801\u7ed3\u679c","Markdown","\u6807\u8bb0\u8bed\u8a00","markdown.md","markdown.zh.md","README.md","README.zh.md","Encode Mode:","\u7f16\u7801\u6a21\u5f0f:","Salt:","\u52a0\u76d0:","Raw","\u65e0","1 Byte","1\u5b57\u8282","4 Bytes","4\u5b57\u8282","Password:","\u5bc6\u7801:","Link","\u94fe\u63a5","Encode","\u7f16\u7801","Decode","\u89e3\u7801","Encode Markdown","\u7f16\u7801\u6807\u8bb0\u8bed\u8a00","Undo","\u64a4\u9500","TadpoleCode","\u874c\u86aa\u7801","Help","\u5e2e\u52a9","Samples","\u793a\u4f8b","Open sample will overwrite current text","\u6253\u5f00\u793a\u4f8b\u4f1a\u8986\u76d6\u5f53\u524d\u7684\u5185\u5bb9","edit this Hashdown","\u7f16\u8f91\u8fd9\u4e2aHashdown","create a new Hashdown","\u521b\u5efa\u65b0\u7684Hashdown","Decoding failed","\u89e3\u7801\u5931\u8d25","Wrong password","\u5bc6\u7801\u9519\u8bef","Input text here and click the encode button","\u5728\u8fd9\u91cc\u8f93\u5165\u6587\u5b57\uff0c\u7136\u540e\u70b9\u51fb\u7f16\u7801\u6309\u94ae","To decode text, paste it here and click the decode button","\u9700\u8981\u89e3\u7801\u65f6\u628a\u6587\u672c\u7c98\u8d34\u5230\u8fd9\u91cc\uff0c\u7136\u540e\u70b9\u51fb\u89e3\u7801\u6309\u94ae","Hosted on GitHub","\u4e0b\u8f7d\u79bb\u7ebf\u7248","https://github.com/rinick/hashdown","https://github.com/rinick/hashdown/archive/gh-pages.zip"],null,null)},"P","Vc",function(){return new M.mv()}])
 
 init.metadata=["invocation","object","sender","e","x","closure","isolate","numberOfArguments","arg1","arg2","arg3","arg4","each","value",,"error","stackTrace","_","ignored","element","data","arg","a","attributeName","context","attr","callback","captureThis","self","arguments","o",];init.types=[{func:""},{func:"",void:true},{func:"",args:[,]},{func:"",args:[P.I,,]},{func:"",args:[,P.I]},{func:"",args:[P.I]},{func:"",args:[{func:"",void:true}]},{func:"",void:true,args:[,],opt:[P.Gz]},{func:"",args:[,],opt:[,]},{func:"",ret:P.a0},{func:"",args:[,P.Gz]},{func:"",void:true,args:[,P.Gz]},{func:"",args:[,,]},{func:"",ret:P.KN,args:[,P.KN]},{func:"",void:true,args:[P.KN,P.KN]},{func:"",args:[P.wv,,]},{func:"",ret:P.I,args:[P.KN]},{func:"",void:true,args:[W.KV,W.KV]},{func:"",ret:P.KN},{func:"",void:true,args:[{func:"",void:true}]},{func:"",void:true,args:[,]},{func:"",ret:P.a0,args:[,,]},{func:"",ret:P.KN,args:[,]},{func:"",ret:P.a0,args:[P.a,P.a]},{func:"",ret:P.KN,args:[P.a]},{func:"",ret:P.a0,args:[W.cv,P.I,P.I,W.JQ]},{func:"",ret:P.a,args:[,]},{func:"",void:true,args:[W.Aj]},{func:"",void:true,args:[W.cv]},{func:"",void:true,args:[W.Gh]},{func:"",void:true,args:[W.FB]},{func:"",void:true,args:[W.ea]},];$=null
 I = I.$finishIsolateConstructor(I)
