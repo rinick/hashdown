@@ -22,14 +22,28 @@ class TadpoleCode {
 //    }
 //    return -1;
 //  }
-  
+
+
+//  static const List<int> _encodeTable = const [ //
+//    0x0315, 0x031B, 0x0321, 0x0322, //
+//    0x0327, 0x0328, 0x0334, 0x0335, //
+//    0x0336, 0x0337, 0x0338, 0x0358, //
+//    0xFE20, 0xFE21, 0xFE22, 0xFE23, //
+//  ];
+//  static const List<int> _encodeTable = const [ //
+//    0x064b, 0x064c, 0x064d, 0x064e, 0x064f, //
+//    0x0650, 0x0651, 0x0652, 0x0653, 0x0654, 0x0655, //
+//    0x670, //
+//    0x061a, 0x065c,//
+//    0x06e0, 0x06e4 //
+//  ];
   static const List<int> _encodeTable = const [ //
-    0x0334, 0x0335, 0x0336, 0x0337, 0x0338, 0x0358, //
-    0x064B, 0x064C, 0x064D, 0x064E, 0x064F, 0x0670, 0x06e4,
-    /*0x20D2, 0x20d3,*/ 0x20d8, 0x20d9, 0x20da, //
-    
-    //0x200E // index 16, L-to-R
+    0x064b, 0x064c, 0x064d, 0x064e, 0x064f, //
+    0x0650, 0x0651, 0x0652, 0x0653, 0x0654, 0x0655, //
+    0x670, //
+    0x065c,0x06e0, 0x06e4, 0x06ea//
   ];
+
   static final List<int> _decodeTable = (() {
     List<int> table = new List<int>(decodeTableSize);
     table.fillRange(0, decodeTableSize, 17);
@@ -49,7 +63,7 @@ class TadpoleCode {
       out[++i] = _encodeTable[byte&15];
     }
     //out[++i] = 0x200E;
-    out[++i] = 0x2C;
+    out[++i] = 0xFF9E;
     return new String.fromCharCodes(out);
   }
 
@@ -67,10 +81,10 @@ class TadpoleCode {
     for (; i < len;++i){
       int code1 = codes[(i<<1)+1];
       int code2 = codes[(i<<1)+2];
-      if (code1 >= 0x0334 && code1 <= 0x20da) {
+      if (code1 >= 0x0618 && code1 <= 0x06ea) {
         code1 = _decodeTable[code1%decodeTableSize];
       }
-      if (code2 >= 0x0334 && code2 <= 0x20da) {
+      if (code2 >= 0x0618 && code2 <= 0x06ea) {
         code2 = _decodeTable[code2%decodeTableSize];
       }
       if (code1<16 && code2<16){

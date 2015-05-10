@@ -64,6 +64,7 @@ void main() {
       onMarkdown(null);
     } catch(err) {}finally {
       document.querySelectorAll('.menu > div').style..display = '';
+      document.querySelector('.menu').blur();
     }
   });
   checkSize(null);
