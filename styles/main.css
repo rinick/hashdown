@@ -340,6 +340,7 @@ img.dart {
   right: 0;
   text-align: right;
   z-index: 10;
+  outline: 0;
 }
 .menu > div {
   text-align: center;
@@ -350,11 +351,12 @@ img.dart {
   padding: 0;
   margin-top:2px;
 }
-.menu:hover > div {
+.menu:hover > div, .menu:focus > div {
   display: block;
 }
 .menu > div > label {
   display: block;
+  cursor: pointer;
 }
 .menu > div >label:hover {
   background: #4d90fe;
@@ -382,7 +384,7 @@ img.dart {
   -webkit-border-radius: 2px;
   border-radius: 2px;
   color: #333;
-  cursor: default;
+  cursor: pointer;
   font-family: arial, sans-serif;
   font-size: 12px;
   font-weight: bold;
@@ -390,7 +392,7 @@ img.dart {
   margin: 0;
   min-width: 72px;
   outline: 0;
-  padding: 7px 19px 7px 4px;
+  padding: 4px 19px 4px 4px;
   text-align: center;
   white-space: nowrap;
 }
