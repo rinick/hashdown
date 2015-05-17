@@ -42,15 +42,23 @@ Convert to Base2e15 ( **114 characters** )
 ```
 
 ## Hashdown Tadpole Code
-[Tadpole Code](https://github.com/rinick/tadpolecode) convert text to unicode combining characters, which is saves all your visual space by combining everything into "single" character.
+Tadpole Code convert text to unicode combining characters, which is saves all your visual space by combining everything into "single" character.
 
-Sample Plain Text
+Convert above sample text to Tadpole Code:
 ```
-In URIs a hashmark # introduces the optional fragment near the end of the URL. The generic RFC 3986 syntax for URIs also allows an optional query part introduced by a question mark ?. In URIs with a query and a fragment, the fragment follows the query. Query parts depend on the URI scheme and are evaluated by the server.
+/ًًًًًًًًًًًًًًًًًًًًًًًٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍََََََََََََََََََََََََََََُُُُُُُُُُُُُُُُُُُُُُُُُُُُِِِِِِِِِِِِِِِِِِِِِِِِِِّّّّّّّّّّّّّّّّّّّّّّّّّّّّْْْْْْْْْْْْْْْْْْْْْْْْْْْْٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٕٕٜ۪ٕ۪۪ٕ۪ٕ۪۪۪ٜٕٜٜٕ۪۪۪۪۪ٕٕ۪۪ٕٕٕ۪۪۪ٕ۪ٜٜٕ۪ٜٕٕ۪ٕ۪۪۪۪ٕ۪ٜٕٕٕٜ۪ٜٕٕ۪ٕٕ۪۪ٜ۪ٜٜ۪۪ٜٜٜٜٜ۪ٕٜٕٜۤٓٔٔۤٔۤٓ۠ٔٔٓٔ۠ۤ۠ۤۤۤ۠۠۠ۤ۠ٓ۠ۤٓۤ۠ۤۤ۠ۤٔۤۤ۠ۤۤ۠ٓٓۤ۠ٓۤ۠ٔۤٓٓٓ۠۠۠ۤٔ۠۠ٓٔٔٓٓ۠ٓ۠ۤٓٔٔ۠ۤٓ۠ٓٓۤۤٔۤ۠ۤٓٓ۠ۤ۠ٔ۠ٓۤۤٓﾞ ( It's actually **426** characters!! )
 ```
-Convert to Tadpole Code:
 
-&nbsp; /ًًًًًًًًًًًًًًًًًًًًًًًٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍََََََََََََََََََََََََََََُُُُُُُُُُُُُُُُُُُُُُُُُُُُِِِِِِِِِِِِِِِِِِِِِِِِِِّّّّّّّّّّّّّّّّّّّّّّّّّّّّْْْْْْْْْْْْْْْْْْْْْْْْْْْْٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٕٕٜ۪ٕ۪۪ٕ۪ٕ۪۪۪ٜٕٜٜٕ۪۪۪۪۪ٕٕ۪۪ٕٕٕ۪۪۪ٕ۪ٜٜٕ۪ٜٕٕ۪ٕ۪۪۪۪ٕ۪ٜٕٕٕٜ۪ٜٕٕ۪ٕٕ۪۪ٜ۪ٜٜ۪۪ٜٜٜٜٜ۪ٕٜٕٜۤٓٔٔۤٔۤٓ۠ٔٔٓٔ۠ۤ۠ۤۤۤ۠۠۠ۤ۠ٓ۠ۤٓۤ۠ۤۤ۠ۤٔۤۤ۠ۤۤ۠ٓٓۤ۠ٓۤ۠ٔۤٓٓٓ۠۠۠ۤٔ۠۠ٓٔٔٓٓ۠ٓ۠ۤٓٔٔ۠ۤٓ۠ٓٓۤۤٔۤ۠ۤٓٓ۠ۤ۠ٔ۠ٓۤۤٓﾞ  &nbsp; &nbsp; ( It's actually **426** characters!! )
+
+## Hashdown Hidden Text
+Hidden Text convert text to ASCII control code, which is invisible in most browsers.
+
+Convert above sample text to Hidden Text
+```
+Hidden Text here -><- ( **424** characters! )
+```
+
+The font compatibility of Hidden Text is not as good as Tadpole Code, in Firefox and most text editors these control codes are not hidden.
 
 # API
 
@@ -67,10 +75,10 @@ API to encode and decode hashdown in javascript and dart code
 
       // encoding with options
       var encoded2 = $hashdown.encode('Hashdown is awesome',{
-      	"codec" : $hashdown.BASE2E15,
-      	"markdown" : true,
-      	"protect" :  $hashdown.PROTECT_PASSWORD,
-      	"password" : "mypassword"
+        "codec" : $hashdown.BASE2E15,
+        "markdown" : true,
+        "protect" :  $hashdown.PROTECT_PASSWORD,
+        "password" : "mypassword"
       });
       var decoded2 = $hashdown.decode(encoded2, 'mypassword').text;
     </script>
@@ -79,15 +87,15 @@ API to encode and decode hashdown in javascript and dart code
 ## dart
 
 ```dart
-	import 'package:hashdown/hashdown.dart';
+  import 'package:hashdown/hashdown.dart';
 
-	void main() {
-	  // encode string to hashdown link
-	  String hashdownLink =
-	      Hashdown.encodeString('Hashdown is awesome', new HashdownOptions());
-	  
-	  // encode string to base2e15
-	  String base2e15 = Hashdown.encodeString(
-	      'Hashdown is awesome', new HashdownOptions()..codec = Hashdown.BASE2E15);
-	}
+  void main() {
+    // encode string to hashdown link
+    String hashdownLink =
+        Hashdown.encodeString('Hashdown is awesome', new HashdownOptions());
+    
+    // encode string to tadpole code
+    String tadpolecode = Hashdown.encodeString(
+        'Hashdown is awesome', new HashdownOptions()..codec = Hashdown.TADPOLE);
+  }
 ```
