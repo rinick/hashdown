@@ -10,7 +10,7 @@ import "package:lzma/lzma.dart" as LZMA;
 import 'dart:math';
 import 'rc4.dart';
 import 'tadpole.dart';
-import 'hidden_text.dart';
+import 'shadow.dart';
 
 part 'src/codecs.dart';
 part 'src/compress.dart';

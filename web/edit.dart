@@ -116,7 +116,7 @@ void main() {
   if (codecOption != null) {
     window.localStorage['codec'] = codecOption.value;
     if (codecOption.value == Hashdown.SHADOW) {
-      inputtext.text = t_('Visible text,{Hidden text}More visible text');
+      inputtext.value = t_('Visible text,{Hidden text}More visible text');
     }
     codecOption.selected = true;
   } else if (Base64UrlCodec.url.indexOf('2e15.com') > 0) {
@@ -128,8 +128,8 @@ void main() {
     window.location.hash = '#${selectCode.value}#';
     window.localStorage['codec'] = selectCode.value;
     if (selectCode.value == Hashdown.SHADOW) {
-      if (inputtext.text == '') {
-        inputtext.text = t_('Visible text,{Hidden text}More visible text');
+      if (inputtext.value == '') {
+        inputtext.value = t_('Visible text,{Hidden text}More visible text');
       }
     }
   });

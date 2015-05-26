@@ -3,6 +3,7 @@ import '../lib/hashdown.dart';
 
 void main() {
   String testStr = 'Hashdown is awesome';
+  String testShadowStr = 'Hashdown is {super }awesome';
   String testStrLong =
       '''Dart is an open-source Web programming language developed by Google.
 It was unveiled at the GOTO conference in Aarhus, Denmark, October 10–12, 2011.
@@ -94,7 +95,31 @@ Static type annotations do not affect the runtime semantics of the code. Instead
     String decode3 = Hashdown.decode(encode3).text;
     expect(decode3, testStrLongUnicode);
   });
-  
+  test("Hashdown Shadow", () {
+    HashdownOptions opt = new HashdownOptions()
+      ..codec = Hashdown.SHADOW
+      ..compress = false;
+    String encode1 = Hashdown.encodeString(testStr, opt);
+    String decode1 = Hashdown.decode(encode1).text;
+    expect(decode1, testStr);
+
+    String encode2 = Hashdown.encodeString(testStrLong, opt);
+    String decode2 = Hashdown.decode(encode2).text;
+    expect(decode2, testStrLong);
+
+    String encode3 = Hashdown.encodeString(testStrLongUnicode, opt);
+    String decode3 = Hashdown.decode(encode3).text;
+    expect(decode3, testStrLongUnicode);
+    
+    String encode4 = Hashdown.encodeString(testShadowStr, opt);
+    String decode4 = Hashdown.decode(encode4).text;
+    expect(decode4, testShadowStr);
+    
+    opt.markdown = true;
+    String encode5 = Hashdown.encodeString(testShadowStr, opt);
+    String decode5 = Hashdown.decode(encode5).text;
+    expect(decode5, testShadowStr);
+  });
   test("Salt4 Protection", () {
     HashdownOptions opt = new HashdownOptions()
       ..protect = Hashdown.PROTECT_SALT4
