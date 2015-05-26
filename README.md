@@ -50,15 +50,18 @@ Convert above sample text to Tadpole Code:
 ```
 
 
-## Hashdown Hidden Text
-Hidden Text convert text to ASCII control code, which is invisible in most browsers.
+## Hashdown Shadow Code
+Shadow Code convert text to ASCII control code, which is invisible in most browsers.
 
-Convert above sample text to Hidden Text
+Sample Plain Text
 ```
-Hidden Text here -><- ( **424** characters! )
+Hello {ShadowCode}World
 ```
-
-The font compatibility of Hidden Text is not as good as Tadpole Code, in Firefox and most text editors these control codes are not hidden.
+Convert to Base2e15
+```
+Hello ‍⁫⁭⁭⁫‌⁫‌⁪‌​⁭⁮⁬⁭⁮‍​⁭⁭⁮⁬⁫⁫⁪‌‍World
+```
+The font compatibility of Shadow Code is not as good as Tadpole Code, and it's not suitable for encoding long string.
 
 # API
 
