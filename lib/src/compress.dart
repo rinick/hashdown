@@ -1,9 +1,9 @@
 part of hashdown;
 
 class HashdownCompress {
-  static List<int> compressString(
-      String str, HashdownParams params) {
+  static List<int> compressString(String str, HashdownParams params) {
     List<int> utf8 = UTF8.encode(str);
+    List<int> uft16 = UTF16.encode(str);
     List<int> rslt = utf8;
     int min = utf8.length;
     params.mode = HashdownParams.MODE_UTF8;
@@ -11,32 +11,34 @@ class HashdownCompress {
     if (params.compressed == 1) {
       // assume compression is not needed
       params.compressed = 0;
-      List<int> uft16 = UTF16.encode(str);
-      List<int> utf8c = compress(utf8);
-      List<int> uft16c = compress(uft16);
-      if (min > utf8c.length) {
-        rslt = utf8c;
-        min = utf8c.length;
-        params.compressed = 1;
-      }
-      if (min > uft16c.length) {
-        rslt = uft16c;
-        min = uft16c.length;
-        params.mode = HashdownParams.MODE_UTF16;
-        params.compressed = 1;
-      }
-      if (min > uft16.length) {
-        if (params.protection == HashdownParams.PROTECT_PASSWORD) {
-          // add extra 0 to validate utf16
-          rslt = []
-            ..addAll(uft16)
-            ..add(0);
-        } else {
-          rslt = uft16;
+      // don't compress short string
+      if (utf8.length > 16 && uft16.length > 16) {
+        List<int> utf8c = compress(utf8);
+        List<int> uft16c = compress(uft16);
+        if (min > utf8c.length) {
+          rslt = utf8c;
+          min = utf8c.length;
+          params.compressed = 1;
         }
-        params.mode = HashdownParams.MODE_UTF16;
-        params.compressed = 0;
+        if (min > uft16c.length) {
+          rslt = uft16c;
+          min = uft16c.length;
+          params.mode = HashdownParams.MODE_UTF16;
+          params.compressed = 1;
+        }        
       }
+    }
+    if (min > uft16.length) {
+      if (params.protection == HashdownParams.PROTECT_PASSWORD) {
+        // add extra 0 to validate utf16
+        rslt = []
+          ..addAll(uft16)
+          ..add(0);
+      } else {
+        rslt = uft16;
+      }
+      params.mode = HashdownParams.MODE_UTF16;
+      params.compressed = 0;
     }
     return rslt;
   }

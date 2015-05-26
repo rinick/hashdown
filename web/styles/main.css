@@ -203,28 +203,40 @@ background: linear-gradient(135deg, #f0f0f0 0%,#ffffff 100%); /* W3C */
 }
 .encodeMarkdown{
   position: absolute;
-  font-size: 10px;
+  font-size: 12px;
   right: 4px;
   bottom: 4px;
   line-height: 12px
 }
-.markdownBtn {
+.btnBar {
   position: absolute;
   right: 0;
   top: 2px;
   font-size: 12px;
+}
+.btnBar > button {
   min-width: 0;
   width: 24px;
   height: 24px;
   padding: 0;
   line-height: 0;
+  margin: 0;
+  border-radius:0;
+}
+.btnBar > :first-child { 
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.btnBar > :last-child { 
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 button.decode{
   color: #f00000;
 }
 .vtoolbar > button{
   font-size:13px;
-  min-width: 0;
+  min-width: 30px;
 }
 
 .padding {
@@ -336,8 +348,8 @@ img.dart {
 
 .menu {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 2px;
+  right: 80px;
   text-align: right;
   z-index: 10;
   outline: 0;
@@ -351,7 +363,7 @@ img.dart {
   padding: 0;
   margin-top:2px;
 }
-.menu:hover > div, .menu:focus > div {
+.menu:focus > div {
   display: block;
 }
 .menu > div > label {

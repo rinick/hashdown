@@ -9,6 +9,7 @@ Map<String, String> _lan_zh = {
   'Plain Text': '纯文本',
   'Encoded': '编码结果',
   'Markdown': '标记语言',
+  'Both': '同时显示',
   'markdown.md': 'markdown.zh.md',
   'README.md': 'README.zh.md',
   'Encode Mode:': '编码模式:',
@@ -23,6 +24,7 @@ Map<String, String> _lan_zh = {
   'Encode Markdown': '编码标记语言',
   'Undo': '撤销',
   'TadpoleCode': '蝌蚪码',
+  'ShadowCode': '隐影码',
   'Help': '帮助',
   'Samples': '示例',
   'Open sample will overwrite current text': '打开示例会覆盖当前的内容',
@@ -32,6 +34,7 @@ Map<String, String> _lan_zh = {
   'Wrong password':'密码错误',
   'Input text here and click the encode button':'在这里输入文字，然后点击编码按钮',
   'To decode text, paste it here and click the decode button':'需要解码时把文本粘贴到这里，然后点击解码按钮',
+  'Visible text,{Hidden text}More visible text':'可见文字，{隐藏文字}更多可见文字',
   'Hosted on GitHub':'下载离线版',
   'https://github.com/rinick/hashdown':'https://github.com/rinick/hashdown/archive/gh-pages.zip',
 };
@@ -102,6 +105,7 @@ String getLocaleFilename(String name, String ext) {
     return '$name$ext';
   }
 }
+
 void _translateElement(Element e) {
   String rslt = t(e.text);
   if (rslt != null) e.text = rslt;

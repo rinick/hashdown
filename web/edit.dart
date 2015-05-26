@@ -7,7 +7,6 @@ import 'language.dart';
 import 'util.dart';
 import 'dart:async';
 
-
 InputElement opPass;
 
 SelectElement selectCode;
@@ -21,7 +20,10 @@ TextAreaElement inputtext;
 TextAreaElement outputtext;
 TextAreaElement vinputtext;
 
+DivElement btnBar;
+
 Element encodedTab;
+
 void main() {
   Base64UrlCodec.url = window.location
       .toString()
@@ -31,7 +33,7 @@ void main() {
 
   querySelector('.encodeArrow').onClick.listen(onEncode);
   querySelector('.decodeArrow').onClick.listen(onDecode);
-  querySelector('.markdownBtn').onClick.listen(onMarkdown);
+  querySelectorAll('.btnBar>button').onClick.listen(onMarkdown);
 
   querySelector('.encodeV').onClick.listen(onEncodeV);
   querySelector('.decodeV').onClick.listen(onDecodeV);
@@ -41,7 +43,8 @@ void main() {
   inputtext = querySelector('#inputtext');
   outputtext = querySelector('#outputtext');
   vinputtext = querySelector('#vinputtext');
-  
+
+  btnBar = querySelector('.btnBar');
   encodedTab = querySelector('#encodedTab');
 
   opPass = querySelector('#opPass');
@@ -54,42 +57,91 @@ void main() {
 
   encodedTab.onClick.listen(onClickLink);
 
-  document.querySelectorAll('.menu > div > label').onClick.listen((MouseEvent e) async{
+  document.querySelectorAll('.menu > div > label').onClick
+      .listen((MouseEvent e) {
     String filename = (e.target as LabelElement).text;
-    document.querySelectorAll('.menu > div').style..display = 'none';
-    try {
-      String str = await HttpRequest.getString(getLocaleFilename(filename,'.md'));
-      inputtext.value = str;
-      markdown = false;
-      onMarkdown(null);
-    } catch(err) {}finally {
-      document.querySelectorAll('.menu > div').style..display = '';
-      document.querySelector('.menu').blur();
-    }
+    document.querySelector('.menu').blur();
+    loadMd(getLocaleFilename(filename, '.md'));
   });
   checkSize(null);
   window.onResize.listen(checkSize);
   new Timer(new Duration(milliseconds: 500), initAd);
 
   String hash = window.location.hash;
+  OptionElement codecOption;
   if (hash.length > 1) {
-    if (hash.length < 10) {
-      Element opt =
-          document.querySelector('option[value="${hash.substring(1)}"');
-      if (opt is OptionElement) {
-        opt.selected = true;
+    hash = hash.substring(1);
+    String loadMd;
+    String loadHd;
+    if (hash.contains('#')) {
+      List hashs = hash.split('#');
+      hash = hashs.removeLast();
+      for (String cmd in hashs) {
+        if (cmd.endsWith('.md')) {
+          loadMd = cmd;
+        } else if (cmd.endsWith('.h-d')) {
+          loadHd = cmd;
+        } else {
+          Element elm = document.querySelector('option[value="$cmd"');
+          if (elm != null) {
+            if (elm.classes.contains('codeOpt')) {
+              codecOption = elm;
+            } else {
+              (elm as OptionElement).selected = true;
+            }
+          }
+        }
       }
-    } else {
-      pendingInitData = Base64UrlCodec.url + hash.substring(1);
     }
-  } else {
-    if (Base64UrlCodec.url.indexOf('2e15.com') > 0) {
-      (document.querySelector('option[value="base2e15"') as OptionElement).selected = true;
+    if (loadHd != null) {
+      () async {
+        try {
+          String str = await HttpRequest.getString(loadHd);
+          decodeData(str);
+        } catch (err) {}
+      }();
+    } /* else if (loadMd != null) {
+      
+    }*/
+    else if (hash.length > 0) {
+      decodeData(Base64UrlCodec.url + hash);
     }
   }
+  if (codecOption == null) {
+    String codec = window.localStorage['codec'];
+    if (codec != null) {
+      codecOption = document.querySelector('option[value="$codec"');
+    }
+  }
+  if (codecOption != null) {
+    window.localStorage['codec'] = codecOption.value;
+    if (codecOption.value == Hashdown.SHADOW) {
+      inputtext.text = t_('Visible text,{Hidden text}More visible text');
+    }
+    codecOption.selected = true;
+  } else if (Base64UrlCodec.url.indexOf('2e15.com') > 0) {
+    (document.querySelector(
+        'option[value="base2e15"') as OptionElement).selected = true;
+  }
+
   selectCode.onChange.listen((e) {
-    window.location.hash = '#${selectCode.value}';
+    window.location.hash = '#${selectCode.value}#';
+    window.localStorage['codec'] = selectCode.value;
+    if (selectCode.value == Hashdown.SHADOW) {
+      if (inputtext.text == '') {
+        inputtext.text = t_('Visible text,{Hidden text}More visible text');
+      }
+    }
   });
+}
+
+/// load markdown file
+loadMd(String path) async {
+  try {
+    String str = await HttpRequest.getString(path);
+    inputtext.value = str;
+    onMarkdown(null);
+  } catch (err) {}
 }
 void onPassInput(Event e) {
   if (opPass.value == '') {
@@ -104,25 +156,58 @@ void onPassInput(Event e) {
 bool markdown = false;
 
 void onMarkdown(Event e) {
-  if (markdown) {
-    markdown = false;
+  HtmlElement elm;
+  if (e == null) {
+    if (markdown) {
+      // force a markdown update
+      markdown = false;
+      elm = document.querySelector('.btnBar > .blue');
+    } else {
+      elm = document.querySelector('.btnBar > :last-child');
+    }
+  } else {
+    elm = e.target;
+    if (elm.classes.contains('blue')){
+      return;
+    }
+  }
+   
+  document.querySelector('.btnBar > .blue').classes.remove('blue');
+  elm.classes.add('blue');
+  
+  bool toMarkDown = false;
+  if (elm.text == 'A') {
+    toMarkDown = false;
     querySelector('.markdownbox').style.display = 'none';
+    querySelector('.plainbox').style.display = '';
+  } else if (elm.text == '#'){
+    toMarkDown = true;
+    querySelector('.markdownbox').style.display = '';
+    querySelector('.plainbox').style.display = 'none';
+  } else { //both
+    toMarkDown = true;
+    querySelector('.markdownbox').style.display = '';
+    querySelector('.plainbox').style.display = '';
+  }
+  if (toMarkDown == markdown) {
+    return;
+  }
+  markdown = toMarkDown;
+  if (markdown) {
+     querySelector('.markdownbox > .title').append(btnBar);
+     querySelector('.encodeMarkdown').style.display = '';  
+     querySelector('#markdown').setInnerHtml(markdownToHtml(inputtext.value),
+         validator: markdownValidator);
+     if (inputChangeListener == null) {
+       inputChangeListener = inputtext.onInput.listen(onMarkdownUpdate);
+     }
+  } else {
+    querySelector('.plainbox > .title').append(btnBar);
     querySelector('.encodeMarkdown').style.display = 'none';
     querySelector('#markdown').innerHtml = '';
-    querySelector('.markdownBtn').classes.remove('blue');
     if (inputChangeListener != null) {
       inputChangeListener.cancel();
       inputChangeListener = null;
-    }
-  } else {
-    markdown = true;
-    querySelector('.markdownbox').style.display = '';
-    querySelector('.encodeMarkdown').style.display = '';
-    querySelector('#markdown').setInnerHtml(markdownToHtml(inputtext.value),
-        validator: markdownValidator);
-    querySelector('.markdownBtn').classes.add('blue');
-    if (inputChangeListener == null) {
-      inputChangeListener = inputtext.onInput.listen(onMarkdownUpdate);
     }
   }
 }
@@ -142,16 +227,19 @@ void doMarkdownUpdate() {
       validator: markdownValidator);
 }
 
+RegExp bracesExp = new RegExp('({.*}|[\u000f-\u001e]{4,})');
 void onEncode(Event e) {
   String txt = inputtext.value;
   if (txt != '') {
     HashdownOptions option = getOption(markdown);
-    outputtext.value = Hashdown.encodeString(txt, option);
-    if (option.codec == 'link') {
-      setLink(outputtext.value);
+    String output = Hashdown.encodeString(txt, option);
+    if (option.codec == Hashdown.LINK) {
+      setLink(output);
     } else {
       setLink(null);
     }
+    outputtext.value = output;
+
   }
 }
 void onDecode(Event e) {
@@ -159,7 +247,7 @@ void onDecode(Event e) {
   if (txt != '') {
     HashdownResult result = Hashdown.decode(txt, opPass.value);
     if (result.text == null) {
-      if (result.usePassword){
+      if (result.usePassword) {
         inputtext.value = t_('Wrong password');
       } else {
         inputtext.value = t_('Decoding failed');
@@ -167,7 +255,6 @@ void onDecode(Event e) {
     } else {
       inputtext.value = result.text;
       if (result.useMarkdown) {
-        markdown = false; // force a conversion
         onMarkdown(null);
       }
     }
@@ -197,7 +284,9 @@ void onEncodeV(Event e) {
     if (markdownV) {
       onMarkdownV(null);
     }
-    vinputtext.value = Hashdown.encodeString(txt, getOption(markdownV));
+    HashdownOptions option = getOption(markdownV);
+    String output = Hashdown.encodeString(txt, option);
+    vinputtext.value = output;
     querySelector('.error').text = '';
   }
 }
@@ -280,32 +369,42 @@ HashdownOptions getOption(bool markdown) {
   opt.compress = (opt.protect != Hashdown.PROTECT_RAW);
   return opt;
 }
+
+void decodeData(String str) {
+  if (inited) {
+    if (vmode) {
+      vinputtext.value = str;
+      onDecodeV(null);
+    } else {
+      outputtext.value = str;
+      onDecode(null);
+    }
+    pendingInitData = null;
+  } else {
+    pendingInitData = str;
+  }
+}
+
 bool inited = false;
 bool vmode = false;
 void checkSize(Event e) {
   headerh1.style.display = window.innerWidth < 445 ? 'none' : '';
   if (window.innerWidth < 480) {
-    if (pendingInitData != null) {
-      vinputtext.value = pendingInitData;
-      onDecodeV(null);
-      pendingInitData = null;
-    }
     if (!vmode) {
       document.querySelector('.vbodybox').style.display = '';
       document.querySelector('.bodybox').style.display = 'none';
       vmode = true;
     }
   } else {
-    if (pendingInitData != null) {
-      outputtext.value = pendingInitData;
-      onDecode(null);
-      pendingInitData = null;
-    }
     if (vmode || !inited) {
       document.querySelector('.vbodybox').style.display = 'none';
       document.querySelector('.bodybox').style.display = '';
       vmode = false;
     }
+  }
+  if (pendingInitData != null) {
+    decodeData(pendingInitData);
+    pendingInitData = null;
   }
 }
 

@@ -8,6 +8,7 @@ void main() {
   hashdown['LINK'] = Hashdown.LINK;
   hashdown['BASE2E15'] = Hashdown.BASE2E15;
   hashdown['TADPOLE'] = Hashdown.TADPOLE;
+  hashdown['SHADOW'] = Hashdown.SHADOW;
   hashdown['PROTECT_RAW'] = Hashdown.PROTECT_RAW;
   hashdown['PROTECT_SALT'] = Hashdown.PROTECT_SALT;
   hashdown['PROTECT_SALT4'] = Hashdown.PROTECT_SALT4;

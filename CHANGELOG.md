@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4
+
+- Add hidden text codec
+
 ## 1.0.3
 
 - Improve tadpole code for different font/os

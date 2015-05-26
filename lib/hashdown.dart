@@ -10,6 +10,7 @@ import "package:lzma/lzma.dart" as LZMA;
 import 'dart:math';
 import 'rc4.dart';
 import 'tadpole.dart';
+import 'hidden_text.dart';
 
 part 'src/codecs.dart';
 part 'src/compress.dart';
@@ -59,10 +60,17 @@ class HashdownParams {
     }
   }
   HashdownParams.fromByte(int b) {
-    mode = b & 3;
-    markdown = (b >> 2) & 1;
-    protection = (b >> 3) & 3;
-    compressed = (b >> 5) & 1;
+    if (b & 0xC0 == 0xC0) {
+      mode = b & 3;
+      markdown = (b >> 2) & 1;
+      protection = (b >> 3) & 3;
+      compressed = (b >> 5) & 1;
+    } else {
+      mode = MODE_UTF8;
+      markdown = 0;
+      protection = PROTECT_RAW;
+      compressed = 0;
+    }
   }
   int toByte() {
     return 0xC0 | (compressed << 5) | (protection << 3) | (markdown << 2) | mode;
@@ -99,17 +107,35 @@ class Hashdown {
   static const String LINK = 'link';
   static const String TADPOLE = 'tadpole';
   static const String BASE2E15 = 'base2e15';
+  static const String SHADOW = 'shadow';
   
   static const String PROTECT_RAW = 'raw';
   static const String PROTECT_SALT = 'salt';
   static const String PROTECT_SALT4 = 'salt4';
   static const String PROTECT_PASSWORD = 'password';
   
+  
   static String encodeString(String str, HashdownOptions opt) {
+    if (opt.codec == SHADOW && opt.markdown == false && str.contains(_shadowEncodeReg)) {
+      return _encodeShadowCode(str, opt);
+    }
     HashdownParams params = new HashdownParams.fromOption(opt);
     List<int> data = HashdownCompress.compressString(str, params);
     data = HashdownCrypt.encrypt(data, params, opt.password);
     return XCodec.getCodec(opt.codec).encode(data);
+  }
+  static final RegExp _shadowEncodeReg = new RegExp(r'\{.+?\}');
+  static String _encodeShadowCode(String str, HashdownOptions opt) {
+    String replaceShadowCode(Match m) {
+      String str = m.group(0);
+      if (str == '{{}') return '{';
+      if (str == '{}}') return '}';
+      HashdownParams params = new HashdownParams.fromOption(opt);
+      List<int> data = HashdownCompress.compressString(str.substring(1, str.length - 1), params);
+      data = HashdownCrypt.encrypt(data, params, opt.password);
+      return XCodec.getCodec(SHADOW).encode(data);
+    }
+    return str.replaceAllMapped(_shadowEncodeReg, replaceShadowCode);
   }
   static String encodeFile(HashdownFile file, HashdownOptions opt) {
     HashdownParams params = new HashdownParams.fromOption(opt);
@@ -118,20 +144,35 @@ class Hashdown {
     return XCodec.getCodec(opt.codec).encode(data);
   }
 
+  static final RegExp _tadpoleReg = new RegExp(r'\/[\u0600-\u06ff]{2,}');
+  static final RegExp _shadowReg = new RegExp(r'[\u200b-\u206f]{3,}');
+  
   /// return String, Uint8List, or HashdownFile
   static HashdownResult decode(String str, [String password = '']) {
     str = str.trim();
     List<int> bytes;
     HashdownResult result = new HashdownResult();
     HashdownParams params;
+    bool checkPartialShadowCode = false;
     try {
-      int char0 = str.codeUnitAt(0);
-      if (char0 == 0x2F) {
-        bytes = XCodec.getCodec(TADPOLE).decode(str);
-      } else if (char0 >= 0x3400 && char0 <= 0xD7A3) {
-        bytes = XCodec.getCodec(BASE2E15).decode(str);
+      Match m1 = _shadowReg.firstMatch(str);
+      if (m1 != null) {
+        if (m1.group(0) != str) {
+          checkPartialShadowCode = true;
+        }
+        bytes = XCodec.getCodec(SHADOW).decode(m1.group(0));
       } else {
-        bytes = XCodec.getCodec(LINK).decode(str);
+        Match m2 = _tadpoleReg.firstMatch(str);
+        if (m2 != null) {
+          bytes = XCodec.getCodec(TADPOLE).decode(m2.group(0));
+        } else {
+          int char0 = str.codeUnitAt(0);
+          if (char0 >= 0x3400 && char0 <= 0xD7A3) {
+            bytes = XCodec.getCodec(BASE2E15).decode(str);
+          } else {
+            bytes = XCodec.getCodec(LINK).decode(str);
+          }
+        }
       }
 
       if (bytes == null || bytes.length == 0) {
@@ -139,6 +180,9 @@ class Hashdown {
       }
       
       params = new HashdownParams.fromByte(bytes.last);
+      if (checkPartialShadowCode && params.markdown == 0 && params.mode != HashdownParams.MODE_FILE) {
+        return _decodeShadowCodes(str, password);
+      }
       result.params = params;
       if (result.usePassword && (password == '' || password == null)) {
         return result;
@@ -158,6 +202,42 @@ class Hashdown {
     } catch (e) {
       //print(e);
     }
+    return result;
+  }
+  static final RegExp _shadowSpecialReg = new RegExp(r'[\{\}]');
+  static HashdownResult _decodeShadowCodes(String str, [String password = '']) {
+    str = str.replaceAllMapped(_shadowSpecialReg, (Match m)=>'{${m.group(0)}}');
+    HashdownResult result = new HashdownResult();
+    String decodeShadowCode(Match m) {
+      try {
+        List<int> bytes = XCodec.getCodec(SHADOW).decode(m.group(0));
+        if (bytes == null || bytes.length == 0) {
+          return '';
+        }
+        HashdownParams params = new HashdownParams.fromByte(bytes.last);
+        if (result.params == null) {
+          result.params = params;
+        }
+        
+        if (result.usePassword && (password == '' || password == null)) {
+          return '';
+        }
+        if ((bytes.last & 0xC0) != 0xC0) {
+          return '{${UTF8.decode(bytes)}}';
+        }
+        
+        bytes = HashdownCrypt.decrypt(bytes, params, password);
+        Object data =  HashdownCompress.decompressAuto(bytes, params);
+        if (data is String) {
+          return '{$data}';
+        } else if (data is HashdownFile) {
+          result.file = data;
+        }
+      } catch (err) {
+      }
+      return '';
+    }
+    result.text = str.replaceAllMapped(_shadowReg, decodeShadowCode);
     return result;
   }
 }

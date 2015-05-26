@@ -23,20 +23,6 @@ class TadpoleCode {
 //    return -1;
 //  }
 
-
-//  static const List<int> _encodeTable = const [ //
-//    0x0315, 0x031B, 0x0321, 0x0322, //
-//    0x0327, 0x0328, 0x0334, 0x0335, //
-//    0x0336, 0x0337, 0x0338, 0x0358, //
-//    0xFE20, 0xFE21, 0xFE22, 0xFE23, //
-//  ];
-//  static const List<int> _encodeTable = const [ //
-//    0x064b, 0x064c, 0x064d, 0x064e, 0x064f, //
-//    0x0650, 0x0651, 0x0652, 0x0653, 0x0654, 0x0655, //
-//    0x670, //
-//    0x061a, 0x065c,//
-//    0x06e0, 0x06e4 //
-//  ];
   static const List<int> _encodeTable = const [ //
     0x064b, 0x064c, 0x064d, 0x064e, 0x064f, //
     0x0650, 0x0651, 0x0652, 0x0653, 0x0654, 0x0655, //
@@ -62,7 +48,6 @@ class TadpoleCode {
       out[++i] = _encodeTable[byte>>4];
       out[++i] = _encodeTable[byte&15];
     }
-    //out[++i] = 0x200E;
     out[++i] = 0xFF9E;
     return new String.fromCharCodes(out);
   }

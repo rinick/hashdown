@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="hashdownad" content="enabled">
 <meta name="description" content="Hashdown Editor">
-<meta name="keywords" content="Hashdown,Encode,Decode,Base2e15,Base64,tadpole code,编码,解码,蝌蚪解码,蝌蚪码,加密,安全">
+<meta name="keywords" content="Hashdown,Base2e15,Base64,tadpole code,shadow code,tadpoleCode,shadowCode,hidden text,蝌蚪解码,蝌蚪码,隐藏文字,隐影码,加密,安全">
 <meta name="author" content="Rick Zhou">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
 <div class='sizebox'>
   <div class="headerbox">
     <a href='https://github.com/rinick/hashdown'><img src="hashdown.png">
-    <h1 class='lan'>Hashdown<span style='font-size:10px'> 1.0.3</span></h1></a>
+    <h1 class='lan'>Hashdown<span style='font-size:10px'> 1.0.5</span></h1></a>
     <div class="headeroptions hlayout">
       <div class="selectProtect">
        <label id="saltSelectLabel" for="saltSelect">Salt:</label><br/>
@@ -37,10 +37,10 @@
       <div class="selectCode">
        <label>Encode Mode:</label><br/>
        <select style='width:90px'>
-        <option value="link">Link</option>
-        <option value="base2e15">Base2e15</option>
-        <!--option value="base64">Base64</option-->
-        <option value="tadpole">TadpoleCode</option>
+        <option class="codeOpt" value="link">Link</option>
+        <option class="codeOpt" value="base2e15">Base2e15</option>
+        <option class="codeOpt" value="tadpole">TadpoleCode</option>
+        <option class="codeOpt" value="">ShadowCode</option>
        </select>
       </div>
       <div class="selectLanguage">
@@ -52,10 +52,15 @@
     </div>
   </div>
   <div class="bodybox hlayout" style='display:none'>
-    <div class="inputbox">
+    <div class="inputbox plainbox">
       <div class="title padding">
         <h2 id='inputnavTab' class='lan tabbtn'>Plain Text</h2>
-        <button class='markdownBtn' title='Markdown' >[ ]</button>
+        <div class='btnBar hlayout'>
+          <button class='blue' title='Plain Text' >A</button>
+          <button title='Both' >A|#</button>
+          <button title='Markdown' >#</button>
+        </div>
+        
       </div>
       <div id="inputnav" class="padding" style="top:35px;">
         <textarea id="inputtext" placeholder="Input text here and click the encode button"></textarea>
@@ -64,15 +69,15 @@
     <div class="inputbox markdownbox" style='min-width:320px;display:none'>
       <div class="title padding">
         <h2 class='lan tabbtn'>Markdown</h2>
-<div class="menu" tabindex='0'>
-<label>Samples</label>
-<div>
-  <div class='lan'>Open sample will overwrite current text</div>
-  <label>markdown_basis</label>
-  <label>markdown_style</label>
-  <label>README</label>
-</div>
-</div>
+        <div class="menu" tabindex='0'>
+        <label>Samples</label>
+        <div>
+          <div class='lan'>Open sample will overwrite current text</div>
+          <label>markdown_basis</label>
+          <label>markdown_style</label>
+          <label>README</label>
+        </div>
+        </div>
       </div>
       <div id="markdown" class="padding markdown" style="top:35px">
         
@@ -80,7 +85,7 @@
     </div>
     <div class="dividerbox">
       <button class="red encodeArrow" title="Encode">►
-        <div class='encodeMarkdown' style='display:none'>[ ]</div>
+        <div class='encodeMarkdown' style='display:none'>#</div>
       </button>
       <button class="decode decodeArrow" title="Decode">►</button>
     </div>
@@ -103,7 +108,7 @@
     <div class="vtoolbar">
       <button class='red encodeV'>Encode</button>
       <button class='decodeV decode'>Decode</button>&nbsp;&nbsp;
-      <button class='markdownVBtn' title='Markdown' >[ ]</button>
+      <button class='markdownVBtn' title='Markdown' >#</button>
       <button class='undoV' title='Undo' disabled>↶</button> <br/>
       <h2 class='error errorpos'></h2>
     </div>

@@ -11,6 +11,10 @@ abstract class XCodec {
     if (name.startsWith('tadpole')) {
       return new TadpoleCodec();
     }
+    
+    if (name.startsWith('shadow')) {
+      return new ShadowCodeCodec();
+    }
     return new Base2e15Codec();
   }
   String encode(List<int> bytes);
@@ -77,5 +81,14 @@ class TadpoleCodec implements XCodec {
 
   String encode(List<int> bytes) {
     return TadpoleCode.encode(bytes);
+  }
+}
+class ShadowCodeCodec implements XCodec {
+  List<int> decode(String str) {
+    return ShadowCode.decode(str, [-1, 0xC1]);
+  }
+
+  String encode(List<int> bytes) {
+    return ShadowCode.encode(bytes, [0xC0, 0xC1]);
   }
 }

@@ -18,7 +18,7 @@ void main() {
     if (result.useMarkdown) {
       querySelector('.markdown').setInnerHtml(
           markdownToHtml(result.text),
-          validator: allowAllValidator);
+          validator: markdownValidator);
     } else {
       querySelector('.markdown')
         ..style.whiteSpace = 'pre-wrap'
@@ -45,7 +45,7 @@ void onDecode(Event e) {
     if (result.useMarkdown) {
       querySelector('.markdown').setInnerHtml(
           markdownToHtml(result.text),
-          validator: allowAllValidator);
+          validator: markdownValidator);
     } else {
       querySelector('.markdown')
         ..style.whiteSpace = 'pre-wrap'
