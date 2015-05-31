@@ -64,12 +64,15 @@ In URIs a hashmark # introduces the optional fragment near the end of the URL. T
 ```
 隐藏字符在不同字体下的兼容性不如蝌蚪码，并且不适合用来编码太长的字符。
 
+## 镜像网址
+* http://2e15.com
+* https://rinick.github.io/hashdown
 
-# API
+## API
 
 在javascript或dart中编解码Hashdown
 
-## javascript
+### javascript
 
 ```html
     <script src="http://www.hashdown.net/api.js"></script>
@@ -89,7 +92,7 @@ In URIs a hashmark # introduces the optional fragment near the end of the URL. T
     </script>
 ```
 
-## dart
+### dart
 
 ```dart
 	import 'package:hashdown/hashdown.dart';
