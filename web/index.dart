@@ -4,7 +4,7 @@
 ///  (at your option) any later version.
 
 import 'dart:html';
-import '../lib/hashdown.dart';
+import 'package:hashdown/hashdown.dart';
 import 'language.dart';
 import 'util.dart';
 import 'dart:async';
@@ -62,7 +62,7 @@ void onDecode(Event e) {
 
 void initAd() {
   if (!window.location.protocol.startsWith('http') ||
-      document.querySelector('meta[name="hashdownad"][content="enabled"]') == null) {
+      document.querySelector('meta[name=hashdownad][content=enabled]') == null) {
     return;
   }
   var aboutBox = document.querySelector('.aboutDiv');

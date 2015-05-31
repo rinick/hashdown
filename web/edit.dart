@@ -4,7 +4,7 @@
 ///  (at your option) any later version.
 
 import 'dart:html';
-import '../lib/hashdown.dart';
+import 'package:hashdown/hashdown.dart';
 import 'language.dart';
 import 'util.dart';
 import 'dart:async';
@@ -27,7 +27,7 @@ DivElement btnBar;
 Element encodedTab;
 
 OptionElement shadowCodeOption;
-    
+
 void main() {
   Base64UrlCodec.url = window.location
       .toString()
@@ -59,8 +59,8 @@ void main() {
   saltSelectLabel = querySelector('#saltSelectLabel');
   headerh1 = querySelector('h1');
 
-  shadowCodeOption = document.querySelector('option[value="shadow"');
-  
+  shadowCodeOption = document.querySelector('option[value=shadow]');
+
   encodedTab.onClick.listen(onClickLink);
 
   document.querySelectorAll('.menu > div > label').onClick
@@ -77,18 +77,18 @@ void main() {
   OptionElement codecOption;
   if (hash.length > 1) {
     hash = hash.substring(1);
-    String loadMd;
-    String loadHd;
+    String mdData;
+    String hdData;
     if (hash.contains('#')) {
       List hashs = hash.split('#');
       hash = hashs.removeLast();
       for (String cmd in hashs) {
         if (cmd.endsWith('.md')) {
-          loadMd = cmd;
+          mdData = cmd;
         } else if (cmd.endsWith('.h-d')) {
-          loadHd = cmd;
+          hdData = cmd;
         } else {
-          Element elm = document.querySelector('option[value="$cmd"');
+          Element elm = document.querySelector('option[value=$cmd');
           if (elm != null) {
             if (elm.classes.contains('codeOpt')) {
               codecOption = elm;
@@ -99,13 +99,8 @@ void main() {
         }
       }
     }
-    if (loadHd != null) {
-      () async {
-        try {
-          String str = await HttpRequest.getString(loadHd);
-          decodeData(str);
-        } catch (err) {}
-      }();
+    if (hdData != null) {
+      loadHd(hdData);
     } /* else if (loadMd != null) {
       
     }*/
@@ -116,7 +111,7 @@ void main() {
   if (codecOption == null) {
     String codec = window.localStorage['codec'];
     if (codec != null) {
-      codecOption = document.querySelector('option[value="$codec"');
+      codecOption = document.querySelector('option[value=$codec');
     }
   }
   if (codecOption != null) {
@@ -127,7 +122,7 @@ void main() {
     codecOption.selected = true;
   } else if (Base64UrlCodec.url.indexOf('2e15.com') > 0) {
     (document.querySelector(
-        'option[value="base2e15"') as OptionElement).selected = true;
+        'option[value=base2e15') as OptionElement).selected = true;
   }
 
   selectCode.onChange.listen((e) {
@@ -140,7 +135,12 @@ void main() {
     }
   });
 }
-
+loadHd(String path) async {
+  try {
+    String str = await HttpRequest.getString(path);
+    decodeData(str);
+  } catch (err) {}
+}
 /// load markdown file
 loadMd(String path) async {
   try {
@@ -173,24 +173,25 @@ void onMarkdown(Event e) {
     }
   } else {
     elm = e.target;
-    if (elm.classes.contains('blue')){
+    if (elm.classes.contains('blue')) {
       return;
     }
   }
-   
+
   document.querySelector('.btnBar > .blue').classes.remove('blue');
   elm.classes.add('blue');
-  
+
   bool toMarkDown = false;
   if (elm.text == 'A') {
     toMarkDown = false;
     querySelector('.markdownbox').style.display = 'none';
     querySelector('.plainbox').style.display = '';
-  } else if (elm.text == '#'){
+  } else if (elm.text == '#') {
     toMarkDown = true;
     querySelector('.markdownbox').style.display = '';
     querySelector('.plainbox').style.display = 'none';
-  } else { //both
+  } else {
+    //both
     toMarkDown = true;
     querySelector('.markdownbox').style.display = '';
     querySelector('.plainbox').style.display = '';
@@ -200,13 +201,14 @@ void onMarkdown(Event e) {
   }
   markdown = toMarkDown;
   if (markdown) {
-     querySelector('.markdownbox > .title').append(btnBar);
-     querySelector('.encodeMarkdown').style.display = '';  
-     querySelector('#markdown').setInnerHtml(markdownToHtml(inputtext.value, shadowCodeOption.selected),
-         validator: markdownValidator);
-     if (inputChangeListener == null) {
-       inputChangeListener = inputtext.onInput.listen(onMarkdownUpdate);
-     }
+    querySelector('.markdownbox > .title').append(btnBar);
+    querySelector('.encodeMarkdown').style.display = '';
+    querySelector('#markdown').setInnerHtml(
+        markdownToHtml(inputtext.value, shadowCodeOption.selected),
+        validator: markdownValidator);
+    if (inputChangeListener == null) {
+      inputChangeListener = inputtext.onInput.listen(onMarkdownUpdate);
+    }
   } else {
     querySelector('.plainbox > .title').append(btnBar);
     querySelector('.encodeMarkdown').style.display = 'none';
@@ -229,7 +231,8 @@ void onMarkdownUpdate(Event e) {
 void doMarkdownUpdate() {
   updateMarkdownTimer = null;
   if (inputChangeListener == null) return;
-  querySelector('#markdown').setInnerHtml(markdownToHtml(inputtext.value, shadowCodeOption.selected),
+  querySelector('#markdown').setInnerHtml(
+      markdownToHtml(inputtext.value, shadowCodeOption.selected),
       validator: markdownValidator);
 }
 
@@ -245,7 +248,6 @@ void onEncode(Event e) {
       setLink(null);
     }
     outputtext.value = output;
-
   }
 }
 String onDecode(Event e) {
@@ -347,7 +349,8 @@ void onMarkdownV(Event e) {
     markdownV = true;
     querySelector('#vmarkdown')
       ..style.display = ''
-      ..setInnerHtml(markdownToHtml(vinputtext.value, shadowCodeOption.selected),
+      ..setInnerHtml(
+          markdownToHtml(vinputtext.value, shadowCodeOption.selected),
           validator: markdownValidator);
     querySelector('.markdownVBtn').classes.add('blue');
     querySelector('.encodeV').text = t_('Encode Markdown');
@@ -376,7 +379,10 @@ HashdownOptions getOption(String str, bool markdown) {
   } else {
     opt.protect = saltSelect.value;
   }
-  if (str.length < 16 && opt.codec == Hashdown.SHADOW && opt.markdown == false && opt.protect == Hashdown.PROTECT_SALT) {
+  if (str.length < 16 &&
+      opt.codec == Hashdown.SHADOW &&
+      opt.markdown == false &&
+      opt.protect == Hashdown.PROTECT_SALT) {
     // optimize shadow code for short string, don't use default 1 byte salt
     opt.protect = Hashdown.PROTECT_RAW;
   }
@@ -397,11 +403,10 @@ void decodeData(String str) {
   } else {
     pendingInitData = str;
   }
-
 }
 void changeCodec(String codec) {
   if (codec != null) {
-    Element elm = document.querySelector('option[value="$codec"');
+    Element elm = document.querySelector('option[value=$codec');
     if (elm != null) {
       (elm as OptionElement).selected = true;
     }
@@ -434,7 +439,7 @@ void initAd() {
   inited = true;
   checkSize(null);
   if (!window.location.protocol.startsWith('http') ||
-      document.querySelector('meta[name="hashdownad"][content="enabled"]') ==
+      document.querySelector('meta[name=hashdownad][content=enabled]') ==
           null) {
     return;
   }
