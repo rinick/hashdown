@@ -1,3 +1,8 @@
+///  Hashdown is free software: you can redistribute it and/or modify
+///  it under the terms of the GNU General Public License as published by
+///  the Free Software Foundation, either version 3 of the License, or
+///  (at your option) any later version.
+
 library language;
 
 import 'dart:html';
@@ -24,7 +29,7 @@ Map<String, String> _lan_zh = {
   'Encode Markdown': '编码标记语言',
   'Undo': '撤销',
   'TadpoleCode': '蝌蚪码',
-  'ShadowCode': '隐影码',
+  'ShadowCode': '隐形码',
   'Help': '帮助',
   'Samples': '示例',
   'Open sample will overwrite current text': '打开示例会覆盖当前的内容',
@@ -34,7 +39,7 @@ Map<String, String> _lan_zh = {
   'Wrong password':'密码错误',
   'Input text here and click the encode button':'在这里输入文字，然后点击编码按钮',
   'To decode text, paste it here and click the decode button':'需要解码时把文本粘贴到这里，然后点击解码按钮',
-  'Visible text,{Hidden text}More visible text':'可见文字，{隐藏文字}更多可见文字',
+  'Visible text,{Hidden text}More visible text':'可见文本，{隐形文本}更多可见文本',
   'Hosted on GitHub':'下载离线版',
   'https://github.com/rinick/hashdown':'https://github.com/rinick/hashdown/archive/gh-pages.zip',
 };

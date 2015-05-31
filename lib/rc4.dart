@@ -1,5 +1,7 @@
-// Copyright (c) 2015, Rick Zhou. All rights reserved. Use of this source code
-// is governed by a BSD-style license that can be found in the LICENSE file.
+///  Hashdown is free software: you can redistribute it and/or modify
+///  it under the terms of the GNU General Public License as published by
+///  the Free Software Foundation, either version 3 of the License, or
+///  (at your option) any later version.
 
 library hashdown.rc4;
 

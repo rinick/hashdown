@@ -1,5 +1,7 @@
-// Copyright (c) 2015, Rick Zhou. All rights markdown. Use of this source code
-// is governed by a BSD-style license that can be found in the LICENSE file.
+///  Hashdown is free software: you can redistribute it and/or modify
+///  it under the terms of the GNU General Public License as published by
+///  the Free Software Foundation, either version 3 of the License, or
+///  (at your option) any later version.
 
 library hashdown;
 import 'dart:typed_data';
@@ -90,6 +92,7 @@ class HashdownOptions {
 }
 
 class HashdownResult {
+  String codec;
   HashdownParams params = HashdownParams.defaultParams;
   String text;
   HashdownFile file;
@@ -116,7 +119,7 @@ class Hashdown {
   
   
   static String encodeString(String str, HashdownOptions opt) {
-    if (opt.codec == SHADOW && opt.markdown == false && str.contains(_shadowEncodeReg)) {
+    if (opt.codec == SHADOW && str.contains(shadowEncodeReg)) {
       return _encodeShadowCode(str, opt);
     }
     HashdownParams params = new HashdownParams.fromOption(opt);
@@ -124,18 +127,25 @@ class Hashdown {
     data = HashdownCrypt.encrypt(data, params, opt.password);
     return XCodec.getCodec(opt.codec).encode(data);
   }
-  static final RegExp _shadowEncodeReg = new RegExp(r'\{.+?\}');
+  static final RegExp shadowEncodeReg = new RegExp(r'(^|[^\\])\{[.\u0000-\u00ff]*?[^\\]\}');
   static String _encodeShadowCode(String str, HashdownOptions opt) {
     String replaceShadowCode(Match m) {
       String str = m.group(0);
-      if (str == '{{}') return '{';
-      if (str == '{}}') return '}';
+      String firstChar;
+      if (str.startsWith('{')){
+        firstChar = '';
+        str = str.substring(1, str.length - 1);
+      } else {
+        firstChar = str.substring(0,1);
+        str = str.substring(2, str.length - 1);
+      }
+      str = str.replaceAll('\\{', '{').replaceAll('\\}', '}');
       HashdownParams params = new HashdownParams.fromOption(opt);
-      List<int> data = HashdownCompress.compressString(str.substring(1, str.length - 1), params);
+      List<int> data = HashdownCompress.compressString(str, params);
       data = HashdownCrypt.encrypt(data, params, opt.password);
-      return XCodec.getCodec(SHADOW).encode(data);
+      return '$firstChar${XCodec.getCodec(SHADOW).encode(data)}';
     }
-    return str.replaceAllMapped(_shadowEncodeReg, replaceShadowCode);
+    return str.replaceAllMapped(shadowEncodeReg, replaceShadowCode).replaceAll('\\{', '{').replaceAll('\\}', '}');
   }
   static String encodeFile(HashdownFile file, HashdownOptions opt) {
     HashdownParams params = new HashdownParams.fromOption(opt);
@@ -161,16 +171,20 @@ class Hashdown {
           checkPartialShadowCode = true;
         }
         bytes = XCodec.getCodec(SHADOW).decode(m1.group(0));
+        result.codec = SHADOW;
       } else {
         Match m2 = _tadpoleReg.firstMatch(str);
         if (m2 != null) {
           bytes = XCodec.getCodec(TADPOLE).decode(m2.group(0));
+          result.codec = TADPOLE;
         } else {
           int char0 = str.codeUnitAt(0);
           if (char0 >= 0x3400 && char0 <= 0xD7A3) {
             bytes = XCodec.getCodec(BASE2E15).decode(str);
+            result.codec = BASE2E15;
           } else {
             bytes = XCodec.getCodec(LINK).decode(str);
+            result.codec = LINK;
           }
         }
       }
@@ -180,7 +194,7 @@ class Hashdown {
       }
       
       params = new HashdownParams.fromByte(bytes.last);
-      if (checkPartialShadowCode && params.markdown == 0 && params.mode != HashdownParams.MODE_FILE) {
+      if (checkPartialShadowCode && params.mode != HashdownParams.MODE_FILE) {
         return _decodeShadowCodes(str, password);
       }
       result.params = params;
@@ -204,10 +218,11 @@ class Hashdown {
     }
     return result;
   }
-  static final RegExp _shadowSpecialReg = new RegExp(r'[\{\}]');
   static HashdownResult _decodeShadowCodes(String str, [String password = '']) {
-    str = str.replaceAllMapped(_shadowSpecialReg, (Match m)=>'{${m.group(0)}}');
+    str = str.replaceAll('{', '\\{').replaceAll('}', '\\}');
     HashdownResult result = new HashdownResult();
+    result.codec = SHADOW;
+    bool getParam = true;
     String decodeShadowCode(Match m) {
       try {
         List<int> bytes = XCodec.getCodec(SHADOW).decode(m.group(0));
@@ -215,8 +230,9 @@ class Hashdown {
           return '';
         }
         HashdownParams params = new HashdownParams.fromByte(bytes.last);
-        if (result.params == null) {
+        if (getParam) {
           result.params = params;
+          getParam = false;
         }
         
         if (result.usePassword && (password == '' || password == null)) {
@@ -229,7 +245,7 @@ class Hashdown {
         bytes = HashdownCrypt.decrypt(bytes, params, password);
         Object data =  HashdownCompress.decompressAuto(bytes, params);
         if (data is String) {
-          return '{$data}';
+          return '{${data.replaceAll("}","\\}").replaceAll("{","\\{")}}';
         } else if (data is HashdownFile) {
           result.file = data;
         }

@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'dart:js' as Js;
+import 'package:hashdown/hashdown.dart';
 
 class _AllowAllValidator implements NodeValidator {
   bool allowsAttribute(Element element, String attributeName, String value) {
@@ -17,13 +18,49 @@ class _MarkdownValidator implements NodeValidator {
     return !attributeName.startsWith('on');
   }
   bool allowsElement(Element element) {
-    return  (element is! ScriptElement && element is! IFrameElement && element is! MetaElement && element is! ObjectElement && element is!EmbedElement);
+    return (element is! ScriptElement &&
+        element is! IFrameElement &&
+        element is! MetaElement &&
+        element is! ObjectElement &&
+        element is! EmbedElement);
   }
 }
 
 _MarkdownValidator markdownValidator = new _MarkdownValidator();
 
+RegExp _processShadowCodeReg = new RegExp(r'(\\\{|\\\}|\{|\})');
+String markdownToHtml(String str, bool processShadowCode) {
+  bool closeQ = false;
+  String _processShadowCode(Match m) {
+    switch (m.group(0)) {
+      case '\\{':
+        return '\\{';
+      case '\\}':
+        return '\\}';
+      case '{':
+        if (!closeQ) {
+          closeQ = true;
+          return '\n\n';
+        }
+        return '{';
+      case '}':
+        if (closeQ) {
+          closeQ = false;
+          if (m.end != m.input.length) {
+            return '\n\n>';
+          }
+          return '\n\n';
+        }
+        return '}';
+    }
+    return '';
+  }
 
-String markdownToHtml(String str){
+  if (processShadowCode && str.contains(Hashdown.shadowEncodeReg)) {
+    if (!str.startsWith('{')) {
+      str = '>$str';
+    }
+    str = str.replaceAllMapped(_processShadowCodeReg, _processShadowCode);
+  }
   return Js.context.callMethod('marked', [str]);
 }

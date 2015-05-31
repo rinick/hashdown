@@ -1,5 +1,7 @@
-// Copyright (c) 2015, <your name>. All rights reserved. Use of this source code
-// is governed by a BSD-style license that can be found in the LICENSE file.
+///  Hashdown is free software: you can redistribute it and/or modify
+///  it under the terms of the GNU General Public License as published by
+///  the Free Software Foundation, either version 3 of the License, or
+///  (at your option) any later version.
 
 import 'dart:html';
 import '../lib/hashdown.dart';
@@ -24,6 +26,8 @@ DivElement btnBar;
 
 Element encodedTab;
 
+OptionElement shadowCodeOption;
+    
 void main() {
   Base64UrlCodec.url = window.location
       .toString()
@@ -55,6 +59,8 @@ void main() {
   saltSelectLabel = querySelector('#saltSelectLabel');
   headerh1 = querySelector('h1');
 
+  shadowCodeOption = document.querySelector('option[value="shadow"');
+  
   encodedTab.onClick.listen(onClickLink);
 
   document.querySelectorAll('.menu > div > label').onClick
@@ -196,7 +202,7 @@ void onMarkdown(Event e) {
   if (markdown) {
      querySelector('.markdownbox > .title').append(btnBar);
      querySelector('.encodeMarkdown').style.display = '';  
-     querySelector('#markdown').setInnerHtml(markdownToHtml(inputtext.value),
+     querySelector('#markdown').setInnerHtml(markdownToHtml(inputtext.value, shadowCodeOption.selected),
          validator: markdownValidator);
      if (inputChangeListener == null) {
        inputChangeListener = inputtext.onInput.listen(onMarkdownUpdate);
@@ -223,7 +229,7 @@ void onMarkdownUpdate(Event e) {
 void doMarkdownUpdate() {
   updateMarkdownTimer = null;
   if (inputChangeListener == null) return;
-  querySelector('#markdown').setInnerHtml(markdownToHtml(inputtext.value),
+  querySelector('#markdown').setInnerHtml(markdownToHtml(inputtext.value, shadowCodeOption.selected),
       validator: markdownValidator);
 }
 
@@ -231,7 +237,7 @@ RegExp bracesExp = new RegExp('({.*}|[\u000f-\u001e]{4,})');
 void onEncode(Event e) {
   String txt = inputtext.value;
   if (txt != '') {
-    HashdownOptions option = getOption(markdown);
+    HashdownOptions option = getOption(txt, markdown);
     String output = Hashdown.encodeString(txt, option);
     if (option.codec == Hashdown.LINK) {
       setLink(output);
@@ -242,7 +248,7 @@ void onEncode(Event e) {
 
   }
 }
-void onDecode(Event e) {
+String onDecode(Event e) {
   String txt = outputtext.value;
   if (txt != '') {
     HashdownResult result = Hashdown.decode(txt, opPass.value);
@@ -254,11 +260,14 @@ void onDecode(Event e) {
       }
     } else {
       inputtext.value = result.text;
+      changeCodec(result.codec);
       if (result.useMarkdown) {
         onMarkdown(null);
       }
     }
+    return result.codec;
   }
+  return null;
 }
 
 String link;
@@ -281,12 +290,12 @@ void onEncodeV(Event e) {
   String txt = vinputtext.value;
   if (txt != '') {
     logHis(txt);
+    HashdownOptions option = getOption(txt, markdownV);
+    String output = Hashdown.encodeString(txt, option);
+    vinputtext.value = output;
     if (markdownV) {
       onMarkdownV(null);
     }
-    HashdownOptions option = getOption(markdownV);
-    String output = Hashdown.encodeString(txt, option);
-    vinputtext.value = output;
     querySelector('.error').text = '';
   }
 }
@@ -303,6 +312,7 @@ void onDecodeV(Event e) {
     } else {
       logHis(txt);
       vinputtext.value = result.text;
+      changeCodec(result.codec);
       if (result.useMarkdown) {
         markdownV = false; // force a conversion
         onMarkdownV(null);
@@ -337,7 +347,7 @@ void onMarkdownV(Event e) {
     markdownV = true;
     querySelector('#vmarkdown')
       ..style.display = ''
-      ..setInnerHtml(markdownToHtml(vinputtext.value),
+      ..setInnerHtml(markdownToHtml(vinputtext.value, shadowCodeOption.selected),
           validator: markdownValidator);
     querySelector('.markdownVBtn').classes.add('blue');
     querySelector('.encodeV').text = t_('Encode Markdown');
@@ -356,7 +366,7 @@ void onUndoV(Event e) {
   }
 }
 
-HashdownOptions getOption(bool markdown) {
+HashdownOptions getOption(String str, bool markdown) {
   HashdownOptions opt = new HashdownOptions();
   opt.markdown = markdown;
   opt.password = opPass.value;
@@ -365,6 +375,10 @@ HashdownOptions getOption(bool markdown) {
     opt.protect = Hashdown.PROTECT_PASSWORD;
   } else {
     opt.protect = saltSelect.value;
+  }
+  if (str.length < 16 && opt.codec == Hashdown.SHADOW && opt.markdown == false && opt.protect == Hashdown.PROTECT_SALT) {
+    // optimize shadow code for short string, don't use default 1 byte salt
+    opt.protect = Hashdown.PROTECT_RAW;
   }
   opt.compress = (opt.protect != Hashdown.PROTECT_RAW);
   return opt;
@@ -383,8 +397,16 @@ void decodeData(String str) {
   } else {
     pendingInitData = str;
   }
-}
 
+}
+void changeCodec(String codec) {
+  if (codec != null) {
+    Element elm = document.querySelector('option[value="$codec"');
+    if (elm != null) {
+      (elm as OptionElement).selected = true;
+    }
+  }
+}
 bool inited = false;
 bool vmode = false;
 void checkSize(Event e) {

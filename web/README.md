@@ -57,7 +57,7 @@ Sample Plain Text
 ```
 Hello {ShadowCode}World
 ```
-Convert to Base2e15
+Convert to Shadow Code
 ```
 Hello ‍⁫⁭⁭⁫‌⁫‌⁪‌​⁭⁮⁬⁭⁮‍​⁭⁭⁮⁬⁫⁫⁪‌‍World
 ```

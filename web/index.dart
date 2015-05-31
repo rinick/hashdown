@@ -1,3 +1,8 @@
+///  Hashdown is free software: you can redistribute it and/or modify
+///  it under the terms of the GNU General Public License as published by
+///  the Free Software Foundation, either version 3 of the License, or
+///  (at your option) any later version.
+
 import 'dart:html';
 import '../lib/hashdown.dart';
 import 'language.dart';
@@ -17,7 +22,7 @@ void main() {
   }else if (result.text != null) {
     if (result.useMarkdown) {
       querySelector('.markdown').setInnerHtml(
-          markdownToHtml(result.text),
+          markdownToHtml(result.text, false),
           validator: markdownValidator);
     } else {
       querySelector('.markdown')
@@ -44,7 +49,7 @@ void onDecode(Event e) {
   } else {
     if (result.useMarkdown) {
       querySelector('.markdown').setInnerHtml(
-          markdownToHtml(result.text),
+          markdownToHtml(result.text, false),
           validator: markdownValidator);
     } else {
       querySelector('.markdown')
