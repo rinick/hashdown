@@ -1,5 +1,5 @@
 name: 'hashdown'
-version: 1.0.5
+version: 1.0.6
 description: >
   Hashdown is an  file/text-to-text encoding scheme designed for safe and compact data sharing
 author: Rick Zhou <rinick@gmail.com>

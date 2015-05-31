@@ -127,7 +127,7 @@ class Hashdown {
     data = HashdownCrypt.encrypt(data, params, opt.password);
     return XCodec.getCodec(opt.codec).encode(data);
   }
-  static final RegExp shadowEncodeReg = new RegExp(r'(^|[^\\])\{[.\u0000-\u00ff]*?[^\\]\}');
+  static final RegExp shadowEncodeReg = new RegExp(r'(^|[^\\])\{[^\u0000]*?[^\\]\}');
   static String _encodeShadowCode(String str, HashdownOptions opt) {
     String replaceShadowCode(Match m) {
       String str = m.group(0);

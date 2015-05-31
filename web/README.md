@@ -63,11 +63,11 @@ Hello ‍⁫⁭⁭⁫‌⁫‌⁪‌​⁭⁮⁬⁭⁮‍​⁭⁭⁮⁬⁫⁫�
 ```
 The font compatibility of Shadow Code is not as good as Tadpole Code, and it's not suitable for encoding long string.
 
-# API
+## API
 
 API to encode and decode hashdown in javascript and dart code
 
-## javascript
+### javascript
 
 ```html
     <script src="http://www.hashdown.net/api.js"></script>
@@ -87,7 +87,7 @@ API to encode and decode hashdown in javascript and dart code
     </script>
 ```
 
-## dart
+### dart
 
 ```dart
   import 'package:hashdown/hashdown.dart';
@@ -102,3 +102,9 @@ API to encode and decode hashdown in javascript and dart code
         'Hashdown is awesome', new HashdownOptions()..codec = Hashdown.TADPOLE);
   }
 ```
+
+## Libraries used in Hashdown
+
+https://pub.dartlang.org/packages/lzma
+
+https://github.com/chjj/marked

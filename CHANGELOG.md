@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.6
+
+- Bug fixing
+
+## 1.0.5
+
+- Rename hidden text to shadow code
+
 ## 1.0.4
 
 - Add hidden text codec
@@ -15,3 +23,4 @@
 ## 1.0.1
 
 - Support Markdown and Hashdown Link
+

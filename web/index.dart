@@ -10,11 +10,36 @@ import 'util.dart';
 import 'dart:async';
 
 String hash;
-void main() {
+main() async{
   initLanguage();
 
   hash = window.location.hash;
-  HashdownResult result = Hashdown.decode(hash, '');
+  String resultStr;
+  try {
+    if (hash.endsWith('.md')) {
+      String path = hash.substring(1);
+      if (!path.startsWith('http')) {
+        path = getLocaleFilename(path.substring(0, path.length - 3), '.md');
+      }
+      resultStr = await HttpRequest.getString(path);
+     } else if (hash.endsWith('.h-d')){
+       String path = hash.substring(1);
+       hash = await HttpRequest.getString(path);
+     }
+  } catch(err) {
+    
+  }
+ 
+  HashdownResult result;
+  if (resultStr != null) {
+    // no need to decode, already load the md file
+    result = new HashdownResult();
+    result.params.markdown = 1;
+    result.text = resultStr;
+  } else {
+    result = Hashdown.decode(hash, '');
+  }
+  
   if (result.usePassword) {
     // need password
     querySelector('.viewerpassbox').style.display = '';

@@ -104,7 +104,7 @@ String t_(String str) {
   return str;
 }
 String getLocaleFilename(String name, String ext) {
-  if (_lan == _lan_zh) {
+  if (_lan == _lan_zh && !name.endsWith('.zh')) {
     return '$name.zh$ext';
   } else {
     return '$name$ext';
