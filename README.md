@@ -102,3 +102,9 @@ API to encode and decode hashdown in javascript and dart code
         'Hashdown is awesome', new HashdownOptions()..codec = Hashdown.TADPOLE);
   }
 ```
+
+# Libraries used in Hashdown
+
+https://pub.dartlang.org/packages/lzma
+
+https://github.com/chjj/marked
