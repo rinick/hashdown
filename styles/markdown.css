@@ -26,7 +26,7 @@
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
   -webkit-margin-before: 20px;
-  -webkit-margin-after: 20px;
+  -webkit-margin-after: 12px;
   cursor: text;
   position: relative; }
  
@@ -254,7 +254,9 @@
 .markdown pre code {
   margin: 0;
   padding: 0;
-  white-space: pre;
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
   border: none;
   background: transparent; }
  
