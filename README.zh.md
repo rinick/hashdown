@@ -66,7 +66,7 @@ In URIs a hashmark # introduces the optional fragment near the end of the URL. T
 
 ## 镜像网址
 * http://2e15.com
-* https://rinick.github.io/hashdown
+* https://hashdown.github.io
 
 ## API
 
