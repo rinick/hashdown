@@ -133,6 +133,7 @@ loadHd(String path) async {
     decodeData(str);
   } catch (err) {}
 }
+bool _loadingMd = false;
 /// load markdown file
 loadMd(String path) async {
   try {
@@ -141,8 +142,10 @@ loadMd(String path) async {
     }
     String str = await HttpRequest.getString(path);
     inputtext.value = str;
-    nullMarkDown = true;
+    nullToMarkDown = true;
+    _loadingMd = true;
     onMarkdown(null);
+    _loadingMd = false;
   } catch (err) {}
 }
 void onPassInput(Event e) {
@@ -157,11 +160,11 @@ void onPassInput(Event e) {
 
 bool markdown = false;
 
-bool nullMarkDown = false;
+bool nullToMarkDown = false;
 void onMarkdown(Event e) {
   HtmlElement elm;
   if (e == null) {
-    if (nullMarkDown) {
+    if (nullToMarkDown) {
       if (markdown) {
         // force a markdown update
         markdown = false;
@@ -205,7 +208,7 @@ void onMarkdown(Event e) {
     querySelector('.markdownbox > .title').append(btnBar);
     querySelector('.encodeMarkdown').style.display = '';
     querySelector('#markdown').setInnerHtml(
-        markdownToHtml(inputtext.value, shadowCodeOption.selected),
+        markdownToHtml(inputtext.value, shadowCodeOption.selected && !_loadingMd),
         validator: markdownValidator);
     if (inputChangeListener == null) {
       inputChangeListener = inputtext.onInput.listen(onMarkdownUpdate);
@@ -265,10 +268,10 @@ String onDecode(Event e) {
       inputtext.value = result.text;
       changeCodec(result.codec);
       if (result.useMarkdown) {
-        nullMarkDown = true;
+        nullToMarkDown = true;
         onMarkdown(null);
       } else if (querySelector('.plainbox').style.display == 'none') {
-        nullMarkDown = false;
+        nullToMarkDown = false;
         onMarkdown(null);
       }
     }
