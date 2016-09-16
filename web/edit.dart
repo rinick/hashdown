@@ -71,6 +71,7 @@ void main() {
 
   String hash = window.location.hash;
   OptionElement codecOption;
+
   if (hash.length > 1) {
     hash = hash.substring(1);
     String mdData;
@@ -99,7 +100,18 @@ void main() {
         decodeData(Base64UrlCodec.url + hash);
       }
     }
+  } else {
+    String lastStr = window.localStorage['last'];
+    if (lastStr != '') {
+      inputtext.value = lastStr;
+      nullToMarkDown = true;
+      _loadingMd = true;
+      onMarkdown(null);
+      _loadingMd = false;
+    }
   }
+
+
   if (codecOption == null) {
     String codec = window.localStorage['codec'];
     if (codec != null) {
@@ -234,6 +246,7 @@ void onMarkdownUpdate(Event e) {
 }
 void doMarkdownUpdate() {
   updateMarkdownTimer = null;
+  window.localStorage['last'] = inputtext.value;
   if (inputChangeListener == null) return;
   querySelector('#markdown').setInnerHtml(
       markdownToHtml(inputtext.value, shadowCodeOption.selected),
@@ -491,6 +504,16 @@ void initAd() {
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>''', validator: allowAllValidator);
+    DivElement closeAd = document.createElement('div');
+    closeAd.style..left='733px'..position='absolute'..bottom='70px'..border='solid 1px black'..cursor='pointer'..padding='0 1px';
+    closeAd.text = 'x';
+    document.querySelector('.sizebox').append(closeAd);
+    closeAd.onClick.listen((e) {
+      closeAd.remove();
+      adDiv.remove();
+      document.querySelector('.bodybox').style.bottom = '0';
+      document.querySelector('.vbodybox').style.bottom = '0';
+    });
   }
   document.querySelector('.sizebox').append(adDiv);
 }
