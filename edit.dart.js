@@ -8376,7 +8376,7 @@ z=J.y(v)
 if(J.ae(z.gi(v),0))if(z.bs(v,".md"))E.c3(v)
 else if(z.bs(v,".h-d"))E.cG(v)
 else E.dL(C.c.j($.cV,v))}else{p=window.localStorage.getItem("last")
-if(p!==""){J.a4($.aa,p)
+if(p!==""&&p!=null){J.a4($.aa,p)
 $.c5=!0
 $.c0=!0
 E.cJ(null)
@@ -8450,6 +8450,7 @@ if(J.l(y.gaW(z),"A")){y=document.querySelector(".markdownbox").style
 y.display="none"
 y=document.querySelector(".plainbox").style
 y.display=""
+window.localStorage.setItem("last","")
 x=!1}else{if(J.l(y.gaW(z),"#")){y=document.querySelector(".markdownbox").style
 y.display=""
 y=document.querySelector(".plainbox").style
