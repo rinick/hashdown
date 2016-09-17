@@ -102,7 +102,7 @@ void main() {
     }
   } else {
     String lastStr = window.localStorage['last'];
-    if (lastStr != '') {
+    if (lastStr != '' && lastStr != null) {
       inputtext.value = lastStr;
       nullToMarkDown = true;
       _loadingMd = true;
@@ -202,6 +202,8 @@ void onMarkdown(Event e) {
     toMarkDown = false;
     querySelector('.markdownbox').style.display = 'none';
     querySelector('.plainbox').style.display = '';
+    // clear storage
+    window.localStorage['last'] = '';
   } else if (elm.text == '#') {
     toMarkDown = true;
     querySelector('.markdownbox').style.display = '';
