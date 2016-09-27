@@ -4,7 +4,7 @@ Hashdown在线工具可以转换文本，使之更易于被分享
 
 http://www.hashdown.net/edit.html
 
-支持三种编码模式
+支持四种编码模式
 
 ## Hashdown链接
 
