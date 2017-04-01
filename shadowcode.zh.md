@@ -4,7 +4,7 @@
 `a{b}c` `a⁪​⁫c` b被隐藏在a和c之间
  ↑━解码━┛
 </span>
-编解码工具: http://www.hashdown.net/edit.html#shadow#
+编解码工具: https://hashdown.github.io/edit.html#shadow#
 
 ####示例:
 打开编解码工具以后把这个文本贴到左边的输入框:
