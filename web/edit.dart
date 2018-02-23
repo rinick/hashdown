@@ -190,6 +190,9 @@ void onMarkdown(Event e) {
   } else {
     elm = e.target;
     if (elm.classes.contains('blue')) {
+      if (elm.text == "A|#") {
+        toggleFullEditor();
+      }
       return;
     }
   }
@@ -235,6 +238,16 @@ void onMarkdown(Event e) {
       inputChangeListener.cancel();
       inputChangeListener = null;
     }
+  }
+}
+void toggleFullEditor(){
+  Element encodedbox = document.querySelector(".encodedbox");
+  if (encodedbox.style.display == "none") {
+    encodedbox.style.display = "";
+    document.querySelector(".dividerbox").style.display = "";
+  } else {
+    encodedbox.style.display = "none";
+    document.querySelector(".dividerbox").style.display = "none";
   }
 }
 StreamSubscription inputChangeListener;
