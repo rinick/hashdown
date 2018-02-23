@@ -2,7 +2,7 @@
 
 Hashdown is an online tool to convert text into a format that's easier and safer for sharing
 
-http://www.hashdown.net/edit.html
+https://hashdown.github.io/edit.html
 
 It supports 3 different encoding modes
 
@@ -11,7 +11,7 @@ It supports 3 different encoding modes
 Hashdown link convert text into url hash
 
 Example:  
-http://www.hashdown.net/#SGFzaERvd24gTGluayBpcyBBd2Vzb21l
+https://hashdown.github.io/#SGFzaERvd24gTGluayBpcyBBd2Vzb21l
 
 #### Why?
 
@@ -70,7 +70,7 @@ API to encode and decode hashdown in javascript and dart code
 ### javascript
 
 ```html
-    <script src="http://www.hashdown.net/api.js"></script>
+    <script src="https://hashdown.github.io/api.js"></script>
     <script>
       // simple encoding/decoding
       var encoded1 = $hashdown.encode('Hashdown is awesome');

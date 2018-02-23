@@ -4,7 +4,7 @@
 `a{b}c` `a⁪​⁫c` b is hidden between a and c
   ↑━decode┛
 </span>
-try it at: http://www.hashdown.net/edit.html#shadow#
+try it at: https://hashdown.github.io/edit.html#shadow#
 
 ####Example:
 open ShadowCode tool and paste this text into the left input box:
