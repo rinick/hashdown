@@ -57,17 +57,18 @@ background: linear-gradient(135deg, #ffffff 0%,#f0f0f0 100%);
         return;
       }
     }
-    if (navigator.userAgent.indexOf('(Dart)') !== -1) {
-     var s = document.createElement('script');
-     s.type = 'application/dart';
-     s.src = 'index.dart'
-     document.body.appendChild(s);
-    }
+      var s = document.createElement('script');
+      if (navigator.userAgent.indexOf('(Dart)') !== -1) {
+          s.type = 'application/dart';
+          s.src = 'index.dart';
+      } else {
+          s.src = 'index.dart.js';
+      }
+      document.body.appendChild(s);
    }
    init();
    
 </script>
-<script src="markd_min.js"></script>
-<script src="index.dart.js"></script>
+<script src="marked.min.js"></script>
   </body>
 </html>
