@@ -2,16 +2,16 @@
 
 Hashdown在线工具可以转换文本，使之更易于被分享
 
-http://www.hashdown.net/edit.html
+https://hashdown.github.io/edit.html
 
-支持四种编码模式
+支持三种编码模式
 
 ## Hashdown链接
 
 Hashdown链接把文本以哈希的方式转换到Url中
 
 例子:  
-http://www.hashdown.net/#SGFzaERvd24gTGluayBpcyBBd2Vzb21l
+https://hashdown.github.io/#SGFzaERvd24gTGluayBpcyBBd2Vzb21l
 
 #### 理由?
 
@@ -66,7 +66,7 @@ In URIs a hashmark # introduces the optional fragment near the end of the URL. T
 
 ## 镜像网址
 * http://2e15.com
-* https://hashdown.github.io
+* https://rinick.github.io/hashdown
 
 ## API
 
@@ -75,7 +75,7 @@ In URIs a hashmark # introduces the optional fragment near the end of the URL. T
 ### javascript
 
 ```html
-    <script src="http://www.hashdown.net/api.js"></script>
+    <script src="https://hashdown.github.io/api.js"></script>
     <script>
       // 基本编解码
       var encoded1 = $hashdown.encode('Hashdown is awesome');
