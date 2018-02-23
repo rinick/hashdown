@@ -8571,54 +8571,43 @@ z.display=""
 $.c9=!1}z=$.cH
 if(z!=null){E.dM(z)
 $.cH=null}},"$1","mR",2,0,3],
-pq:[function(){var z,y,x,w,v,u
+pq:[function(){var z,y,x,w,v
 $.dS=!0
 E.hq(null)
 if(!J.ca(window.location.protocol,"http")||document.querySelector("meta[name=hashdownad][content=enabled]")==null)return
 z=document
-y=z.querySelector(".aboutDiv")
-x=z.createElement("div")
-x.id="adDiv"
-w=window.innerWidth
-if(typeof w!=="number")return w.u()
-v=x.style
-if(w<728){v.height="100px"
-w=x.style
-w.left="0"
-w=x.style
-w.right="0"
-w=z.querySelector(".bodybox").style
-w.bottom="100px"
-w=z.querySelector(".vbodybox").style
-w.bottom="100px"
+y=z.createElement("div")
+y.id="adDiv"
+x=window.innerWidth
+if(typeof x!=="number")return x.u()
 w=y.style
-w.bottom="105px"
-w=y.style
-w.right="16px"
-J.bC(x,'<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>\n<!-- 2e15_mobile -->\n<ins class="adsbygoogle"\n     style="display:inline-block;width:320px;height:100px;margin:auto;"\n     data-ad-client="ca-pub-3283235194066083"\n     data-ad-slot="6644918654"></ins>\n<script>\n(adsbygoogle = window.adsbygoogle || []).push({});\n</script>',$.$get$dJ())}else{v.height="90px"
-w=z.querySelector(".bodybox").style
-w.bottom="90px"
-w=z.querySelector(".vbodybox").style
-w.bottom="90px"
-w=z.querySelector(".downloadDiv").style
-w.display=""
-w=y.style
-w.bottom="30px"
-w=y.style
-w.right="10px"
-J.bC(x,'<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>\n<!-- 2e15_desktop -->\n<ins class="adsbygoogle"\n     style="display:inline-block;width:728px;height:90px"\n     data-ad-client="ca-pub-3283235194066083"\n     data-ad-slot="5168185454"></ins>\n<script>\n(adsbygoogle = window.adsbygoogle || []).push({});\n</script>',$.$get$dJ())
-u=z.createElement("div")
-w=u.style
-w.left="733px"
-w.position="absolute"
-w.bottom="70px"
-w.border="solid 1px black"
-w.cursor="pointer"
-w.padding="0 1px"
-u.textContent="x"
-z.querySelector(".sizebox").appendChild(u)
-w=J.aq(u)
-W.S(w.a,w.b,new E.na(x,u),!1,H.y(w,0))}z.querySelector(".sizebox").appendChild(x)},"$0","mT",0,0,1],
+if(x<728){w.height="100px"
+x=y.style
+x.left="0"
+x=y.style
+x.right="0"
+x=z.querySelector(".bodybox").style
+x.bottom="100px"
+x=z.querySelector(".vbodybox").style
+x.bottom="100px"
+J.bC(y,'<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>\n<!-- 2e15_mobile -->\n<ins class="adsbygoogle"\n     style="display:inline-block;width:320px;height:100px;margin:auto;"\n     data-ad-client="ca-pub-3283235194066083"\n     data-ad-slot="6644918654"></ins>\n<script>\n(adsbygoogle = window.adsbygoogle || []).push({});\n</script>',$.$get$dJ())}else{w.height="90px"
+x=z.querySelector(".bodybox").style
+x.bottom="90px"
+x=z.querySelector(".vbodybox").style
+x.bottom="90px"
+J.bC(y,'<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>\n<!-- 2e15_desktop -->\n<ins class="adsbygoogle"\n     style="display:inline-block;width:728px;height:90px"\n     data-ad-client="ca-pub-3283235194066083"\n     data-ad-slot="5168185454"></ins>\n<script>\n(adsbygoogle = window.adsbygoogle || []).push({});\n</script>',$.$get$dJ())
+v=z.createElement("div")
+x=v.style
+x.left="733px"
+x.position="absolute"
+x.bottom="0"
+x.border="solid 1px black"
+x.cursor="pointer"
+x.padding="0 1px"
+v.textContent="x"
+z.querySelector(".sizebox").appendChild(v)
+x=J.aq(v)
+W.S(x.a,x.b,new E.na(y,v),!1,H.y(x,0))}z.querySelector(".sizebox").appendChild(y)},"$0","mT",0,0,1],
 nu:{"^":"f:24;",
 $1:[function(a){var z=H.by(J.e7(a),"$iseT").textContent
 J.hP(document.querySelector(".menu"))
