@@ -38,11 +38,11 @@ class Base2e15Codec implements XCodec {
 
 class Base64Codec implements XCodec {
   List<int> decode(String str) {
-    return CryptoUtils.base64StringToBytes(str);
+    return BASE64.decode(str);
   }
 
   String encode(List<int> bytes) {
-    return CryptoUtils.bytesToBase64(bytes);
+    return BASE64.encode(bytes);
   }
 }
 
@@ -67,11 +67,11 @@ class Base64UrlCodec implements XCodec {
         str = str + '===';
         break;
     }
-    return CryptoUtils.base64StringToBytes(str);
+    return BASE64URL.decode(str);
   }
 
   String encode(List<int> bytes) {
-    String base64 = CryptoUtils.bytesToBase64(bytes, urlSafe: true);
+    String base64 = BASE64URL.encode(bytes);
     if (base64.endsWith('==')) base64 = base64.substring(0, base64.length - 2);
     else if (base64.endsWith('=')) base64 =
         base64.substring(0, base64.length - 1);

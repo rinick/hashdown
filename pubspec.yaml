@@ -7,8 +7,8 @@ homepage: http://www.hashdown.net
 environment:
   sdk: '>=1.0.0 <2.0.0'
 dependencies:
-  base2e15: ">=0.2.0 <1.0.0"
-  crypto: ">=0.9.0 <0.10.0"
+  base2e15: any
   lzma: ">=0.3.0 <0.4.0"
+  convert: ">=2.0.0 <3.0.0"
 dev_dependencies:
   test: any

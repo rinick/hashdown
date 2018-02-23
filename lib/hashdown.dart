@@ -7,12 +7,12 @@ library hashdown;
 import 'dart:typed_data';
 import 'dart:convert';
 import 'package:base2e15/base2e15.dart';
-import 'package:crypto/crypto.dart';
 import "package:lzma/lzma.dart" as LZMA;
 import 'dart:math';
 import 'rc4.dart';
 import 'tadpole.dart';
 import 'shadow.dart';
+import 'dart:convert';
 
 part 'src/codecs.dart';
 part 'src/compress.dart';
