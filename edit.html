@@ -20,7 +20,7 @@
 <div class='sizebox'>
   <div class="headerbox">
     <a href='https://github.com/rinick/hashdown'><img src="hashdown.png">
-    <h1 class='lan'>Hashdown<span style='font-size:10px'> 1.0.6</span></h1></a>
+    <h1 class='lan'>Hashdown<span style='font-size:10px'> 1.0.7</span></h1></a>
     <div class="headeroptions hlayout">
       <div class="selectProtect">
        <label id="saltSelectLabel" for="saltSelect">Salt:</label><br/>
@@ -90,7 +90,7 @@
       </button>
       <button class="decode decodeArrow" title="Decode">►</button>
     </div>
-    <div class="inputbox">
+    <div class="inputbox encodedbox">
       <div class="title padding">
         <h2 id='encodedTab' class='lan tabbtn'>Encoded</h2>
       </div>
@@ -121,6 +121,8 @@
 </div>
 <div class='aboutDiv'>
 by <a href='https://github.com/rinick'>Rinick</a><br>
+<!--powered by<br/>
+<a href='https://www.dartlang.org'><img class='dart' alt='Dart' src='https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/static/dart-logo.png'></a-->
 </div>
 
 <script type="text/javascript">
@@ -134,18 +136,21 @@ by <a href='https://github.com/rinick'>Rinick</a><br>
         return;
       }
     }
-    if (navigator.userAgent.indexOf('(Dart)') !== -1) {
+
      var s = document.createElement('script');
-     s.type = 'application/dart';
-     s.src = 'edit.dart'
+      if (navigator.userAgent.indexOf('(Dart)') !== -1) {
+          s.type = 'application/dart';
+          s.src = 'edit.dart';
+      } else {
+          s.src = 'edit.dart.js';
+      }
      document.body.appendChild(s);
-    }
+
    }
    init();
    
 </script>
-<script src="markd_min.js"></script>
-<script src="edit.dart.js"></script>
+<script src="marked.min.js"></script>
 </div>
 </body>
 </html>
