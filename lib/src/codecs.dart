@@ -20,6 +20,9 @@ abstract class XCodec {
     if (name.startsWith('shadow')) {
       return new ShadowCodeCodec();
     }
+    if (name.startsWith('braillnary')) {
+      return new BraillnaryCodec();
+    }
     return new Base2e15Codec();
   }
   String encode(List<int> bytes);
@@ -46,8 +49,18 @@ class Base64Codec implements XCodec {
   }
 }
 
+class BraillnaryCodec implements XCodec {
+  List<int> decode(String str) {
+    return Braillnary.decode(str);
+  }
+
+  String encode(List<int> bytes) {
+    return Braillnary.encode(bytes);
+  }
+}
+
 class Base64UrlCodec implements XCodec {
-  static String url = 'http://www.hashdown.net/#';
+  static String url = 'https://hashdown.github.io/#';
 
   List<int> decode(String str) {
     int pos = str.indexOf('#');

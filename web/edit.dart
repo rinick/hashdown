@@ -80,7 +80,7 @@ void main() {
       List hashs = hash.split('#');
       hash = hashs.removeLast();
       for (String cmd in hashs) {
-        Element elm = document.querySelector('option[value=$cmd');
+        Element elm = document.querySelector('option[value=$cmd]');
         if (elm != null) {
           if (elm.classes.contains('codeOpt')) {
             codecOption = elm;
@@ -115,7 +115,7 @@ void main() {
   if (codecOption == null) {
     String codec = window.localStorage['codec'];
     if (codec != null) {
-      codecOption = document.querySelector('option[value=$codec');
+      codecOption = document.querySelector('option[value=$codec]');
     }
   }
   if (codecOption != null) {
@@ -124,9 +124,6 @@ void main() {
       inputtext.value = t_('Visible text,{Hidden text}More visible text');
     }
     codecOption.selected = true;
-  } else if (Base64UrlCodec.url.indexOf('2e15.com') > 0) {
-    (document.querySelector(
-        'option[value=base2e15') as OptionElement).selected = true;
   }
 
   selectCode.onChange.listen((e) {

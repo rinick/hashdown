@@ -12,6 +12,7 @@ import 'dart:math';
 import 'rc4.dart';
 import 'tadpole.dart';
 import 'shadow.dart';
+import 'braille.dart';
 import 'dart:convert';
 
 part 'src/codecs.dart';
@@ -111,6 +112,7 @@ class Hashdown {
   static const String TADPOLE = 'tadpole';
   static const String BASE2E15 = 'base2e15';
   static const String SHADOW = 'shadow';
+  static const String BRAILLNARY = 'braillnary';
   
   static const String PROTECT_RAW = 'raw';
   static const String PROTECT_SALT = 'salt';
@@ -122,10 +124,14 @@ class Hashdown {
     if (opt.codec == SHADOW && str.contains(shadowEncodeReg)) {
       return _encodeShadowCode(str, opt);
     }
-    HashdownParams params = new HashdownParams.fromOption(opt);
-    List<int> data = HashdownCompress.compressString(str, params);
-    data = HashdownCrypt.encrypt(data, params, opt.password);
-    return XCodec.getCodec(opt.codec).encode(data);
+    if (opt.protect == PROTECT_RAW) {
+      HashdownParams params = new HashdownParams.fromOption(opt);
+      List<int> data = HashdownCompress.compressString(str, params);
+      data = HashdownCrypt.encrypt(data, params, opt.password);
+      return XCodec.getCodec(opt.codec).encode(data);
+    } else {
+      return XCodec.getCodec(opt.codec).encode(UTF8.encode(str));
+    }
   }
   static final RegExp shadowEncodeReg = new RegExp(r'(^|[^\\])\{[^\u0000]*?[^\\]\}');
   static String _encodeShadowCode(String str, HashdownOptions opt) {
@@ -156,6 +162,7 @@ class Hashdown {
 
   static final RegExp _tadpoleReg = new RegExp(r'\/[\u0600-\u06ff]{2,}');
   static final RegExp _shadowReg = new RegExp(r'[\u200b-\u206f]{3,}');
+  static final RegExp _brailleReg = new RegExp(r'^[\u2800-\u28ff]+');
   
   /// return String, Uint8List, or HashdownFile
   static HashdownResult decode(String str, [String password = '']) {
@@ -178,13 +185,19 @@ class Hashdown {
           bytes = XCodec.getCodec(TADPOLE).decode(m2.group(0));
           result.codec = TADPOLE;
         } else {
-          int char0 = str.codeUnitAt(0);
-          if (char0 >= 0x3400 && char0 <= 0xD7A3) {
-            bytes = XCodec.getCodec(BASE2E15).decode(str);
-            result.codec = BASE2E15;
+          Match m3 = _brailleReg.firstMatch(str);
+          if (m3 != null) {
+            bytes = XCodec.getCodec(BRAILLNARY).decode(m3.group(0));
+            result.codec = BRAILLNARY;
           } else {
-            bytes = XCodec.getCodec(LINK).decode(str);
-            result.codec = LINK;
+            int char0 = str.codeUnitAt(0);
+            if (char0 >= 0x3400 && char0 <= 0xD7A3) {
+              bytes = XCodec.getCodec(BASE2E15).decode(str);
+              result.codec = BASE2E15;
+            } else {
+              bytes = XCodec.getCodec(LINK).decode(str);
+              result.codec = LINK;
+            }
           }
         }
       }

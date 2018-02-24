@@ -30,6 +30,7 @@ Map<String, String> _lan_zh = {
   'Undo': '撤销',
   'TadpoleCode': '蝌蚪码',
   'ShadowCode': '隐形码',
+  'Braillnary': '布莱叶二进制',
   'Help': '帮助',
   'Samples': '示例',
   'Open sample will overwrite current text': '打开示例会覆盖当前的内容',
