@@ -49,6 +49,18 @@ Convert above sample text to Tadpole Code:
 /ًًًًًًًًًًًًًًًًًًًًًًًٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٌٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍٍََََََََََََََََََََََََََََُُُُُُُُُُُُُُُُُُُُُُُُُُُُِِِِِِِِِِِِِِِِِِِِِِِِِِّّّّّّّّّّّّّّّّّّّّّّّّّّّّْْْْْْْْْْْْْْْْْْْْْْْْْْْْٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٰٕٕٜ۪ٕ۪۪ٕ۪ٕ۪۪۪ٜٕٜٜٕ۪۪۪۪۪ٕٕ۪۪ٕٕٕ۪۪۪ٕ۪ٜٜٕ۪ٜٕٕ۪ٕ۪۪۪۪ٕ۪ٜٕٕٕٜ۪ٜٕٕ۪ٕٕ۪۪ٜ۪ٜٜ۪۪ٜٜٜٜٜ۪ٕٜٕٜۤٓٔٔۤٔۤٓ۠ٔٔٓٔ۠ۤ۠ۤۤۤ۠۠۠ۤ۠ٓ۠ۤٓۤ۠ۤۤ۠ۤٔۤۤ۠ۤۤ۠ٓٓۤ۠ٓۤ۠ٔۤٓٓٓ۠۠۠ۤٔ۠۠ٓٔٔٓٓ۠ٓ۠ۤٓٔٔ۠ۤٓ۠ٓٓۤۤٔۤ۠ۤٓٓ۠ۤ۠ٔ۠ٓۤۤٓﾞ ( It's actually **426** characters!! )
 ```
 
+## Hashdown Braillnary
+
+Braillnary means braille binary, it converts string to binary and shows it in the form of braille code
+
+Sample Plain Text
+```
+Braille is named after its creator, Louis Braille, a Frenchman who lost his sight as a result of a childhood accident.
+```
+Convert to Braillnary
+```
+⡂⡲⡡⡩⡬⡬⡥⠠⡩⡳⠠⡮⡡⡭⡥⡤⠠⡡⡦⡴⡥⡲⠠⡩⡴⡳⠠⡣⡲⡥⡡⡴⡯⡲⠬⠠⡌⡯⡵⡩⡳⠠⡂⡲⡡⡩⡬⡬⡥⠬⠠⡡⠠⡆⡲⡥⡮⡣⡨⡭⡡⡮⠠⡷⡨⡯⠠⡬⡯⡳⡴⠠⡨⡩⡳⠠⡳⡩⡧⡨⡴⠠⡡⡳⠠⡡⠠⡲⡥⡳⡵⡬⡴⠠⡯⡦⠠⡡⠠⡣⡨⡩⡬⡤⡨⡯⡯⡤⠠⡡⡣⡣⡩⡤⡥⡮⡴⠮⣀
+```
 
 ## Hashdown Shadow Code
 Shadow Code convert text to ASCII control code, which is invisible in most browsers.
