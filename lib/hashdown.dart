@@ -124,13 +124,13 @@ class Hashdown {
     if (opt.codec == SHADOW && str.contains(shadowEncodeReg)) {
       return _encodeShadowCode(str, opt);
     }
-    if (opt.protect == PROTECT_RAW) {
+    if (opt.protect == PROTECT_RAW && !opt.markdown && opt.password.isEmpty) {
+      return XCodec.getCodec(opt.codec).encode(UTF8.encode(str));
+    } else {
       HashdownParams params = new HashdownParams.fromOption(opt);
       List<int> data = HashdownCompress.compressString(str, params);
       data = HashdownCrypt.encrypt(data, params, opt.password);
       return XCodec.getCodec(opt.codec).encode(data);
-    } else {
-      return XCodec.getCodec(opt.codec).encode(UTF8.encode(str));
     }
   }
   static final RegExp shadowEncodeReg = new RegExp(r'(^|[^\\])\{[^\u0000]*?[^\\]\}');
