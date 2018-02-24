@@ -51,6 +51,20 @@ In URIs a hashmark # introduces the optional fragment near the end of the URL. T
 ```
 
 
+## Hashdown布莱叶二进制
+
+将字符转换成二进制并以布莱叶码的方式显示
+
+样本数据
+```
+Braille is named after its creator, Louis Braille, a Frenchman who lost his sight as a result of a childhood accident.
+```
+转换到布莱叶二进制
+```
+⡂⡲⡡⡩⡬⡬⡥⠠⡩⡳⠠⡮⡡⡭⡥⡤⠠⡡⡦⡴⡥⡲⠠⡩⡴⡳⠠⡣⡲⡥⡡⡴⡯⡲⠬⠠⡌⡯⡵⡩⡳⠠⡂⡲⡡⡩⡬⡬⡥⠬⠠⡡⠠⡆⡲⡥⡮⡣⡨⡭⡡⡮⠠⡷⡨⡯⠠⡬⡯⡳⡴⠠⡨⡩⡳⠠⡳⡩⡧⡨⡴⠠⡡⡳⠠⡡⠠⡲⡥⡳⡵⡬⡴⠠⡯⡦⠠⡡⠠⡣⡨⡩⡬⡤⡨⡯⡯⡤⠠⡡⡣⡣⡩⡤⡥⡮⡴⠮⣀
+```
+
+
 ## Hashdown隐形码
 隐藏文字将数据转换到ACSII的控制字符，这些字符在大多数浏览器里都不可见
 
