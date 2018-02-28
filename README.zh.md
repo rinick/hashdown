@@ -1,4 +1,4 @@
-**Hashdown**在线工具可以转换文本，使之更易于被分享
+**Hashdown**在线工具可以将文本编码成特殊的格式
 
 编码网址：
 [hashdown.github.io/edit.html](https://hashdown.github.io/edit.html)
@@ -30,6 +30,10 @@ Hashdown链接把文本以哈希的方式转换到Url中，以下特性使它有
 
 再加上Hashdown本身支持压缩，这能在有限的字符里存储更多的数据
 
+## 布莱天书
+
+将字符转换成二进制并以布莱叶码的方式显示，图形中的每一个点对应数据中的每一比特
+
 
 ## 蝌蚪码
 
@@ -56,4 +60,4 @@ Hashdown链接把文本以哈希的方式转换到Url中，以下特性使它有
 
 
 ## 镜像网址
-* https://rinick.github.io/hashdown
+* [https://rinick.github.io/hashdown](https://rinick.github.io/hashdown)
