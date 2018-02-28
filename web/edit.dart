@@ -430,10 +430,13 @@ HashdownOptions getOption(String str, bool markdown) {
     opt.compress = true;
     if (opt.password == '1') {
       opt.protect = Hashdown.PROTECT_SALT;
+      opt.password = null;
     } else if (opt.password == '4') {
       opt.protect = Hashdown.PROTECT_SALT4;
+      opt.password = null;
     } else if (opt.password == '0') {
       opt.protect = Hashdown.PROTECT_RAW;
+      opt.password = null;
       opt.compress = false;
     } else {
       opt.protect = Hashdown.PROTECT_PASSWORD;

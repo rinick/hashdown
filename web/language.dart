@@ -18,10 +18,6 @@ Map<String, String> _lan_zh = {
   'markdown.md': 'markdown.zh.md',
   'README.md': 'README.zh.md',
   'Encode Mode:': '编码模式:',
-  'Salt:': '加盐:',
-  'Raw': '无',
-  '1 Byte': '1字节',
-  '4 Bytes': '4字节',
   'Password:': '密码:',
   'Link': '链接',
   'Encode': '编码',
@@ -42,7 +38,7 @@ Map<String, String> _lan_zh = {
   'To decode text, paste it here and click the decode button':'需要解码时把文本粘贴到这里，然后点击解码按钮',
   'Visible text,{Hidden text}More visible text':'可见文本，{隐形文本}更多可见文本',
   'Hosted on GitHub':'下载离线版',
-  'https://github.com/rinick/hashdown':'http://www.deepmess.com/zh/hashdown.html',
+  'https://github.com/rinick/hashdown':'http://www.deepmess.com/zh/hashdown/',
 };
 
 Element cnflag;
