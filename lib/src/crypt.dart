@@ -9,6 +9,11 @@ class HashdownCrypt {
   static Random rng = new Random();
   static const List<int> _sizeOffset = const [1, 2, 5, 2];
   static List<int> encrypt(List<int> bytes, HashdownParams params, String password) {
+    int tail = params.toByte();
+    if (tail == 0xC0) {
+      return bytes;
+    }
+
     Uint8List rslt = new Uint8List(bytes.length + _sizeOffset[params.protection]);
     rslt.setRange(0, bytes.length, bytes);
     List<int> pass;
@@ -31,7 +36,9 @@ class HashdownCrypt {
       rc4.encryptBytes(rslt);
       rslt.setRange(bytes.length, rslt.length - 1, salts);
     }
-    rslt[rslt.length - 1] = params.toByte();
+
+    rslt[rslt.length - 1] = tail;
+
     return rslt;
   }
   static List<int> decrypt(List<int> bytes, HashdownParams params, String password) {

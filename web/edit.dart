@@ -12,8 +12,7 @@ import 'dart:async';
 InputElement opPass;
 
 SelectElement selectCode;
-SelectElement saltSelect;
-LabelElement saltSelectLabel;
+
 Element headerh1;
 
 String pendingInitData;
@@ -48,18 +47,17 @@ void main() {
   encodedTab = querySelector('#encodedTab');
 
   opPass = querySelector('#opPass');
-  opPass.onInput.listen(onPassInput);
 
   selectCode = querySelector('.selectCode>select');
-  saltSelect = querySelector('#saltSelect');
-  saltSelectLabel = querySelector('#saltSelectLabel');
   headerh1 = querySelector('h1');
 
   shadowCodeOption = document.querySelector('option[value=shadow]');
 
   encodedTab.onClick.listen(onClickLink);
 
-  document.querySelectorAll('.menu > div > label').onClick
+  document
+      .querySelectorAll('.menu > div > label')
+      .onClick
       .listen((MouseEvent e) {
     String filename = (e.target as LabelElement).text;
     document.querySelector('.menu').blur();
@@ -136,13 +134,16 @@ void main() {
     }
   });
 }
+
 loadHd(String path) async {
   try {
     String str = await HttpRequest.getString(path);
     decodeData(str);
   } catch (err) {}
 }
+
 bool _loadingMd = false;
+
 /// load markdown file
 loadMd(String path) async {
   try {
@@ -157,19 +158,11 @@ loadMd(String path) async {
     _loadingMd = false;
   } catch (err) {}
 }
-void onPassInput(Event e) {
-  if (opPass.value == '') {
-    saltSelect.disabled = false;
-    saltSelectLabel.classes.remove('disabled');
-  } else {
-    saltSelect.disabled = true;
-    saltSelectLabel.classes.add('disabled');
-  }
-}
 
 bool markdown = false;
 
 bool nullToMarkDown = false;
+
 void onMarkdown(Event e) {
   HtmlElement elm;
   if (e == null) {
@@ -194,7 +187,10 @@ void onMarkdown(Event e) {
     }
   }
 
-  document.querySelector('.btnBar > .blue').classes.remove('blue');
+  document
+      .querySelector('.btnBar > .blue')
+      .classes
+      .remove('blue');
   elm.classes.add('blue');
 
   bool toMarkDown = false;
@@ -222,7 +218,8 @@ void onMarkdown(Event e) {
     querySelector('.markdownbox > .title').append(btnBar);
     querySelector('.encodeMarkdown').style.display = '';
     querySelector('#markdown').setInnerHtml(
-        markdownToHtml(inputtext.value, shadowCodeOption.selected && !_loadingMd),
+        markdownToHtml(
+            inputtext.value, shadowCodeOption.selected && !_loadingMd),
         validator: markdownValidator);
     if (inputChangeListener == null) {
       inputChangeListener = inputtext.onInput.listen(onMarkdownUpdate);
@@ -237,25 +234,35 @@ void onMarkdown(Event e) {
     }
   }
 }
-void toggleFullEditor(){
+
+void toggleFullEditor() {
   Element encodedbox = document.querySelector(".encodedbox");
   if (encodedbox.style.display == "none") {
     encodedbox.style.display = "";
-    document.querySelector(".dividerbox").style.display = "";
+    document
+        .querySelector(".dividerbox")
+        .style
+        .display = "";
   } else {
     encodedbox.style.display = "none";
-    document.querySelector(".dividerbox").style.display = "none";
+    document
+        .querySelector(".dividerbox")
+        .style
+        .display = "none";
   }
 }
+
 StreamSubscription inputChangeListener;
 Timer updateMarkdownTimer;
+
 void onMarkdownUpdate(Event e) {
   if (updateMarkdownTimer != null) {
     updateMarkdownTimer.cancel();
   }
   updateMarkdownTimer =
-      new Timer(new Duration(milliseconds: 300), doMarkdownUpdate);
+  new Timer(new Duration(milliseconds: 300), doMarkdownUpdate);
 }
+
 void doMarkdownUpdate() {
   updateMarkdownTimer = null;
   window.localStorage['last'] = inputtext.value;
@@ -266,6 +273,7 @@ void doMarkdownUpdate() {
 }
 
 RegExp bracesExp = new RegExp('({.*}|[\u000f-\u001e]{4,})');
+
 void onEncode(Event e) {
   String txt = inputtext.value;
   if (txt != '') {
@@ -275,10 +283,15 @@ void onEncode(Event e) {
       setLink(output);
     } else {
       setLink(null);
+      if (option.codec == Hashdown.SHADOW &&
+          !txt.contains(Hashdown.shadowEncodeReg)) {
+        output = '>' + output + '<';
+      }
     }
     outputtext.value = output;
   }
 }
+
 String onDecode(Event e) {
   String txt = outputtext.value;
   if (txt != '') {
@@ -306,6 +319,7 @@ String onDecode(Event e) {
 }
 
 String link;
+
 void setLink(String str) {
   link = str;
   if (link != null) {
@@ -334,6 +348,7 @@ void onEncodeV(Event e) {
     querySelector('.error').text = '';
   }
 }
+
 void onDecodeV(Event e) {
   String txt = vinputtext.value;
   if (txt != '') {
@@ -356,7 +371,9 @@ void onDecodeV(Event e) {
     }
   }
 }
+
 List<String> history = [];
+
 void logHis(String str) {
   if (str != null &&
       str != '' &&
@@ -369,6 +386,7 @@ void logHis(String str) {
 }
 
 bool markdownV = false;
+
 void onMarkdownV(Event e) {
   if (markdownV) {
     markdownV = false;
@@ -390,6 +408,7 @@ void onMarkdownV(Event e) {
     querySelector('.decodeV').style.display = 'none';
   }
 }
+
 void onUndoV(Event e) {
   if (history.length > 0) {
     vinputtext.value = history.removeLast();
@@ -407,19 +426,35 @@ HashdownOptions getOption(String str, bool markdown) {
   opt.markdown = markdown;
   opt.password = opPass.value;
   opt.codec = selectCode.value;
-  if (opt.password != '') {
-    opt.protect = Hashdown.PROTECT_PASSWORD;
+  if (opt.password.isNotEmpty) {
+    opt.compress = true;
+    if (opt.password == '1') {
+      opt.protect = Hashdown.PROTECT_SALT;
+    } else if (opt.password == '4') {
+      opt.protect = Hashdown.PROTECT_SALT4;
+    } else if (opt.password == '0') {
+      opt.protect = Hashdown.PROTECT_RAW;
+      opt.compress = false;
+    } else {
+      opt.protect = Hashdown.PROTECT_PASSWORD;
+    }
   } else {
-    opt.protect = saltSelect.value;
+    if (opt.codec == Hashdown.LINK) {
+      opt.protect = Hashdown.PROTECT_SALT;
+    } else {
+      opt.protect = Hashdown.PROTECT_RAW;
+    }
+    opt.compress = true;
   }
+
   if (str.length < 16 &&
       opt.codec == Hashdown.SHADOW &&
       opt.markdown == false &&
       opt.protect == Hashdown.PROTECT_SALT) {
     // optimize shadow code for short string, don't use default 1 byte salt
     opt.protect = Hashdown.PROTECT_RAW;
+    opt.compress = false;
   }
-  opt.compress = (opt.protect != Hashdown.PROTECT_RAW);
   return opt;
 }
 
@@ -437,6 +472,7 @@ void decodeData(String str) {
     pendingInitData = str;
   }
 }
+
 void changeCodec(String codec) {
   if (codec != null) {
     Element elm = document.querySelector('option[value=$codec');
@@ -445,20 +481,34 @@ void changeCodec(String codec) {
     }
   }
 }
+
 bool inited = false;
 bool vmode = false;
+
 void checkSize(Event e) {
   headerh1.style.display = window.innerWidth < 445 ? 'none' : '';
   if (window.innerWidth < 480) {
     if (!vmode) {
-      document.querySelector('.vbodybox').style.display = '';
-      document.querySelector('.bodybox').style.display = 'none';
+      document
+          .querySelector('.vbodybox')
+          .style
+          .display = '';
+      document
+          .querySelector('.bodybox')
+          .style
+          .display = 'none';
       vmode = true;
     }
   } else {
     if (vmode || !inited) {
-      document.querySelector('.vbodybox').style.display = 'none';
-      document.querySelector('.bodybox').style.display = '';
+      document
+          .querySelector('.vbodybox')
+          .style
+          .display = 'none';
+      document
+          .querySelector('.bodybox')
+          .style
+          .display = '';
       vmode = false;
     }
   }
@@ -483,8 +533,14 @@ void initAd() {
     adDiv.style.height = '100px';
     adDiv.style.left = '0';
     adDiv.style.right = '0';
-    document.querySelector('.bodybox').style.bottom = '100px';
-    document.querySelector('.vbodybox').style.bottom = '100px';
+    document
+        .querySelector('.bodybox')
+        .style
+        .bottom = '100px';
+    document
+        .querySelector('.vbodybox')
+        .style
+        .bottom = '100px';
 
     adDiv.setInnerHtml(r'''
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -498,8 +554,14 @@ void initAd() {
 </script>''', validator: allowAllValidator);
   } else {
     adDiv.style.height = '90px';
-    document.querySelector('.bodybox').style.bottom = '90px';
-    document.querySelector('.vbodybox').style.bottom = '90px';
+    document
+        .querySelector('.bodybox')
+        .style
+        .bottom = '90px';
+    document
+        .querySelector('.vbodybox')
+        .style
+        .bottom = '90px';
     adDiv.setInnerHtml(r'''
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- 2e15_desktop -->
@@ -511,14 +573,26 @@ void initAd() {
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>''', validator: allowAllValidator);
     DivElement closeAd = document.createElement('div');
-    closeAd.style..left='733px'..position='absolute'..bottom='0'..border='solid 1px black'..cursor='pointer'..padding='0 1px';
+    closeAd.style
+      ..left = '733px'
+      ..position = 'absolute'
+      ..bottom = '0'
+      ..border = 'solid 1px black'
+      ..cursor = 'pointer'
+      ..padding = '0 1px';
     closeAd.text = 'x';
     document.querySelector('.sizebox').append(closeAd);
     closeAd.onClick.listen((e) {
       closeAd.remove();
       adDiv.remove();
-      document.querySelector('.bodybox').style.bottom = '0';
-      document.querySelector('.vbodybox').style.bottom = '0';
+      document
+          .querySelector('.bodybox')
+          .style
+          .bottom = '0';
+      document
+          .querySelector('.vbodybox')
+          .style
+          .bottom = '0';
     });
   }
   document.querySelector('.sizebox').append(adDiv);

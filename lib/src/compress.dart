@@ -8,7 +8,7 @@ part of hashdown;
 class HashdownCompress {
   static List<int> compressString(String str, HashdownParams params) {
     List<int> utf8 = UTF8.encode(str);
-    List<int> uft16 = UTF16.encode(str);
+    List<int> utf16 = UTF16.encode(str);
     List<int> rslt = utf8;
     int min = utf8.length;
     params.mode = HashdownParams.MODE_UTF8;
@@ -17,30 +17,34 @@ class HashdownCompress {
       // assume compression is not needed
       params.compressed = 0;
       // don't compress short string
-      if (utf8.length > 16 && uft16.length > 16) {
-        List<int> utf8c = compress(utf8);
-        List<int> uft16c = compress(uft16);
-        if (min > utf8c.length) {
-          rslt = utf8c;
-          min = utf8c.length;
-          params.compressed = 1;
+      if (utf8.length > 16 && utf16.length > 16) {
+        if (utf16.length * 1.125 > utf8.length) {
+          List<int> utf8c = compress(utf8);
+          if (min > utf8c.length) {
+            rslt = utf8c;
+            min = utf8c.length;
+            params.compressed = 1;
+          }
         }
-        if (min > uft16c.length) {
-          rslt = uft16c;
-          min = uft16c.length;
-          params.mode = HashdownParams.MODE_UTF16;
-          params.compressed = 1;
-        }        
+        if (utf8.length * 1.125 > utf16.length) {
+          List<int> utf16c = compress(utf16);
+          if (min > utf16c.length) {
+            rslt = utf16c;
+            min = utf16c.length;
+            params.mode = HashdownParams.MODE_UTF16;
+            params.compressed = 1;
+          }
+        }
       }
     }
-    if (min > uft16.length) {
+    if (min > utf16.length) {
       if (params.protection == HashdownParams.PROTECT_PASSWORD) {
         // add extra 0 to validate utf16
         rslt = []
-          ..addAll(uft16)
+          ..addAll(utf16)
           ..add(0);
       } else {
-        rslt = uft16;
+        rslt = utf16;
       }
       params.mode = HashdownParams.MODE_UTF16;
       params.compressed = 0;

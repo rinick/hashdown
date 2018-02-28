@@ -30,7 +30,7 @@ Map<String, String> _lan_zh = {
   'Undo': '撤销',
   'TadpoleCode': '蝌蚪码',
   'ShadowCode': '隐形码',
-  'Braillnary': '布莱叶二进制',
+  'Braillnary': '布莱天书',
   'Help': '帮助',
   'Samples': '示例',
   'Open sample will overwrite current text': '打开示例会覆盖当前的内容',
@@ -42,7 +42,7 @@ Map<String, String> _lan_zh = {
   'To decode text, paste it here and click the decode button':'需要解码时把文本粘贴到这里，然后点击解码按钮',
   'Visible text,{Hidden text}More visible text':'可见文本，{隐形文本}更多可见文本',
   'Hosted on GitHub':'下载离线版',
-  'https://github.com/rinick/hashdown':'https://github.com/rinick/hashdown/archive/gh-pages.zip',
+  'https://github.com/rinick/hashdown':'http://www.deepmess.com/zh/hashdown.html',
 };
 
 Element cnflag;
