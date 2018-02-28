@@ -4,7 +4,7 @@ Hashdown is an online tool to convert text into a format that's easier and safer
 
 https://hashdown.github.io/edit.html
 
-It supports 3 different encoding modes
+It supports 5 different encoding modes
 
 ## Hashdown Link
 
@@ -13,18 +13,10 @@ Hashdown link convert text into url hash
 Example:  
 https://hashdown.github.io/#SGFzaERvd24gTGluayBpcyBBd2Vzb21l
 
-#### Why?
-
-Of course, you can write things on blog and share the link. But Hashdown link does it in a very different way
-
 * The encoding and decoding are 100% done in client side javascript, our server never know your text. the url hash (what's after #) is never sent to the network.
 * When the server is down, you can still decode the content from the url if you can find any Hashdown mirror site or an offline version of Hashdown tool. 
 * You can use a password to protect your content.
 
-#### Url Shortener
-Url shortener works great with Hashdown link, like this: http://goo.gl/Oz9MJu
-
-But if the url shortener service is shutdown or blocked by firewall, people will no longer be able to access it.
 
 ## Hashdown Base2e15
 
@@ -97,22 +89,6 @@ API to encode and decode hashdown in javascript and dart code
       });
       var decoded2 = $hashdown.decode(encoded2, 'mypassword').text;
     </script>
-```
-
-### dart
-
-```dart
-  import 'package:hashdown/hashdown.dart';
-
-  void main() {
-    // encode string to hashdown link
-    String hashdownLink =
-        Hashdown.encodeString('Hashdown is awesome', new HashdownOptions());
-    
-    // encode string to tadpole code
-    String tadpolecode = Hashdown.encodeString(
-        'Hashdown is awesome', new HashdownOptions()..codec = Hashdown.TADPOLE);
-  }
 ```
 
 ## Libraries used in Hashdown
