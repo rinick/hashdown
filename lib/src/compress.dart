@@ -51,6 +51,7 @@ class HashdownCompress {
     }
     return rslt;
   }
+
   static List<int> compressFile(HashdownFile file, HashdownParams params) {
     List<int> data = file.encode();
     params.mode = HashdownParams.MODE_FILE;
@@ -63,6 +64,7 @@ class HashdownCompress {
     params.compressed = 0;
     return data;
   }
+
   static Object decompressAuto(List<int> data, HashdownParams params) {
     if (params.compressed == 1) {
       data = decompress(data);
@@ -79,38 +81,31 @@ class HashdownCompress {
     return data;
   }
 
-  static LZMA.Params _params = new LZMA.Params();
-
   static List<int> compress(List<int> data) {
-    var inStream = new LZMA.InStream(data);
-    var outStream = new LZMA.OutStream();
-    var encoder = new LZMA.Encoder();
-    encoder.setDictionarySize(1 << _params.dictionarySize);
-    encoder.setNumFastBytes(_params.fb);
-    encoder.setMatchFinder(_params.matchFinder);
-    encoder.setLcLpPb(_params.lc, _params.lp, _params.pb);
-    encoder.setEndMarkerMode(_params.eos);
-
-    var sizes = encodeLength(data.length);
-    outStream.writeBlock(sizes, 0, sizes.length);
-
-    encoder.code(inStream, outStream, -1, -1);
-    return outStream.data;
+    List rslt = Js.context['LZMA'].callMethod('compress', [data]);
+    print(rslt);
+    int len = rslt[5] + (rslt[6] << 8) + (rslt[7] << 16) + (rslt[8] << 24);
+    List<int> lenArray = encodeLength(len);
+    // fill the length
+    for (int i = 0; i < lenArray.length; ++i) {
+      rslt[13 - lenArray.length + i] = lenArray[i];
+    }
+    return rslt.sublist(13 - lenArray.length);
   }
 
   static List<int> decompress(List<int> data) {
-    var inStream = new LZMA.InStream(data);
-    var outStream = new LZMA.OutStream();
-    var decoder = new LZMA.Decoder();
-    decoder.setDecoderProperties([93, 0, 0, 128, 0]);
-
-    int size = decodeLength(inStream);
-
-    if (!decoder.decode(inStream, outStream, size)) {
-      throw 'decompress failed';
-    }
-    return outStream.data;
+    List<int> lens = decodeLength(data);
+    int len = lens[0];
+    int skip = lens[1];
+    List<int> fixedData = [93, 0, 0, 128, 0,
+    len & 0xFF, (len >> 8) & 0xFF, (len >> 16) & 0xFF, (len >> 24) & 0xFF,
+    0, 0, 0, 0
+    ];
+    fixedData.addAll(data.getRange(skip, data.length));
+    print(fixedData);
+    return Js.context['LZMA'].callMethod('decompress', [fixedData]);
   }
+
   static List<int> encodeLength(int n) {
     List<int> list = new List<int>();
     while (n > 127) {
@@ -120,15 +115,17 @@ class HashdownCompress {
     list.add(n);
     return list;
   }
-  static int decodeLength(LZMA.InStream stream) {
+
+  static List<int> decodeLength(List<int> input) {
     int n = 0;
     int shift = 0;
-    int byte;
-    do {
-      byte = stream.read();
+    int byte = 0xFF;
+    int pos = 0;
+    for (; byte > 127; ++pos) {
+      byte = input[pos] & 0xFF;
       n |= (byte & 127) << shift;
       shift += 7;
-    } while (byte > 127);
-    return n;
+    }
+    return [n, pos + 1];
   }
 }
