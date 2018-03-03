@@ -109,7 +109,7 @@ class HashdownCompress {
     0, 0, 0, 0
     ];
     fixedData.addAll(data.getRange(skip, data.length));
-    return lzma_decompress(fixedData);
+    return lzma_decompress(fixedData).map((n){return n&0xff;}).toList();;
   }
 
   static List<int> encodeLength(int n) {
