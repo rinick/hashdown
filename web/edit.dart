@@ -529,6 +529,7 @@ void initAd() {
           null) {
     return;
   }
+  var helpBox = document.querySelector('.helpDiv');
   DivElement adDiv = document.createElement('div');
   adDiv.id = 'adDiv';
 
@@ -545,6 +546,7 @@ void initAd() {
         .style
         .bottom = '100px';
 
+    helpBox.style.bottom = '105px';
     adDiv.setInnerHtml(r'''
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- 2e15_mobile -->
@@ -557,14 +559,11 @@ void initAd() {
 </script>''', validator: allowAllValidator);
   } else {
     adDiv.style.height = '90px';
-    document
-        .querySelector('.bodybox')
-        .style
-        .bottom = '90px';
-    document
-        .querySelector('.vbodybox')
-        .style
-        .bottom = '90px';
+
+    document.querySelector('.bodybox').style.bottom = '90px';
+    document.querySelector('.vbodybox').style.bottom = '90px';
+    helpBox.style.bottom = '10px';
+
     adDiv.setInnerHtml(r'''
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- 2e15_desktop -->
@@ -576,6 +575,7 @@ void initAd() {
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>''', validator: allowAllValidator);
     DivElement closeAd = document.createElement('div');
+
     closeAd.style
       ..left = '733px'
       ..position = 'absolute'
@@ -583,6 +583,7 @@ void initAd() {
       ..border = 'solid 1px black'
       ..cursor = 'pointer'
       ..padding = '0 1px';
+
     closeAd.text = 'x';
     document.querySelector('.sizebox').append(closeAd);
     closeAd.onClick.listen((e) {
