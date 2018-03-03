@@ -7,8 +7,13 @@ part of hashdown;
 
 class HashdownCompress {
   static List<int> compressString(String str, HashdownParams params) {
+    // don't try utf16 when it doesn't need compression
+    bool tryUtf16 = (params.compressed == 1);
     List<int> utf8 = UTF8.encode(str);
-    List<int> utf16 = UTF16.encode(str);
+    List<int> utf16;
+    if (tryUtf16) {
+      utf16 = UTF16.encode(str);
+    }
     List<int> rslt = utf8;
     int min = utf8.length;
     params.mode = HashdownParams.MODE_UTF8;
@@ -37,7 +42,7 @@ class HashdownCompress {
         }
       }
     }
-    if (min > utf16.length) {
+    if (tryUtf16 && min > utf16.length) {
       if (params.protection == HashdownParams.PROTECT_PASSWORD) {
         // add extra 0 to validate utf16
         rslt = []

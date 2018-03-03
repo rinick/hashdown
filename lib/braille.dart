@@ -15,7 +15,7 @@ class Braillnary {
   static void _initTable(){
     if (_inited) return;
     _inited = true;
-    
+
     for (int i = 0; i< 256; ++i) {
       int j = i & 0xE1;
       // move bits
