@@ -8,13 +8,14 @@ library hashdown;
 import 'dart:typed_data';
 import 'dart:convert';
 import 'package:base2e15/base2e15.dart';
-import "package:lzma/lzma.dart" as LZMA;
 import 'dart:math';
 import 'rc4.dart';
 import 'tadpole.dart';
 import 'shadow.dart';
 import 'braille.dart';
 import 'dart:convert';
+import 'dart:html';
+import 'dart:js' as Js;
 
 part 'src/codecs.dart';
 
