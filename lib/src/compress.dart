@@ -82,8 +82,9 @@ class HashdownCompress {
   }
 
   static List<int> compress(List<int> data) {
-    List rslt = Js.context['LZMA'].callMethod('compress', [data]);
-    print(rslt);
+    lzma_disableEndMark = true;
+    List rslt = lzma_compress(data, 7);
+
     int len = rslt[5] + (rslt[6] << 8) + (rslt[7] << 16) + (rslt[8] << 24);
     List<int> lenArray = encodeLength(len);
     // fill the length
@@ -94,6 +95,7 @@ class HashdownCompress {
   }
 
   static List<int> decompress(List<int> data) {
+    lzma_decodeBinary = true;
     List<int> lens = decodeLength(data);
     int len = lens[0];
     int skip = lens[1];
@@ -102,8 +104,7 @@ class HashdownCompress {
     0, 0, 0, 0
     ];
     fixedData.addAll(data.getRange(skip, data.length));
-    print(fixedData);
-    return Js.context['LZMA'].callMethod('decompress', [fixedData]);
+    return lzma_decompress(fixedData);
   }
 
   static List<int> encodeLength(int n) {
@@ -126,6 +127,6 @@ class HashdownCompress {
       n |= (byte & 127) << shift;
       shift += 7;
     }
-    return [n, pos + 1];
+    return [n, pos];
   }
 }

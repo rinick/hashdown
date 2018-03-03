@@ -13,17 +13,14 @@ import 'rc4.dart';
 import 'tadpole.dart';
 import 'shadow.dart';
 import 'braille.dart';
-import 'dart:convert';
-import 'dart:html';
-import 'dart:js' as Js;
+import 'lzma.dart';
 
 part 'src/codecs.dart';
-
 part 'src/compress.dart';
-
 part 'src/utf16.dart';
-
 part 'src/crypt.dart';
+
+
 /*
  * 0,1 utf8 utf16 file reservedMode
  * 2 markdown
@@ -250,7 +247,7 @@ class Hashdown {
         result.file = data;
       }
     } catch (e) {
-      //print(e);
+      print(e);
     }
     return result;
   }

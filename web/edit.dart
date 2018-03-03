@@ -489,7 +489,7 @@ bool inited = false;
 bool vmode = false;
 
 void checkSize(Event e) {
-  headerh1.style.display = window.innerWidth < 445 ? 'none' : '';
+  headerh1.style.display = window.innerWidth < 380 ? 'none' : '';
   if (window.innerWidth < 480) {
     if (!vmode) {
       document

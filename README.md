@@ -66,33 +66,3 @@ Convert to Shadow Code
 Hello ‍⁫⁭⁭⁫‌⁫‌⁪‌​⁭⁮⁬⁭⁮‍​⁭⁭⁮⁬⁫⁫⁪‌‍World
 ```
 The font compatibility of Shadow Code is not as good as Tadpole Code, and it's not suitable for encoding long string.
-
-## API
-
-API to encode and decode hashdown in javascript and dart code
-
-### javascript
-
-```html
-    <script src="https://hashdown.github.io/api.js"></script>
-    <script>
-      // simple encoding/decoding
-      var encoded1 = $hashdown.encode('Hashdown is awesome');
-      var decoded1 = $hashdown.decode(encoded1);
-
-      // encoding with options
-      var encoded2 = $hashdown.encode('Hashdown is awesome',{
-        "codec" : $hashdown.BASE2E15,
-        "markdown" : true,
-        "protect" :  $hashdown.PROTECT_PASSWORD,
-        "password" : "mypassword"
-      });
-      var decoded2 = $hashdown.decode(encoded2, 'mypassword').text;
-    </script>
-```
-
-## Libraries used in Hashdown
-
-https://pub.dartlang.org/packages/lzma
-
-https://github.com/chjj/marked
