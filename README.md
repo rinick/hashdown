@@ -9,14 +9,25 @@ Hashdown supports 5 different encoding methods
 
 | Encoding | Feature | Sample Output |
 | ------------- | ------------- | ------------- |
+| Braillnary | output binary dots | ⡯⡯⡯⠺⡢⡣⡣⡤⡳⡣⡭⡭⠺⡩⡻⡳ |
 | Link | directly open the decoded result | [https://hashdown.github.io/#GMgIv-_0GTC7iTBH4gyek93I](https://hashdown.github.io/#GMgIv-_0GTC7iTBH4gyek93I) |
 | Base2e15 | minimal output characters | 炅땯腖귻㟫䩍븀묓歊 |
-| Braillnary | output binary dots | ⡯⡯⡯⠺⡢⡣⡣⡤⡳⡣⡭⡭⠺⡩⡻⡳ |
 | TadpoleCode | WHat?? | /ًًٍٍٍٍََََُُُِِِّّّّّّّّّْْْْْْْْْْْْٕ۪۪۪ٓۤ۠ۤ۠ﾞ |
 | ShadowCode | Hide Content | Encoded data⁪‌​⁭‍⁬⁫⁬⁪⁫​⁭⁭⁬⁫⁬⁪⁫⁭⁮‌⁫ is invisible |
 
 
 It supports 5 different encoding modes
+
+## Braillnary
+
+Braillnary means braille binary, it converts string to binary and shows it in the form of braille code
+
+Encode Table
+
+|0x01|0x02|0x04|0x08|0x10|0x20|0x40|0x80|
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+|`⠁`|`⠈`|`⠂`|`⠐`|`⠄`|`⠠`|`⡀`|`⢀`|
+
 
 ## Hashdown Link
 
@@ -38,16 +49,6 @@ Since Hashdown supports compression, it allows you to store more data in limited
 
 ## Tadpole Code
 Tadpole Code convert text to unicode combining characters, which is able to combine everything into "single" character.
-
-## Braillnary
-
-Braillnary means braille binary, it converts string to binary and shows it in the form of braille code
-
-Encode Table
-
-|0x01|0x02|0x04|0x08|0x10|0x20|0x40|0x80|
-|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-|`⠁`|`⠈`|`⠂`|`⠐`|`⠄`|`⠠`|`⡀`|`⢀`|
 
 ## Shadow Code
 Shadow Code convert text to ASCII control code, which is invisible in most browsers.
