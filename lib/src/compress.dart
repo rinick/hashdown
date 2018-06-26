@@ -90,7 +90,7 @@ class HashdownCompress {
     lzma_disableEndMark = true;
     List rslt = lzma_compress(data, 7);
 
-    int len = rslt[5] + (rslt[6] << 8) + (rslt[7] << 16) + (rslt[8] << 24);
+    int len = (rslt[5]&0xFF) + ((rslt[6]&0xFF) << 8) + ((rslt[7]&0xFF) << 16) + ((rslt[8]&0xFF) << 24);
     List<int> lenArray = encodeLength(len);
     // fill the length
     for (int i = 0; i < lenArray.length; ++i) {
