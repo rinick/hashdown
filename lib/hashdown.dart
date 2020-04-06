@@ -25,7 +25,7 @@ part 'src/crypt.dart';
  * 0,1 utf8 utf16 file reservedMode
  * 2 markdown
  * 3,4 raw, salt+1, strong salt+3, password (alawys +1 salt)
- * 5, compress 
+ * 5, compress
  * 6,7 must be 1,1
  */
 
@@ -235,7 +235,7 @@ class Hashdown {
         return result;
       }
       if ((bytes.last & 0xC0) != 0xC0) {
-        result.text = UTF8.decode(bytes);
+        result.text = utf8.decode(bytes);
         return result;
       }
 
@@ -273,7 +273,7 @@ class Hashdown {
           return '';
         }
         if ((bytes.last & 0xC0) != 0xC0) {
-          return '{${UTF8.decode(bytes)}}';
+          return '{${utf8.decode(bytes)}}';
         }
 
         bytes = HashdownCrypt.decrypt(bytes, params, password);
@@ -303,12 +303,12 @@ class HashdownFile {
 
   HashdownFile.decode(List<int> bytes) {
     int namelen = bytes[0];
-    name = UTF8.decode(bytes.sublist(1, namelen + 1));
+    name = utf8.decode(bytes.sublist(1, namelen + 1));
     data = bytes.sublist(namelen + 1);
   }
 
   List<int> encode() {
-    List<int> namebytes = UTF8.encode(name);
+    List<int> namebytes = utf8.encode(name);
     List<int> list = new List<int>(namebytes.length + 1 + data.length);
     list[0] = namebytes.length;
     list.setRange(1, namebytes.length + 1, namebytes);

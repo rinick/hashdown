@@ -112,17 +112,17 @@ void _translateElement(Element e) {
   String rslt = t(e.text);
   if (rslt != null) e.text = rslt;
 }
-void _translateAnchor(AnchorElement e) {
-  String rslt = t(e.href);
-  if (rslt != null) e.href = rslt;
+void _translateAnchor(Element e) {
+  String rslt = t((e as AnchorElement).href);
+  if (rslt != null) (e as AnchorElement).href = rslt;
 }
 void _translateTitle(Element e) {
   String rslt = t(e.title);
   if (rslt != null) e.title = rslt;
 }
-void _translatePlaceHolder(TextAreaElement e) {
-  String rslt = t(e.placeholder);
-  if (rslt != null) e.placeholder = rslt;
+void _translatePlaceHolder(Element e) {
+  String rslt = t((e as TextAreaElement).placeholder);
+  if (rslt != null) (e as TextAreaElement).placeholder = rslt;
 }
 
 void _translateAll() {

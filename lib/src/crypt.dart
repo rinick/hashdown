@@ -20,7 +20,7 @@ class HashdownCrypt {
     if (params.protection == HashdownParams.PROTECT_PASSWORD) {
       // only 7 bits salt, reserve 1 bits for other purpose (like pk encryption)
       int salt = rng.nextInt(64);
-      pass = [salt]..addAll(UTF8.encode(password));
+      pass = [salt]..addAll(utf8.encode(password));
       RC4 rc4 = new RC4(pass, 5);
       rc4.encryptBytes(rslt);
       rslt[rslt.length - 2] = salt;
@@ -46,7 +46,7 @@ class HashdownCrypt {
     List<int> pass;
     if (params.protection == HashdownParams.PROTECT_PASSWORD) {
       int salt = bytes[bytes.length - 2];
-      pass = [salt]..addAll(UTF8.encode(password));
+      pass = [salt]..addAll(utf8.encode(password));
       RC4 rc4 = new RC4(pass, 5);
       rc4.decryptBytes(rslt);
     } else if (params.protection == HashdownParams.PROTECT_SALT) {

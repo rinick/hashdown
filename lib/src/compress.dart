@@ -7,32 +7,32 @@ part of hashdown;
 
 class HashdownCompress {
   static List<int> compressString(String str, HashdownParams params) {
-    // don't try utf16 when it doesn't need compression
+    // don't try utf16s when it doesn't need compression
     bool tryUtf16 = (params.compressed == 1);
-    List<int> utf8 = UTF8.encode(str);
-    List<int> utf16;
+    List<int> utf8s = utf8.encode(str);
+    List<int> utf16s;
     if (tryUtf16) {
-      utf16 = UTF16.encode(str);
+      utf16s = UTF16.encode(str);
     }
-    List<int> rslt = utf8;
-    int min = utf8.length;
+    List<int> rslt = utf8s;
+    int min = utf8s.length;
     params.mode = HashdownParams.MODE_UTF8;
 
     if (params.compressed == 1) {
       // assume compression is not needed
       params.compressed = 0;
       // don't compress short string
-      if (utf8.length > 16 && utf16.length > 16) {
-        if (utf16.length * 1.125 > utf8.length) {
-          List<int> utf8c = compress(utf8);
+      if (utf8s.length > 16 && utf16s.length > 16) {
+        if (utf16s.length * 1.125 > utf8s.length) {
+          List<int> utf8c = compress(utf8s);
           if (min > utf8c.length) {
             rslt = utf8c;
             min = utf8c.length;
             params.compressed = 1;
           }
         }
-        if (utf8.length * 1.125 > utf16.length) {
-          List<int> utf16c = compress(utf16);
+        if (utf8s.length * 1.125 > utf16s.length) {
+          List<int> utf16c = compress(utf16s);
           if (min > utf16c.length) {
             rslt = utf16c;
             min = utf16c.length;
@@ -42,14 +42,14 @@ class HashdownCompress {
         }
       }
     }
-    if (tryUtf16 && min > utf16.length) {
+    if (tryUtf16 && min > utf16s.length) {
       if (params.protection == HashdownParams.PROTECT_PASSWORD) {
-        // add extra 0 to validate utf16
+        // add extra 0 to validate utf16s
         rslt = []
-          ..addAll(utf16)
+          ..addAll(utf16s)
           ..add(0);
       } else {
-        rslt = utf16;
+        rslt = utf16s;
       }
       params.mode = HashdownParams.MODE_UTF16;
       params.compressed = 0;
@@ -75,7 +75,7 @@ class HashdownCompress {
       data = decompress(data);
     }
     if (params.mode == HashdownParams.MODE_UTF8) {
-      return UTF8.decode(data);
+      return utf8.decode(data);
     }
     if (params.mode == HashdownParams.MODE_UTF16) {
       return UTF16.decode(data);

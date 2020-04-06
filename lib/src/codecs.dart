@@ -16,7 +16,7 @@ abstract class XCodec {
     if (name.startsWith('tadpole')) {
       return new TadpoleCodec();
     }
-    
+
     if (name.startsWith('shadow')) {
       return new ShadowCodeCodec();
     }
@@ -41,11 +41,11 @@ class Base2e15Codec implements XCodec {
 
 class Base64Codec implements XCodec {
   List<int> decode(String str) {
-    return BASE64.decode(str);
+    return base64.decode(str);
   }
 
   String encode(List<int> bytes) {
-    return BASE64.encode(bytes);
+    return base64.encode(bytes);
   }
 }
 
@@ -80,11 +80,11 @@ class Base64UrlCodec implements XCodec {
         str = str + '===';
         break;
     }
-    return BASE64URL.decode(str);
+    return base64Url.decode(str);
   }
 
   String encode(List<int> bytes) {
-    String base64 = BASE64URL.encode(bytes);
+    String base64 = base64Url.encode(bytes);
     if (base64.endsWith('==')) base64 = base64.substring(0, base64.length - 2);
     else if (base64.endsWith('=')) base64 =
         base64.substring(0, base64.length - 1);

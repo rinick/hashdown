@@ -1,14 +1,15 @@
 name: 'hashdown'
-version: 1.0.6
+version: 1.1.0
 description: >
   Hashdown is an  file/text-to-text encoding scheme designed for safe and compact data sharing
-author: Rick Zhou <rinick@gmail.com>
 homepage: http://www.hashdown.net
 environment:
-  sdk: '>=1.0.0 <2.0.0'
+  sdk: '>=2.0.0 <3.0.0'
 dependencies:
   base2e15: any
   js: any
-  convert: ">=2.0.0 <3.0.0"
+  convert: any
 dev_dependencies:
   test: any
+  build_web_compilers: any
+  build_runner: any

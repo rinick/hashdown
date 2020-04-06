@@ -1,8 +1,8 @@
 # Changelog
 
-## 1.0.6
+## 1.1.0
 
-- Bug fixing
+- Dart 2 support
 
 ## 1.0.5
 
