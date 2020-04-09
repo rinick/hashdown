@@ -62,5 +62,5 @@ String markdownToHtml(String str, bool processShadowCode) {
     }
     str = str.replaceAllMapped(_processShadowCodeReg, _processShadowCode);
   }
-  return Js.context.callMethod('marked', [str]);
+  return Js.context.callMethod('marked', [str]).toString();
 }

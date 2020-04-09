@@ -8,7 +8,7 @@ import 'dart:typed_data';
 
 class TadpoleCode {
   static const int decodeTableSize = 256;
-  
+
 //  static int getDecodeTableSize(){
 //    for (int i=256; i>0; ++i) {
 //      List array = new List(i);
@@ -66,7 +66,7 @@ class TadpoleCode {
       return new Uint8List(0);
     }
     Uint8List out = new Uint8List(len);
-    List codes = input.codeUnits;
+    List<int> codes = input.codeUnits;
     int i = 0;
     for (; i < len;++i){
       int code1 = codes[(i<<1)+1];
@@ -83,7 +83,7 @@ class TadpoleCode {
         break;
       }
     }
-   
+
     return out.sublist(0, i);
   }
 }

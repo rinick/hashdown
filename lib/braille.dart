@@ -43,7 +43,7 @@ class Braillnary {
     _initTable();
     int len = input.length;
     Uint8List out = new Uint8List(input.length);
-    List codes = input.codeUnits;
+    List<int> codes = input.codeUnits;
     int i = 0;
     for (; i < len;++i){
       int code = codes[i]^0x2800;

@@ -27,9 +27,9 @@ main() async{
        hash = await HttpRequest.getString(path);
      }
   } catch(err) {
-    
+
   }
- 
+
   HashdownResult result;
   if (resultStr != null) {
     // no need to decode, already load the md file
@@ -39,7 +39,7 @@ main() async{
   } else {
     result = Hashdown.decode(hash, '');
   }
-  
+
   if (result.usePassword) {
     // need password
     querySelector('.viewerpassbox').style.display = '';
@@ -60,12 +60,12 @@ main() async{
   }
   // init edit link href
   (querySelector('#editLink') as AnchorElement).href = 'edit.html$hash';
-  
+
   new Timer(new Duration(milliseconds: 500), initAd);
 }
 
 void onDecode(Event e) {
-  HashdownResult result = 
+  HashdownResult result =
       Hashdown.decode(hash, (querySelector('input') as InputElement).value);
   if (result.text == null) {
     if (result.usePassword) {
@@ -91,7 +91,7 @@ void initAd() {
     return;
   }
   var aboutBox = document.querySelector('.aboutDiv');
-  DivElement adDiv = document.createElement('div');
+  DivElement adDiv = document.createElement('div') as DivElement;
 
     adDiv.style.height = '100px';
     adDiv.setInnerHtml(r'''

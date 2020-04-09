@@ -39,19 +39,19 @@ void main() {
   querySelector('.markdownVBtn').onClick.listen(onMarkdownV);
   querySelector('.undoV').onClick.listen(onUndoV);
 
-  inputtext = querySelector('#inputtext');
-  outputtext = querySelector('#outputtext');
-  vinputtext = querySelector('#vinputtext');
+  inputtext = querySelector('#inputtext') as TextAreaElement;
+  outputtext = querySelector('#outputtext') as TextAreaElement;
+  vinputtext = querySelector('#vinputtext') as TextAreaElement;
 
-  btnBar = querySelector('.btnBar');
-  encodedTab = querySelector('#encodedTab');
+  btnBar = querySelector('.btnBar') as DivElement;
+  encodedTab = querySelector('#encodedTab') as Element;
 
-  opPass = querySelector('#opPass');
+  opPass = querySelector('#opPass') as InputElement;
 
-  selectCode = querySelector('.selectCode>select');
+  selectCode = querySelector('.selectCode>select') as SelectElement;
   headerh1 = querySelector('h1');
 
-  shadowCodeOption = document.querySelector('option[value=shadow]');
+  shadowCodeOption = document.querySelector('option[value=shadow]') as OptionElement;
 
   encodedTab.onClick.listen(onClickLink);
 
@@ -75,13 +75,13 @@ void main() {
     String mdData;
     String hdData;
     if (hash.contains('#')) {
-      List hashs = hash.split('#');
+      List<String> hashs = hash.split('#');
       hash = hashs.removeLast();
       for (String cmd in hashs) {
         Element elm = document.querySelector('option[value=$cmd]');
         if (elm != null) {
           if (elm.classes.contains('codeOpt')) {
-            codecOption = elm;
+            codecOption = elm as OptionElement;
           } else {
             (elm as OptionElement).selected = true;
           }
@@ -113,7 +113,7 @@ void main() {
   if (codecOption == null) {
     String codec = window.localStorage['codec'];
     if (codec != null) {
-      codecOption = document.querySelector('option[value=$codec]');
+      codecOption = document.querySelector('option[value=$codec]') as OptionElement;
     }
   }
   if (codecOption != null) {
@@ -170,15 +170,15 @@ void onMarkdown(Event e) {
       if (markdown) {
         // force a markdown update
         markdown = false;
-        elm = document.querySelector('.btnBar > .blue');
+        elm = document.querySelector('.btnBar > .blue') as HtmlElement;
       } else {
-        elm = document.querySelector('.btnBar > :nth-child(2)');
+        elm = document.querySelector('.btnBar > :nth-child(2)')as HtmlElement;
       }
     } else {
-      elm = document.querySelector('.btnBar > :first-child');
+      elm = document.querySelector('.btnBar > :first-child')as HtmlElement;
     }
   } else {
-    elm = e.target;
+    elm = e.target as HtmlElement;
     if (elm.classes.contains('blue')) {
       if (elm.text == "A|#") {
         toggleFullEditor();
@@ -530,7 +530,7 @@ void initAd() {
     return;
   }
   var helpBox = document.querySelector('.helpDiv');
-  DivElement adDiv = document.createElement('div');
+  DivElement adDiv = document.createElement('div') as DivElement;;
   adDiv.id = 'adDiv';
 
   if (window.innerWidth < 728) {
@@ -574,7 +574,7 @@ void initAd() {
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>''', validator: allowAllValidator);
-    DivElement closeAd = document.createElement('div');
+    DivElement closeAd = document.createElement('div') as DivElement;
 
     closeAd.style
       ..left = '733px'
